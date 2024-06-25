@@ -7,8 +7,8 @@ import Prueba2 from '../components/Prueba2/Prueba2.jsx'
 
 const usuarios = [
   {
-    email: 'gonzalo@gmail.com',
-    password: 'aaaaa',
+    email: 'a@gmail.com',
+    password: 'a',
     name: 'Gonzalo',
     role: 'admin',
   },
