@@ -1,0 +1,57 @@
+.sectionSlider{
+    margin-top: 2em;
+}
+
+.swiper-wrapper{    
+    display: flex;
+    flex-direction: row;
+}
+.reviewContainer{    
+    height:10m; 
+    width:18em;
+    border:1px solid;
+    padding: 0 2em 2em 2em;    
+}
+
+.reviewContainer{
+    padding-top: 2em;
+}
+
+.reviewContainerInside{
+    margin-top: 2em;
+    display: flex;
+    flex-direction: row;
+}
+
+.reviewContainerInside2{
+    margin-right: 8em;
+}
+
+.reviewContainerInside3{
+    padding-top: 1em;
+    display:flex;
+    flex-direction: row;
+}
+
+.swiper-slide{
+    margin-right: 2em;
+}
+
+.circleLeft{
+    margin-right:0.5em
+}
+
+.swiper-button-prev{
+    color:rgb(139, 41, 41) !important;
+    background-color: white !important;
+    width:2em !important; 
+    height: 2em !important;
+    top: 10em !important;
+}
+.swiper-button-prev::after{
+}
+
+.swiper-button-next{
+}
+.swiper-button-next::after{
+}

@@ -45,8 +45,8 @@ function App() {
     navigate('/login');
   };
 
-  const attempt = () => {
-    navigate('/prueba');
+  const goHome = () => {
+    navigate('/home');
   };
 
   const attempt2 = () => {
@@ -56,7 +56,7 @@ function App() {
   return (
     <Routes>
       <Route path="/login" element={user ? <Navigate to="/" /> : <Login user={user} loginUser={loginUser} loginError={loginError} />} />
-      <Route path="/" element={user ? <Dashboard logoutUser={logoutUser} attempt={attempt} attempt2={attempt2}/> : <Navigate to="/login" />}>
+      <Route path="/" element={user ? <Dashboard logoutUser={logoutUser} goHome={goHome} attempt2={attempt2}/> : <Navigate to="/login" />}>
         <Route path="/home" element={<Home />} />
         <Route path="prueba2" element={<Prueba2 />} />
       </Route>
