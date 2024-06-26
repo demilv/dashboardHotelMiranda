@@ -25,6 +25,7 @@ const ButtonStyled = styled.button`
     border-left: 2px solid ${({ color, active }) => handleColorType(color, active)};
     color: ${({ active }) => (active ? 'rgb(250, 83, 83)' : 'green')};
     margin-bottom:2em;
+    z-index: 100;
 `;
 
 const Button = ({ initialColor = "white", children, index }) => {

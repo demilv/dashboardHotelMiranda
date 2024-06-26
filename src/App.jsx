@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Route, Routes, useNavigate, Navigate } from 'react-router-dom';
 import Login from '../components/Login/Login.jsx';
 import Dashboard from '../components/Dashboard/Dashboard.jsx';
-import Prueba from '../components/Prueba/Prueba.jsx';
+import Home from "../components/Home/Home.jsx";
 import Prueba2 from '../components/Prueba2/Prueba2.jsx';
 
 const usuarios = [
@@ -33,7 +33,7 @@ function App() {
     if (existsUser) {
       setUser(existsUser);
       setLoginError('');
-      navigate('/');
+      navigate('/home');
     } else {
       setUser(false);
       setLoginError('Usuario o contraseña incorrecta');
@@ -57,7 +57,7 @@ function App() {
     <Routes>
       <Route path="/login" element={user ? <Navigate to="/" /> : <Login user={user} loginUser={loginUser} loginError={loginError} />} />
       <Route path="/" element={user ? <Dashboard logoutUser={logoutUser} attempt={attempt} attempt2={attempt2}/> : <Navigate to="/login" />}>
-        <Route path="prueba" element={<Prueba />} />
+        <Route path="/home" element={<Home />} />
         <Route path="prueba2" element={<Prueba2 />} />
       </Route>
     </Routes>
