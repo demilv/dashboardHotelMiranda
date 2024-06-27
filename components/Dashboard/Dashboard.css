@@ -1,10 +1,14 @@
+.navbarContainer{
+    padding-left: 11%;
+    width: 100%;
+}
+
 .navbar {
-    margin-top: 2em;
-    width: 102.5em;
+    width:100%;
     height: 4em;
     display: flex;
     flex-direction: row;
-    position: relative; 
+    position: relative;
 }
 
 .navbar__burger {
@@ -17,14 +21,13 @@
 .navbar__main {
     display: flex;
     flex-direction: row;
-    background-color: rgb(247, 247, 247);
-    margin-left: 40%;
-    width: 60%;
+    background-color: rgb(247, 247, 247);    
+    width: 80%;
     transition: margin-left 0.3s ease;
 }
 
 .navbar__h1 {
-    margin: 0.4em 0 0 1em;
+    margin: 0.7em 28em 0 1em;
 }
 
 .navbar__icon {
@@ -43,14 +46,13 @@
 
 .outletContainer {
     background-color: rgb(192, 192, 192);
-    height: 100%;
     width: 54.446em;
 }
 
 .navbar__aside {
-    display: none; /*Cambiar a Flex una vez tenga algo donde ponerlo debajo y hacer asi el slide a la izquierda*/
+    display: flex; /*Cambiar a Flex una vez tenga algo donde ponerlo debajo y hacer asi el slide a la izquierda*/
     position: absolute;
-    left: 29.1em;
+    left: -11.9em;
     transform: translateX(100%);
     transition: transform 0.3s ease;
     flex-direction: column;
@@ -59,12 +61,13 @@
     height: 42.5em;
     background-color: white;
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-    z-index: -10; 
+    z-index: -1;
 }
 
 .navbar__aside.visible {
     transform: translateX(0);
-    display:flex
+    display:flex;
+    z-index:0;
 }
 
 .navbar__aside__logo {
@@ -120,6 +123,8 @@
 }
 
 .outletContainer{
-    margin-left: 34.2%;
-    width: 51.2%;
+    width:80%;
+    padding: 2em 0 0 2em;
+    z-index:1;
+    min-height:50em;
 }
