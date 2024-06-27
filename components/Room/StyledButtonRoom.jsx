@@ -19,7 +19,23 @@ export const ButtonNewRoom = styled.button`
     margin-left:20%;
 `
 
-export const SelectTime = styled.select`
+export const ButtonNextBack = styled.button`
+    border-radius:0.4em;
+    color: rgb(6, 74, 4);
+    border: 1px solid  rgb(6, 74, 4);
+    width:5em
+    padding: 1em 2em;
+`
+
+export const ButtonPage = styled.button`
+    width: 1em;
+    padding: 1em 2em;
+    border:none;
+    font-color: ${props => props.active ? 'white' : 'black'};
+    background-color: ${props => props.active ? 'green' : 'transparent'};
+`
+
+/*export const SelectTime = styled.select`
     background-color:white;
     border-radius:0.4em;
     border-color: rgb(6, 74, 4);
@@ -27,4 +43,4 @@ export const SelectTime = styled.select`
     color: rgb(6, 74, 4);
     padding: 1em 5em 1em 2em;
 
-`
+`*/
