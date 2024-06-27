@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CajaDiv, CajaStyled, CajaMainContainer, CajaImg } from "./cajasHome";
+import { CajaDiv, CajaStyled, CajaMainContainer, CajaImg } from "./StyledCajasHome";
 import { TextH5Light, TextNumberBig } from "../styledComponents/TextStyled";
 import { LuBedDouble, LuCalendarCheck2 } from "react-icons/lu";
 import { FaDoorOpen, FaDoorClosed } from "react-icons/fa6";

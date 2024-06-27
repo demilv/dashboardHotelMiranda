@@ -4,6 +4,7 @@ export const HomeReviewMainContainer = styled.div`
     border:1px solid;
     padding: 2em 2em 2em 2em; 
     height:14em;
+    background-color:white
 `;
 
 export const HomeReviewMainContainerInside = styled.div`
