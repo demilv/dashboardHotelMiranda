@@ -33,7 +33,7 @@ function App() {
     if (existsUser) {
       setUser(existsUser);
       setLoginError('');
-      navigate('/home');
+      navigate('/');
     } else {
       setUser(false);
       setLoginError('Usuario o contraseña incorrecta');

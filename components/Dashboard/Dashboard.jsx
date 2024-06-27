@@ -23,7 +23,7 @@ const Dashboard = ({ logoutUser, goHome, attempt2 }) => {
           <div className="navbar">
             <div className={`navbar__aside ${isAsideVisible ? 'visible' : ''}`}>
               <img className="navbar__aside__logo" src="../../public/logoDash.png" alt="Logo"/>
-              <button className="noShow" onClick={attempt2}><Button initialColor="white" index={0}>Dashboard</Button></button>
+              <button className="noShow" onClick={goHome}><Button initialColor="white" index={0}>Dashboard</Button></button>
               <button className="noShow" onClick={goHome}><Button initialColor="white" index={1}>Room</Button></button>
               <Button initialColor="white" index={2}>Bookings</Button>
               <Button initialColor="white" index={3}>Contact</Button>
