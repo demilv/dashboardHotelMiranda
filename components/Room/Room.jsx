@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import roomData from "../../data/roomData.json"
 import { ButtonNewRoom, ButtonSort, ButtonNextBack, ButtonPage, ButtonUnseen} from "./StyledButtonRoom";
-import { TableColumnMain, TableIdNameContainer, TableImg, TableRoomData, TableRow } from "./StyledTablaRoom";
+import { TableColumnFlexMain, TableColumnMain, TableContainIdName, TableIdNameContainer, TableImg, TableRoomData, TableRow } from "./StyledTablaRoom";
 
 const Room = () => {
     const [active, setActive] = useState("All")
@@ -12,6 +12,10 @@ const Room = () => {
     const [isDisabledBack, setIsDisabledBack] = useState()
     const [isDisabledNext, setIsDisabledNext] = useState()
     const [maxPages, setMaxPages] = useState(Math.floor(roomData.length / 10))
+
+    const big1 = "big1"
+    const big2 = "big2"
+    const first = "first"
 
     const handlePageClick = (index) =>{
         setPage(index)
@@ -70,32 +74,37 @@ const Room = () => {
             <ButtonNewRoom>+ New Room</ButtonNewRoom>
             <TableRoomData>
                 <TableRow>
-                    <TableColumnMain><ButtonUnseen onClick={()=> handleChangeSort("id")}>Room Name</ButtonUnseen></TableColumnMain>
+                    <TableColumnMain big={big1}><ButtonUnseen onClick={()=> handleChangeSort("id")}>Room Name</ButtonUnseen></TableColumnMain>
                     <TableColumnMain>Room Type</TableColumnMain>
                     <TableColumnMain>Room Floor</TableColumnMain>
-                    <TableColumnMain>Amenities</TableColumnMain>
+                    <TableColumnMain big={big2}>Amenities</TableColumnMain>
                     <TableColumnMain>Price</TableColumnMain>
                     <TableColumnMain><ButtonUnseen onClick={()=> handleChangeSort("offer")}>Offer Price</ButtonUnseen></TableColumnMain>
                     <TableColumnMain><ButtonUnseen onClick={()=> handleChangeSort("status")}>Status</ButtonUnseen></TableColumnMain>
                 </TableRow>
                 {roomsMostrar.map(room => (
                     <TableRow key={room.id}>
-                        <TableColumnMain>
-                            <TableImg src={room.fotoLink}/>
-                            <TableIdNameContainer>
-                                {room.id}{room.number}
-                            </TableIdNameContainer>
-                        </TableColumnMain>
+                        <TableColumnFlexMain>
+                            <TableImg src={room.fotoLink} alt={`Room ${room.number}`}/>
+                            <TableContainIdName>
+                                <TableIdNameContainer>
+                                    #{room.id}
+                                </TableIdNameContainer>
+                                <TableIdNameContainer>
+                                    {room.number}
+                                </TableIdNameContainer>
+                            </TableContainIdName>
+                        </TableColumnFlexMain>
                         <TableColumnMain>{room.bedType}</TableColumnMain>
                         <TableColumnMain>{room.floor}</TableColumnMain>
-                        <TableColumnMain>{room.amenities}</TableColumnMain>
+                        <TableColumnMain big={big2}>{room.amenities}</TableColumnMain>
                         <TableColumnMain>{room.price}/night</TableColumnMain>
                         <TableColumnMain>{room.offer}/night</TableColumnMain>
                         <TableColumnMain>{room.status ? 'Available' : 'Occupied'}</TableColumnMain>
                     </TableRow>
                 ))}         
             </TableRoomData>  
-            <ButtonNextBack onClick={() =>setPage(page-1)} disabled={isDisabledBack}>Back</ButtonNextBack>
+            <ButtonNextBack first={first}onClick={() =>setPage(page-1)} disabled={isDisabledBack}>Back</ButtonNextBack>
             {Array.from({ length: maxPages + 1 }, (_, index) => (
                     <ButtonPage key={index} active={index === page}  onClick={() => handlePageClick(index)}>{index + 1}</ButtonPage>
                 ))}

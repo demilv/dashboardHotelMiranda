@@ -6,7 +6,7 @@ export const ButtonSort = styled.button`
   width:10em;
   border: none;
   border-bottom: 1px solid ${props => props.active ? 'green' : 'grey'};
-  font-color: ${props => props.active ? 'green' : 'grey'};
+  color: ${props => props.active ? 'green' : 'grey'};
   background-color:transparent;
 `;
 
@@ -20,15 +20,20 @@ export const ButtonNewRoom = styled.button`
 `
 
 export const ButtonNextBack = styled.button`
+    margin-left: ${props => props.first ? '60%' : ''};
     border-radius:0.4em;
     color: rgb(6, 74, 4);
     border: 1px solid  rgb(6, 74, 4);
-    width:5em
-    padding: 1em 2em;
+    width:5em;
+    padding: 1em;
+    margin-right:0.5em
 `
 
 export const ButtonPage = styled.button`
+    border-radius:0.4em;
     min-width: 4.5em;
+    margin-bottom:1em;
+    margin-right:0.5em;
     padding: 1em 2em;
     border:none;
     font-color: ${props => props.active ? 'white' : 'black'};
