@@ -1,14 +1,11 @@
-.sectionSlider{
+/*.sectionSlider{
     margin-top: 2em;
 }
 
-.swiper-wrapper{    
-    display: flex;
-    flex-direction: row;
-}
+
 .reviewContainer{    
     height:10m; 
-    width:18em;
+    width:17em;
     border:1px solid;
     padding: 0 2em 2em 2em;    
 }
@@ -54,4 +51,10 @@
 .swiper-button-next{
 }
 .swiper-button-next::after{
+}
+
+
+.swiper-wrapper{    
+    display: flex;
+    flex-direction: row;
 }

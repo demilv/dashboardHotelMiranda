@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const CajaMainContainer = styled.div`
     display: flex;
     flex-direction: row;
+    margin-bottom:3em
 `;
 
 export const CajaImg = styled.div`

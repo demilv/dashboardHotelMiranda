@@ -43,12 +43,8 @@ const Dashboard = ({ logoutUser, goHome, attempt2 }) => {
                 {isAsideVisible ? <GiCancel /> : <RxHamburgerMenu />}
               </button>
               <h1 className="navbar__h1">Dashboard</h1>
-              <TbZoom className="navbar__icon iconFirst"/>
-              <IoMdHeartEmpty className="navbar__icon"/>
               <CiMail className="navbar__icon"/>
               <CiBellOn className="navbar__icon"/>
-              <MdOutlineMessage className="navbar__icon"/>
-              <img src="../../public/IMG_20191223_131827 (2) Grande.jpg" className="navbarFoto" alt="Profile"/>
             </div>
           </div>
           <div className="outletContainer">

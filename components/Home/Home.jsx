@@ -3,11 +3,14 @@ import { CajaDiv, CajaStyled, CajaMainContainer, CajaImg } from "./cajasHome";
 import { TextH5Light, TextNumberBig } from "../styledComponents/TextStyled";
 import { LuBedDouble, LuCalendarCheck2 } from "react-icons/lu";
 import { FaDoorOpen, FaDoorClosed } from "react-icons/fa6";
-import { IoIosCheckmarkCircleOutline } from "react-icons/io";
-import { MdOutlineCancel } from "react-icons/md";
+
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
-import './sliderHome.css'
+import { Navigation } from 'swiper/modules';
+import './sliderHome.css';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import roomReviews from '../../data/roomReview.json';
+import HomeReview from "./HomeReview";
 
 const Home = () => {
     const [selectedBox, setSelectedBox] = useState(null);
@@ -16,15 +19,7 @@ const Home = () => {
         setSelectedBox(boxId);
     };
 
-    const swiper = new Swiper('.swiper1', {  
-        direction: 'horizontal',
-        loop: true,  
-      
-        navigation: {
-          nextEl: '.swiper-button-next1',
-          prevEl: '.swiper-button-prev1',
-        },  
-      });
+    const latestReviews = roomReviews.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5);
 
     return (
         <>
@@ -59,76 +54,25 @@ const Home = () => {
                 </CajaStyled>
             </CajaMainContainer>
 
-            <article className="sectionSlider">
-                <div className="swiper swiper1">
-                    <div className="swiper-wrapper">
-                        <div className="swiper-slide">                      
-                            <div className="reviewContainer">                            
-                                <p className="reviewContainerP">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
-                                <div className="reviewContainerInside">
-                                    <div className="reviewContainerInside2">
-                                        <h3 className="reviewContainerInside2Nombre">Nombre</h3>
-                                        <h6 className="reviewContainerInside2Time">Time</h6>
-                                    </div>
-                                    <div className="reviewContainerInside3">
-                                        <IoIosCheckmarkCircleOutline className= "circleLeft"/>
-                                        <MdOutlineCancel />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="swiper-slide">                      
-                            <div className="reviewContainer">                            
-                                <p className="reviewContainerP">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
-                                <div className="reviewContainerInside">
-                                    <div className="reviewContainerInside2">
-                                        <h3 className="reviewContainerInside2Nombre">Nombre</h3>
-                                        <h6 className="reviewContainerInside2Time">Time</h6>
-                                    </div>
-                                    <div className="reviewContainerInside3">
-                                        <IoIosCheckmarkCircleOutline className= "circleLeft"/>
-                                        <MdOutlineCancel />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="swiper-slide">                      
-                            <div className="reviewContainer">                            
-                                <p className="reviewContainerP">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
-                                <div className="reviewContainerInside">
-                                    <div className="reviewContainerInside2">
-                                        <h3 className="reviewContainerInside2Nombre">Nombre</h3>
-                                        <h6 className="reviewContainerInside2Time">Time</h6>
-                                    </div>
-                                    <div className="reviewContainerInside3">
-                                        <IoIosCheckmarkCircleOutline className= "circleLeft"/>
-                                        <MdOutlineCancel />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="swiper-slide">                      
-                            <div className="reviewContainer">                            
-                                <p className="reviewContainerP">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
-                                <div className="reviewContainerInside">
-                                    <div className="reviewContainerInside2">
-                                        <h3 className="reviewContainerInside2Nombre">Nombre</h3>
-                                        <h6 className="reviewContainerInside2Time">Time</h6>
-                                    </div>
-                                    <div className="reviewContainerInside3">
-                                        <IoIosCheckmarkCircleOutline className= "circleLeft"/>
-                                        <MdOutlineCancel />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="swiper-button-prev swiper-button-prev1"></div>
-                    <div className="swiper-button-next swiper-button-next1"></div>
-                </div>
-        </article>        
+            <Swiper
+                modules={[Navigation]}
+                spaceBetween={50}
+                slidesPerView={3}
+                navigation={true}
+            >
+                {latestReviews.map(review => (
+                    <SwiperSlide key={review.id}>
+                        <HomeReview 
+                            review={review.review}
+                            customerName={review.customerName}
+                            date={review.date}
+                        />
+                    </SwiperSlide>
+                ))}                
+            </Swiper>
         </>
     );
 };
 
 export default Home;
+
