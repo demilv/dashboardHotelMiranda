@@ -28,12 +28,21 @@ export const ButtonNextBack = styled.button`
 `
 
 export const ButtonPage = styled.button`
-    width: 1em;
+    min-width: 4.5em;
     padding: 1em 2em;
     border:none;
     font-color: ${props => props.active ? 'white' : 'black'};
     background-color: ${props => props.active ? 'green' : 'transparent'};
+    text-align:center;
 `
+
+export const ButtonUnseen = styled.button`
+    border:none;
+    background-color:transparent;
+    color:black;
+    font-weight:700
+`
+
 
 /*export const SelectTime = styled.select`
     background-color:white;

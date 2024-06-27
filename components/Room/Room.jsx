@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import roomData from "../../data/roomData.json"
-import { ButtonNewRoom, ButtonSort, ButtonNextBack, ButtonPage} from "./StyledButtonRoom";
+import { ButtonNewRoom, ButtonSort, ButtonNextBack, ButtonPage, ButtonUnseen} from "./StyledButtonRoom";
 import { TableColumnMain, TableIdNameContainer, TableImg, TableRoomData, TableRow } from "./StyledTablaRoom";
 
 const Room = () => {
@@ -11,26 +11,41 @@ const Room = () => {
     const [roomsMostrar, setRoomsMostrar] = useState([])
     const [isDisabledBack, setIsDisabledBack] = useState()
     const [isDisabledNext, setIsDisabledNext] = useState()
+    const [maxPages, setMaxPages] = useState(Math.floor(roomData.length / 10))
 
     const handlePageClick = (index) =>{
         setPage(index)
     }
 
-    const maxPages = Math.floor(roomData.length / 10)
+    const handleChangeSort = (type) =>{
+        setSorting(type)
+    }
 
-    useEffect(() =>{
-        setSortedRooms(roomData.sort((a, b) => {
+    useEffect(() => {
+        let filteredRooms = roomData;
+
+        if (active === "Available") {
+            filteredRooms = filteredRooms.filter(room => room.status);
+        } else if (active === "Not available") {
+            filteredRooms = filteredRooms.filter(room => !room.status);
+        }
+
+        filteredRooms.sort((a, b) => {
             if (a[sorting] < b[sorting]) return -1;
             if (a[sorting] > b[sorting]) return 1;
             return 0;
-        }));
-        setPage(0)
-    }, [sorting]);
+        });
 
-      useEffect(() => {
+        setSortedRooms(filteredRooms);
+        setPage(0);
+
+        setMaxPages(Math.floor(filteredRooms.length / 10));
+    }, [sorting, active]);
+
+      useEffect(() => {        
         const registros = page*10;
         setRoomsMostrar (sortedRooms.slice(registros, registros+10))
-      }, [page, sortedRooms]);
+      }, [page, sortedRooms, sorting, active]);
 
       useEffect(() =>{
         if (page === 0){
@@ -55,13 +70,13 @@ const Room = () => {
             <ButtonNewRoom>+ New Room</ButtonNewRoom>
             <TableRoomData>
                 <TableRow>
-                    <TableColumnMain>Room Name</TableColumnMain>
+                    <TableColumnMain><ButtonUnseen onClick={()=> handleChangeSort("id")}>Room Name</ButtonUnseen></TableColumnMain>
                     <TableColumnMain>Room Type</TableColumnMain>
                     <TableColumnMain>Room Floor</TableColumnMain>
                     <TableColumnMain>Amenities</TableColumnMain>
                     <TableColumnMain>Price</TableColumnMain>
-                    <TableColumnMain>Offer Price</TableColumnMain>
-                    <TableColumnMain>Status</TableColumnMain>
+                    <TableColumnMain><ButtonUnseen onClick={()=> handleChangeSort("offer")}>Offer Price</ButtonUnseen></TableColumnMain>
+                    <TableColumnMain><ButtonUnseen onClick={()=> handleChangeSort("status")}>Status</ButtonUnseen></TableColumnMain>
                 </TableRow>
                 {roomsMostrar.map(room => (
                     <TableRow key={room.id}>
@@ -82,7 +97,7 @@ const Room = () => {
             </TableRoomData>  
             <ButtonNextBack onClick={() =>setPage(page-1)} disabled={isDisabledBack}>Back</ButtonNextBack>
             {Array.from({ length: maxPages + 1 }, (_, index) => (
-                    <ButtonPage key={index} onClick={() => handlePageClick(index)}>{index + 1}</ButtonPage>
+                    <ButtonPage key={index} active={index === page}  onClick={() => handlePageClick(index)}>{index + 1}</ButtonPage>
                 ))}
             <ButtonNextBack onClick={() =>setPage(page+1)} disabled={isDisabledNext}>Next</ButtonNextBack>         
         </>
