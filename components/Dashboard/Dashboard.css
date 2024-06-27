@@ -50,7 +50,7 @@
 }
 
 .navbar__aside {
-    display: none; /*Cambiar a Flex una vez tenga algo donde ponerlo debajo y hacer asi el slide a la izquierda*/
+    display: flex; /*Cambiar a Flex una vez tenga algo donde ponerlo debajo y hacer asi el slide a la izquierda*/
     position: absolute;
     left: -11.9em;
     transform: translateX(100%);

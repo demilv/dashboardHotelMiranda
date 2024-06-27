@@ -26,7 +26,7 @@ const Dashboard = ({ logoutUser, goHome, attempt2 }) => {
               <button className="noShow" onClick={attempt2}><Button initialColor="white" index={0}>Dashboard</Button></button>
               <button className="noShow" onClick={goHome}><Button initialColor="white" index={1}>Room</Button></button>
               <Button initialColor="white" index={2}>Bookings</Button>
-              <Button initialColor="white" index={3}>Guest</Button>
+              <Button initialColor="white" index={3}>Contact</Button>
               <button className="noShow" onClick={attempt2}><Button initialColor="white" index={4}>Concierge</Button></button>
               <img className="navbar__aside__img" src="../../public/IMG_20191223_131827 (2) Grande.jpg" alt="Profile"/>
               <div className="navbar__aside__myData">

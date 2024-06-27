@@ -6,7 +6,6 @@ import { FaDoorOpen, FaDoorClosed } from "react-icons/fa6";
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
-import './sliderHome.css';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import roomReviews from '../../data/roomReview.json';
