@@ -1,7 +1,7 @@
 import React from "react";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 import { MdOutlineCancel } from "react-icons/md";
-import { HomeReviewMainContainer, HomeReviewMainContainerInside, HomeReviewMainContainerInside2, HomeReviewMainContainerInside3, HomeReviewCircle, HomeReviewGreySquare } from "./cajasHomeReview";
+import { HomeReviewMainContainer, HomeReviewMainContainerInside, HomeReviewMainContainerInside2, HomeReviewMainContainerInside3, HomeReviewCircle, HomeReviewGreySquare } from "./StyledCajasHomeReview";
 
 const HomeReview = ({ review, customerName, date }) => {
     const timeSince = (date) => {

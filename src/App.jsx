@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Route, Routes, useNavigate, Navigate } from 'react-router-dom';
 import Login from '../components/Login/Login.jsx';
 import Dashboard from '../components/Dashboard/Dashboard.jsx';
 import Home from "../components/Home/Home.jsx";
-import Prueba2 from '../components/Prueba2/Prueba2.jsx';
+import Room from "../components/Room/Room.jsx";
 
 const usuarios = [
   {
@@ -25,6 +25,13 @@ function App() {
   const [user, setUser] = useState(null);
   const [loginError, setLoginError] = useState('');
 
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
   const loginUser = (formData) => {
     const existsUser = usuarios.find(
       (user) =>
@@ -33,6 +40,7 @@ function App() {
     if (existsUser) {
       setUser(existsUser);
       setLoginError('');
+      localStorage.setItem('user', JSON.stringify(existsUser));
       navigate('/');
     } else {
       setUser(false);
@@ -42,6 +50,7 @@ function App() {
 
   const logoutUser = () => {
     setUser(null);
+    localStorage.removeItem('user');
     navigate('/login');
   };
 
@@ -49,16 +58,16 @@ function App() {
     navigate('/home');
   };
 
-  const attempt2 = () => {
-    navigate('/prueba2');
+  const goRoom = () => {
+    navigate('/room');
   };
 
   return (
     <Routes>
       <Route path="/login" element={user ? <Navigate to="/" /> : <Login user={user} loginUser={loginUser} loginError={loginError} />} />
-      <Route path="/" element={user ? <Dashboard logoutUser={logoutUser} goHome={goHome} attempt2={attempt2}/> : <Navigate to="/login" />}>
+      <Route path="/" element={user ? <Dashboard logoutUser={logoutUser} goHome={goHome} goRoom={goRoom} /> : <Navigate to="/login" />}>
         <Route path="/home" element={<Home />} />
-        <Route path="prueba2" element={<Prueba2 />} />
+        <Route path="/room" element={<Room />} />
       </Route>
     </Routes>
   );
