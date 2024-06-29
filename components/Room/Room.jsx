@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import roomData from "../../data/roomData.json"
 import { ButtonNewRoom, ButtonSort, ButtonNextBack, ButtonPage, ButtonUnseen} from "./StyledButtonRoom";
-import { TableColumnFlexMain, TableColumnMain, TableContainIdName, TableIdNameContainer, TableImg, TableRoomData, TableRow } from "./StyledTablaRoom";
+import { TableColumnFlexMain, TableColumnMain, TableContainIdName, TableFirstRow, TableIdNameContainer, TableImg, TableRoomData, TableRow } from "./StyledTablaRoom";
 
 const Room = () => {
     const [active, setActive] = useState("All")
@@ -67,11 +67,15 @@ const Room = () => {
 
 
     return (
-        <>
-            <ButtonSort active={active === "All"} onClick={() => setActive("All")}>All</ButtonSort>
-            <ButtonSort active={active === "Available"} onClick={() => setActive("Available")}>Available</ButtonSort>
-            <ButtonSort active={active === "Not available"} onClick={() => setActive("Not available")}>Not available</ButtonSort>
-            <ButtonNewRoom>+ New Room</ButtonNewRoom>
+        <>      
+            <TableFirstRow>
+                <TableRow first={first}>
+                    <ButtonSort active={active === "All"} onClick={() => setActive("All")}>All</ButtonSort>
+                    <ButtonSort active={active === "Available"} onClick={() => setActive("Available")}>Available</ButtonSort>
+                    <ButtonSort active={active === "Not available"} onClick={() => setActive("Not available")}>Not available</ButtonSort>
+                </TableRow>
+                <ButtonNewRoom>+ New Room</ButtonNewRoom>
+            </TableFirstRow>
             <TableRoomData>
                 <TableRow>
                     <TableColumnMain big={big1}><ButtonUnseen onClick={()=> handleChangeSort("id")}>Room Name</ButtonUnseen></TableColumnMain>

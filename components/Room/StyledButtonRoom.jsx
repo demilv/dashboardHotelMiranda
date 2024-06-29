@@ -14,9 +14,10 @@ export const ButtonNewRoom = styled.button`
     border-radius:0.4em;
     background-color: rgb(6, 74, 4);  
     color: white;
-    padding: 1em 2em;
-    width:17em;
-    margin-left:20%;
+    margin-top:4em;
+    max-height: 2em;
+    padding: 0.5em 3em 1em 3em;
+    margin-right:5%;
 `
 
 export const ButtonNextBack = styled.button`

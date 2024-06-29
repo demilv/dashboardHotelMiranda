@@ -11,8 +11,8 @@ export const TableRoomData = styled.div`
 `;
 
 export const TableRow = styled.div`
-    border:none;
-    border-bottom:1px solid rgb(219, 219, 219);
+    border:none;    
+    border-bottom: ${({ first }) => (first ? '' : '1px solid rgb(219, 219, 219)')};;
     margin-right:2em;
     display:flex;
     flex-direction:row;
@@ -57,4 +57,10 @@ export const TableIdNameContainer = styled.div`
 export const TableContainIdName = styled.div`
     display: flex;
     flex-direction:column;
+`
+
+export const TableFirstRow = styled.div`
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
 `
