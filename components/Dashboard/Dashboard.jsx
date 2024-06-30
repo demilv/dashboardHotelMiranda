@@ -9,7 +9,7 @@ import { GiCancel } from "react-icons/gi";
 import Button, { ButtonProvider } from "../styledComponents/ButtonStyled";
 import './Dashboard.css';
 
-const Dashboard = ({ logoutUser, goHome, goRoom, goBooking }) => {
+const Dashboard = ({ logoutUser, goHome, goRoom, goBooking, goReviews }) => {
   const [isAsideVisible, setIsAsideVisible] = useState(false);
 
   const toggleAside = () => {
@@ -26,7 +26,7 @@ const Dashboard = ({ logoutUser, goHome, goRoom, goBooking }) => {
               <button className="noShow" onClick={goHome}><Button initialColor="white" index={0}>Dashboard</Button></button>
               <button className="noShow" onClick={goRoom}><Button initialColor="white" index={1}>Room</Button></button>
               <button className="noShow" onClick={goBooking}><Button initialColor="white" index={2}>Bookings</Button></button>
-              <Button initialColor="white" index={3}>Contact</Button>
+              <button className="noShow" onClick={goReviews}><Button initialColor="white" index={3}>Contact</Button></button>
               <button className="noShow" ><Button initialColor="white" index={4}>Concierge</Button></button>
               <img className="navbar__aside__img" src="../../public/IMG_20191223_131827 (2) Grande.jpg" alt="Profile"/>
               <div className="navbar__aside__myData">

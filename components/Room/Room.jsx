@@ -55,6 +55,9 @@ const Room = () => {
         if (page === 0){
             setIsDisabledBack(true)
             setIsDisabledNext(false)
+            if(page === maxPages){
+                setIsDisabledNext(true)
+            }
         }else if(page === maxPages){
             setIsDisabledBack(false)
             setIsDisabledNext(true)

@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const HomeReviewMainContainer = styled.div`
-    border:1px solid;
+    border:none;
+    border-radius:0.4em;
     padding: 2em 2em 2em 2em; 
     height:14em;
     background-color:white

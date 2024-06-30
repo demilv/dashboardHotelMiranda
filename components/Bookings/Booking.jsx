@@ -3,7 +3,7 @@ import bookingsData from "../../data/bookingsData.json"
 import { ButtonNewRoom, ButtonSort, ButtonNextBack, ButtonPage, ButtonUnseen, ButtonGreen} from "../../styledComponents/StyledButton";
 import { TableColumnFlexMain, TableColumnMain, TableContainIdName, TableFirstRow, TableIdNameContainer, TableImg, TableRoomData, TableRow } from "../../styledComponents/StyledTabla";
 import { TextColorful } from "../../styledComponents/TextStyled";
-import Popup from "./Popup";
+import Popup from "../Popup/Popup";
 
 const Booking = () => {
     const [active, setActive] = useState("All")
