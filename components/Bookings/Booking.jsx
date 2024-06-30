@@ -82,7 +82,7 @@ const Booking = () => {
             setIsDisabledBack(false)
             setIsDisabledNext(false)
         }
-      }, [page, active])
+      }, [page,  sortedBookings])
 
 
 

@@ -62,7 +62,7 @@ const Room = () => {
             setIsDisabledBack(false)
             setIsDisabledNext(false)
         }
-      }, [page])
+      }, [page, sortedRooms])
 
 
 
