@@ -3,7 +3,7 @@ import bookingsData from "../../data/bookingsData.json"
 import { ButtonNewRoom, ButtonSort, ButtonNextBack, ButtonPage, ButtonUnseen, ButtonGreen} from "../../styledComponents/StyledButton";
 import { TableColumnFlexMain, TableColumnMain, TableContainIdName, TableFirstRow, TableIdNameContainer, TableImg, TableRoomData, TableRow } from "../../styledComponents/StyledTabla";
 import { TextColorful } from "../../styledComponents/TextStyled";
-import Popup from "./Popup";
+import Popup from "../Popup/Popup";
 
 const Booking = () => {
     const [active, setActive] = useState("All")
@@ -13,7 +13,7 @@ const Booking = () => {
     const [bookingsMostrar, setBookingsMostrar] = useState([])
     const [isDisabledBack, setIsDisabledBack] = useState()
     const [isDisabledNext, setIsDisabledNext] = useState()
-    const [maxPages, setMaxPages] = useState(Math.floor(bookingsData.length / 10))
+    const [maxPages, setMaxPages] = useState(Math.ceil(bookingsData.length / 10))
     const [popupVisible, setPopupVisible] = useState(false);
     const [selectedRequest, setSelectedRequest] = useState("");
 
@@ -63,7 +63,8 @@ const Booking = () => {
         setSortedBookings(filteredBookings);
         setPage(0);
 
-        setMaxPages(Math.floor(filteredBookings.length / 10));
+        const newMaxPages = Math.ceil(filteredBookings.length / 10);
+        setMaxPages(newMaxPages);
     }, [sorting, active]);
 
       useEffect(() => {        
@@ -75,10 +76,10 @@ const Booking = () => {
         if (page === 0){
             setIsDisabledBack(true)
             setIsDisabledNext(false)
-            if(page === maxPages){
+            if(page+1 === maxPages){
                 setIsDisabledNext(true)
             }
-        }else if(page === maxPages){
+        }else if(page+1 === maxPages){
             setIsDisabledBack(false)
             setIsDisabledNext(true)
         }else{
@@ -143,8 +144,8 @@ const Booking = () => {
                 ))}         
             </TableRoomData>  
             <ButtonNextBack first={first} onClick={() =>setPage(page-1)} disabled={isDisabledBack}>Back</ButtonNextBack>
-            {Array.from({ length: maxPages + 1 }, (_, index) => (
-                    <ButtonPage key={index} active={index === page}  onClick={() => handlePageClick(index)}>{index + 1}</ButtonPage>
+            {Array.from({ length: maxPages }, (_, index) => (
+                    <ButtonPage key={index+1} active={index === page}  onClick={() => handlePageClick(index)}>{index + 1}</ButtonPage>
                 ))}
             <ButtonNextBack onClick={() =>setPage(page+1)} disabled={isDisabledNext}>Next</ButtonNextBack>  
             {popupVisible && <Popup specialRequest={selectedRequest} onClose={closePopup} />}       

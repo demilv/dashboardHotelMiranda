@@ -45,7 +45,11 @@ export const ButtonPage = styled.button`
 export const ButtonUnseen = styled.button`
     border:none;
     background-color:transparent;
-    color:black;
+    color: ${props => {
+        if (props.color === "green") return 'green';
+        if (props.color === "red") return 'red';
+        return 'black';
+    }};
     font-weight:700
 `
 
@@ -58,7 +62,7 @@ export const ButtonGreen = styled.button`
 
 
 
-export const CloseButton = styled.button`
+export const CloseButtonn = styled.button`
   position: absolute;
   top: 10px;
   right: 10px;

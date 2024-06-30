@@ -1,11 +1,11 @@
 import React from "react";
 import { PopupContainer, PopupContent } from "../../styledComponents/StyledTabla";
-import { CloseButton } from "../../styledComponents/StyledButton"
+import { CloseButtonn } from "../../styledComponents/StyledButton"
 
 const Popup = ({ specialRequest, onClose }) => (
   <PopupContainer onClick={onClose}>
     <PopupContent onClick={(e) => e.stopPropagation()}>
-      <CloseButton onClick={onClose}>×</CloseButton>
+      <CloseButtonn onClick={onClose}>×</CloseButtonn>
       <p>{specialRequest}</p>
     </PopupContent>
   </PopupContainer>

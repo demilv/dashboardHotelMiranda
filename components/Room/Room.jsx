@@ -11,7 +11,7 @@ const Room = () => {
     const [roomsMostrar, setRoomsMostrar] = useState([])
     const [isDisabledBack, setIsDisabledBack] = useState()
     const [isDisabledNext, setIsDisabledNext] = useState()
-    const [maxPages, setMaxPages] = useState(Math.floor(roomData.length / 10))
+    const [maxPages, setMaxPages] = useState(Math.ceil(roomData.length / 10))
 
     const big1 = "big1"
     const big2 = "big2"
@@ -43,7 +43,8 @@ const Room = () => {
         setSortedRooms(filteredRooms);
         setPage(0);
 
-        setMaxPages(Math.floor(filteredRooms.length / 10));
+        const newMaxPages = Math.ceil(filteredRooms.length / 10);
+        setMaxPages(newMaxPages);
     }, [sorting, active]);
 
       useEffect(() => {        
@@ -55,7 +56,10 @@ const Room = () => {
         if (page === 0){
             setIsDisabledBack(true)
             setIsDisabledNext(false)
-        }else if(page === maxPages){
+            if(page+1 === maxPages){
+                setIsDisabledNext(true)
+            }
+        }else if(page+1 === maxPages){
             setIsDisabledBack(false)
             setIsDisabledNext(true)
         }else{
@@ -109,8 +113,8 @@ const Room = () => {
                 ))}         
             </TableRoomData>  
             <ButtonNextBack first={first}onClick={() =>setPage(page-1)} disabled={isDisabledBack}>Back</ButtonNextBack>
-            {Array.from({ length: maxPages + 1 }, (_, index) => (
-                    <ButtonPage key={index} active={index === page}  onClick={() => handlePageClick(index)}>{index + 1}</ButtonPage>
+            {Array.from({ length: maxPages }, (_, index) => (
+                    <ButtonPage key={index+1} active={index === page}  onClick={() => handlePageClick(index)}>{index + 1}</ButtonPage>
                 ))}
             <ButtonNextBack onClick={() =>setPage(page+1)} disabled={isDisabledNext}>Next</ButtonNextBack>         
         </>

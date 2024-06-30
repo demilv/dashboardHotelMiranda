@@ -23,7 +23,7 @@ export const TextColorful = styled.p`
     background-color: ${props => {
         if (props.color === 'green') return 'rgb(177, 242, 177);';
         if (props.color === 'red') return 'rgb(231, 138, 138)';
-        if (props.color === 'yellow') return 'yellow';
+        if (props.color === 'yellow') return 'grey';
         return 'grey';
     }};
 `

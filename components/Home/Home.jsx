@@ -9,7 +9,7 @@ import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import roomReviews from '../../data/roomReview.json';
-import HomeReview from "./HomeReview";
+import RecentReviews from "../ReviewsSlider/RecentReviews";
 
 const Home = () => {
     const [selectedBox, setSelectedBox] = useState(null);
@@ -61,7 +61,7 @@ const Home = () => {
             >
                 {latestReviews.map(review => (
                     <SwiperSlide key={review.id}>
-                        <HomeReview 
+                        <RecentReviews 
                             review={review.review}
                             customerName={review.customerName}
                             date={review.date}
