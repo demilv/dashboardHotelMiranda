@@ -45,7 +45,7 @@ export const TableColumnFlexMain = styled.div`
 
 export const TableImg = styled.img`
     border-radius:0.4em;
-    max-width:7em;    
+    max-width:4em;    
     min-height:3em;
     margin-right:1em;
 `
@@ -65,3 +65,24 @@ export const TableFirstRow = styled.div`
     justify-content: space-between;
 `
 
+export const PopupContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+`;
+
+export const PopupContent = styled.div`
+  background-color: white;
+  padding: 2em;
+  border-radius: 0.4em;
+  max-width: 500px;
+  width: 80%;
+  position: relative;
+`;

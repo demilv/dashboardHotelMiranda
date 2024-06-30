@@ -4,6 +4,7 @@ import Login from '../components/Login/Login.jsx';
 import Dashboard from '../components/Dashboard/Dashboard.jsx';
 import Home from "../components/Home/Home.jsx";
 import Room from "../components/Room/Room.jsx";
+import Booking from "../components/Bookings/Booking.jsx";
 
 const usuarios = [
   {
@@ -62,12 +63,17 @@ function App() {
     navigate('/room');
   };
 
+  const goBooking = () => {
+    navigate('/booking')
+  }
+
   return (
     <Routes>
       <Route path="/login" element={user ? <Navigate to="/" /> : <Login user={user} loginUser={loginUser} loginError={loginError} />} />
-      <Route path="/" element={user ? <Dashboard logoutUser={logoutUser} goHome={goHome} goRoom={goRoom} /> : <Navigate to="/login" />}>
+      <Route path="/" element={user ? <Dashboard logoutUser={logoutUser} goHome={goHome} goRoom={goRoom} goBooking={goBooking}/> : <Navigate to="/login" />}>
         <Route path="/home" element={<Home />} />
         <Route path="/room" element={<Room />} />
+        <Route path="/booking" element={<Booking/>} />
       </Route>
     </Routes>
   );
