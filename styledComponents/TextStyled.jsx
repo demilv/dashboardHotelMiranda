@@ -27,3 +27,14 @@ export const TextColorful = styled.p`
         return 'grey';
     }};
 `
+
+export const TextColorfulNoBackground = styled.p`
+    border:none;
+    font-weight:700;
+    padding: 0.5em 2em 1em 2em;
+    color: ${props => {
+        if (props.color === 'green') return 'green';
+        if (props.color === 'red') return 'red';
+        return 'grey';
+    }};    
+`

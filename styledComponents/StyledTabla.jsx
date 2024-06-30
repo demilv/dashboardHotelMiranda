@@ -45,9 +45,10 @@ export const TableColumnFlexMain = styled.div`
 
 export const TableImg = styled.img`
     border-radius:0.4em;
-    max-width:4em;    
-    min-height:3em;
+    width:4em;    
+    height:4em;
     margin-right:1em;
+    margin-top:${({active})=> (active ? '0.8em' : '')}
 `
 
 export const TableIdNameContainer = styled.div`

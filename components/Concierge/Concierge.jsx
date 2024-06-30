@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import conciergeData from '../../data/conciergeData.json';
-import { ButtonNewRoom, ButtonSort, ButtonNextBack, ButtonPage, ButtonUnseen} from "../../styledComponents/StyledButton";
+import {  ButtonSort, ButtonNextBack, ButtonPage, ButtonUnseen} from "../../styledComponents/StyledButton";
 import { TableColumnFlexMain, TableColumnMain, TableContainIdName, TableFirstRow, TableIdNameContainer, TableImg, TableRoomData, TableRow } from "../../styledComponents/StyledTabla";
 import { TextColorfulNoBackground } from "../../styledComponents/TextStyled";
 import { MdOutlinePhone } from "react-icons/md";
 
 
-const Reviews= () => {
+const Concierge= () => {
 
     const [active, setActive] = useState("All Contacts")
     const [sorting, setSorting] = useState("startDate")
@@ -99,13 +99,13 @@ const Reviews= () => {
                 {usersMostrar.map(user => (
                     <TableRow key={user.id}>                        
                         <TableColumnFlexMain>
-                            <TableImg src={user.photo} alt={`User ${user.id}`}/>
+                            <TableImg active={active} src={user.photo} alt={`User ${user.id}`}/>
                             <TableContainIdName>
                                 <TableIdNameContainer>
-                                    #{user.name}
+                                    {user.name}
                                 </TableIdNameContainer>
                                 <TableIdNameContainer>
-                                    {user.id}
+                                    #{user.id}
                                 </TableIdNameContainer>
                                 <TableIdNameContainer>
                                     Joined in {user.startDate}
@@ -128,4 +128,4 @@ const Reviews= () => {
     )
 }
 
-export default Reviews
+export default Concierge
