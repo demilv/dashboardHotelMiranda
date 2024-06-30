@@ -12,7 +12,7 @@ import { IoMdStar } from "react-icons/io";
 
 const Reviews= () => {
 
-    const [active, setActive] = useState("All")
+    const [active, setActive] = useState("All Contacts")
     const [sorting, setSorting] = useState("date")
     const [page, setPage] = useState(0)
     const [sortedReviews, setSortedReviews] = useState([])
@@ -62,10 +62,10 @@ const Reviews= () => {
         if (page === 0){
             setIsDisabledBack(true)
             setIsDisabledNext(false)
-            if(page === maxPages){
+            if(page+1 === maxPages){
                 setIsDisabledNext(true)
             }
-        }else if(page === maxPages){
+        }else if(page+1 === maxPages){
             setIsDisabledBack(false)
             setIsDisabledNext(true)
         }else{
@@ -135,7 +135,7 @@ const Reviews= () => {
             </TableRoomData>  
             <ButtonNextBack first={first} onClick={() =>setPage(page-1)} disabled={isDisabledBack}>Back</ButtonNextBack>
             {Array.from({ length: maxPages }, (_, index) => (
-                    <ButtonPage key={index} active={index === page}  onClick={() => handlePageClick(index)}>{index + 1}</ButtonPage>
+                    <ButtonPage key={index+1} active={index === page}  onClick={() => handlePageClick(index)}>{index + 1}</ButtonPage>
                 ))}
             <ButtonNextBack onClick={() =>setPage(page+1)} disabled={isDisabledNext}>Next</ButtonNextBack>  
         </>
