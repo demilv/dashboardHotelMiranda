@@ -45,7 +45,7 @@ export const TableColumnFlexMain = styled.div`
 
 export const TableImg = styled.img`
     border-radius:0.4em;
-    max-width:7em;    
+    max-width:4em;    
     min-height:3em;
     margin-right:1em;
 `
@@ -63,22 +63,4 @@ export const TableFirstRow = styled.div`
     display:flex;
     flex-direction:row;
     justify-content: space-between;
-`
-
-export const TextColorful = styled.div`
-    border:none;
-    font-weight:700;
-    padding: 0.5em 2em 1em 2em;
-    color: ${props => {
-        if (props.color === 'green') return 'green';
-        if (props.color === 'red') return 'red';
-        if (props.color === 'yellow') return 'yellow';
-        return 'grey';
-    }};
-    background-color: ${props => {
-        if (props.color === 'green') return 'rgb(177, 242, 177);';
-        if (props.color === 'red') return 'rgb(231, 138, 138)';
-        if (props.color === 'yellow') return 'yellow';
-        return 'grey';
-    }};
 `

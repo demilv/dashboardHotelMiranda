@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import bookingsData from "../../data/roomData.json"
-import { ButtonNewRoom, ButtonSort, ButtonNextBack, ButtonPage, ButtonUnseen} from "../styledComponents/StyledButton";
-import { TableColumnFlexMain, TableColumnMain, TableContainIdName, TableFirstRow, TableIdNameContainer, TableImg, TableRoomData, TableRow } from "../styledComponents/StyledTabla";
-import { TextColorful } from "../styledComponents/TextStyled";
+import bookingsData from "../../data/bookingsData.json"
+import { ButtonNewRoom, ButtonSort, ButtonNextBack, ButtonPage, ButtonUnseen} from "../../styledComponents/StyledButton";
+import { TableColumnFlexMain, TableColumnMain, TableContainIdName, TableFirstRow, TableIdNameContainer, TableImg, TableRoomData, TableRow } from "../../styledComponents/StyledTabla";
+import { TextColorful } from "../../styledComponents/TextStyled";
 
-const Room = () => {
+const Booking = () => {
     const [active, setActive] = useState("All")
     const [sorting, setSorting] = useState("id")
     const [page, setPage] = useState(0)
@@ -72,6 +72,9 @@ const Room = () => {
         if (page === 0){
             setIsDisabledBack(true)
             setIsDisabledNext(false)
+            if(page === maxPages){
+                setIsDisabledNext(true)
+            }
         }else if(page === maxPages){
             setIsDisabledBack(false)
             setIsDisabledNext(true)
@@ -79,7 +82,7 @@ const Room = () => {
             setIsDisabledBack(false)
             setIsDisabledNext(false)
         }
-      }, [page])
+      }, [page, active])
 
 
 
@@ -93,7 +96,7 @@ const Room = () => {
                     <ButtonSort active={active === "inProgress"} onClick={() => setActive("inProgress")}>In Progress</ButtonSort>
                     {/*Aqui pondria un buscador de booking*/}
                 </TableRow>
-                <ButtonNewRoom>+ New Room</ButtonNewRoom>
+                <ButtonNewRoom>+ New Booking</ButtonNewRoom>
             </TableFirstRow>
             <TableRoomData>
                 <TableRow>
@@ -127,7 +130,7 @@ const Room = () => {
                     </TableRow>
                 ))}         
             </TableRoomData>  
-            <ButtonNextBack first={first}onClick={() =>setPage(page-1)} disabled={isDisabledBack}>Back</ButtonNextBack>
+            <ButtonNextBack first={first} onClick={() =>setPage(page-1)} disabled={isDisabledBack}>Back</ButtonNextBack>
             {Array.from({ length: maxPages + 1 }, (_, index) => (
                     <ButtonPage key={index} active={index === page}  onClick={() => handlePageClick(index)}>{index + 1}</ButtonPage>
                 ))}
@@ -136,4 +139,4 @@ const Room = () => {
     )
 }
 
-export default Room
+export default Booking
