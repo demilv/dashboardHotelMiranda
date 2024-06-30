@@ -13,7 +13,7 @@ const Booking = () => {
     const [bookingsMostrar, setBookingsMostrar] = useState([])
     const [isDisabledBack, setIsDisabledBack] = useState()
     const [isDisabledNext, setIsDisabledNext] = useState()
-    const [maxPages, setMaxPages] = useState(Math.floor(bookingsData.length / 10))
+    const [maxPages, setMaxPages] = useState(Math.ceil(bookingsData.length / 10))
     const [popupVisible, setPopupVisible] = useState(false);
     const [selectedRequest, setSelectedRequest] = useState("");
 
@@ -63,7 +63,8 @@ const Booking = () => {
         setSortedBookings(filteredBookings);
         setPage(0);
 
-        setMaxPages(Math.floor(filteredBookings.length / 10));
+        const newMaxPages = Math.ceil(filteredBookings.length / 10);
+        setMaxPages(newMaxPages);
     }, [sorting, active]);
 
       useEffect(() => {        
@@ -143,7 +144,7 @@ const Booking = () => {
                 ))}         
             </TableRoomData>  
             <ButtonNextBack first={first} onClick={() =>setPage(page-1)} disabled={isDisabledBack}>Back</ButtonNextBack>
-            {Array.from({ length: maxPages + 1 }, (_, index) => (
+            {Array.from({ length: maxPages }, (_, index) => (
                     <ButtonPage key={index} active={index === page}  onClick={() => handlePageClick(index)}>{index + 1}</ButtonPage>
                 ))}
             <ButtonNextBack onClick={() =>setPage(page+1)} disabled={isDisabledNext}>Next</ButtonNextBack>  
