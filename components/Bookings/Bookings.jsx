@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import bookingsData from "../../data/roomData.json"
-import { ButtonNewRoom, ButtonSort, ButtonNextBack, ButtonPage, ButtonUnseen} from "./StyledButtonRoom";
-import { TableColumnFlexMain, TableColumnMain, TableContainIdName, TableFirstRow, TableIdNameContainer, TableImg, TableRoomData, TableRow } from "../styledComponents/StyledTablaRoom";
+import { ButtonNewRoom, ButtonSort, ButtonNextBack, ButtonPage, ButtonUnseen} from "../styledComponents/StyledButton";
+import { TableColumnFlexMain, TableColumnMain, TableContainIdName, TableFirstRow, TableIdNameContainer, TableImg, TableRoomData, TableRow } from "../styledComponents/StyledTabla";
+import { TextColorful } from "../styledComponents/TextStyled";
 
 const Room = () => {
     const [active, setActive] = useState("All")
@@ -16,6 +17,20 @@ const Room = () => {
     const big1 = "big1"
     const big2 = "big2"
     const first = "first"
+
+    const getStatusColor = (status) => {
+        switch (status) {
+          case 'Check In':
+            return 'green';
+          case 'Check Out':
+            return 'red';
+          case 'In Progress':
+            return 'yellow';
+          default:
+            return 'grey';
+        }
+      };
+      
 
     const handlePageClick = (index) =>{
         setPage(index)
@@ -90,25 +105,25 @@ const Room = () => {
                     <TableColumnMain>Room Type</TableColumnMain>
                     <TableColumnMain>Status</TableColumnMain>
                 </TableRow>
-                {bookingsMostrar.map(room => (
-                    <TableRow key={room.id}>
+                {bookingsMostrar.map(booking => (
+                    <TableRow key={booking.id}>
                         <TableColumnFlexMain>
-                            <TableImg src={room.fotoLink} alt={`Room ${room.number}`}/>
+                            <TableImg src={booking.fotoLink} alt={`Room ${booking.number}`}/>
                             <TableContainIdName>
                                 <TableIdNameContainer>
-                                    #{room.id}
+                                    {booking.guest}
                                 </TableIdNameContainer>
                                 <TableIdNameContainer>
-                                    {room.number}
+                                    #{booking.id}
                                 </TableIdNameContainer>
                             </TableContainIdName>
                         </TableColumnFlexMain>
-                        <TableColumnMain>{room.bedType}</TableColumnMain>
-                        <TableColumnMain>{room.floor}</TableColumnMain>
-                        <TableColumnMain big={big2}>{room.amenities}</TableColumnMain>
-                        <TableColumnMain>{room.price}/night</TableColumnMain>
-                        <TableColumnMain>{room.offer}/night</TableColumnMain>
-                        <TableColumnMain>{room.status ? 'Available' : 'Occupied'}</TableColumnMain>
+                        <TableColumnMain>{booking.orderDate}</TableColumnMain>
+                        <TableColumnMain>{booking.checkInDate}</TableColumnMain>
+                        <TableColumnMain>{booking.checkOutDate}</TableColumnMain>
+                        <TableColumnMain>View Notes</TableColumnMain>
+                        <TableColumnMain>Deluxe - {booking.id}</TableColumnMain>
+                        <TableColumnMain><TextColorful color={getStatusColor(booking.status)}>{booking.status}</TextColorful></TableColumnMain>
                     </TableRow>
                 ))}         
             </TableRoomData>  

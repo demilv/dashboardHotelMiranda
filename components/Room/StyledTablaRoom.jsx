@@ -39,8 +39,8 @@ export const TableColumnFlexMain = styled.div`
     color:black;
     font-weight:700;
     margin-right:2em;
-    min-width:11.9em;
-
+    min-width:14.9em;
+    max-width:14.9em;
 `
 
 export const TableImg = styled.img`
