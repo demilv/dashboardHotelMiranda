@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import bookingsData from "../../data/bookingsData.json"
-import { ButtonNewRoom, ButtonSort, ButtonNextBack, ButtonPage, ButtonUnseen} from "../../styledComponents/StyledButton";
+import { ButtonNewRoom, ButtonSort, ButtonNextBack, ButtonPage, ButtonUnseen, ButtonGreen} from "../../styledComponents/StyledButton";
 import { TableColumnFlexMain, TableColumnMain, TableContainIdName, TableFirstRow, TableIdNameContainer, TableImg, TableRoomData, TableRow } from "../../styledComponents/StyledTabla";
 import { TextColorful } from "../../styledComponents/TextStyled";
+import Popup from "./Popup";
 
 const Booking = () => {
     const [active, setActive] = useState("All")
@@ -13,6 +14,8 @@ const Booking = () => {
     const [isDisabledBack, setIsDisabledBack] = useState()
     const [isDisabledNext, setIsDisabledNext] = useState()
     const [maxPages, setMaxPages] = useState(Math.floor(bookingsData.length / 10))
+    const [popupVisible, setPopupVisible] = useState(false);
+    const [selectedRequest, setSelectedRequest] = useState("");
 
     const big1 = "big1"
     const big2 = "big2"
@@ -84,6 +87,15 @@ const Booking = () => {
         }
       }, [page,  sortedBookings])
 
+    const handleSpecialRequest = (specialRequest) => {
+    setSelectedRequest(specialRequest);
+    setPopupVisible(true);
+    };
+
+    const closePopup = () => {
+    setPopupVisible(false);
+    setSelectedRequest("");
+    };
 
 
     return (
@@ -124,7 +136,7 @@ const Booking = () => {
                         <TableColumnMain>{booking.orderDate}</TableColumnMain>
                         <TableColumnMain>{booking.checkInDate}</TableColumnMain>
                         <TableColumnMain>{booking.checkOutDate}</TableColumnMain>
-                        <TableColumnMain>View Notes</TableColumnMain>
+                        <TableColumnMain><ButtonGreen onClick={() => handleSpecialRequest(booking.specialRequest)}>View Notes</ButtonGreen></TableColumnMain>
                         <TableColumnMain>Deluxe - {booking.id}</TableColumnMain>
                         <TableColumnMain><TextColorful color={getStatusColor(booking.status)}>{booking.status}</TextColorful></TableColumnMain>
                     </TableRow>
@@ -134,7 +146,8 @@ const Booking = () => {
             {Array.from({ length: maxPages + 1 }, (_, index) => (
                     <ButtonPage key={index} active={index === page}  onClick={() => handlePageClick(index)}>{index + 1}</ButtonPage>
                 ))}
-            <ButtonNextBack onClick={() =>setPage(page+1)} disabled={isDisabledNext}>Next</ButtonNextBack>         
+            <ButtonNextBack onClick={() =>setPage(page+1)} disabled={isDisabledNext}>Next</ButtonNextBack>  
+            {popupVisible && <Popup specialRequest={selectedRequest} onClose={closePopup} />}       
         </>
     )
 }

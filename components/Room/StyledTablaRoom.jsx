@@ -64,3 +64,4 @@ export const TableFirstRow = styled.div`
     flex-direction:row;
     justify-content: space-between;
 `
+

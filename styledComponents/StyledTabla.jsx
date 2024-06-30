@@ -64,3 +64,25 @@ export const TableFirstRow = styled.div`
     flex-direction:row;
     justify-content: space-between;
 `
+
+export const PopupContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+`;
+
+export const PopupContent = styled.div`
+  background-color: white;
+  padding: 2em;
+  border-radius: 0.4em;
+  max-width: 500px;
+  width: 80%;
+  position: relative;
+`;

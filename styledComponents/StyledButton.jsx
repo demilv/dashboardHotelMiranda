@@ -49,6 +49,24 @@ export const ButtonUnseen = styled.button`
     font-weight:700
 `
 
+export const ButtonGreen = styled.button`
+    border:none;
+    background-color: rgb(177, 242, 177);
+    color:black;
+    padding: 0.3em 1em 0.3em 1em;
+`
+
+
+
+export const CloseButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5em;
+`;
+
 /*export const SelectTime = styled.select`
     background-color:white;
     border-radius:0.4em;
