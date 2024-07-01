@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import roomData from "../../data/roomData.json"
+import { useNavigate } from "react-router-dom";
 import { ButtonNewRoom, ButtonSort, ButtonNextBack, ButtonPage, ButtonUnseen} from "../../styledComponents/StyledButton";
 import { TableColumnFlexMain, TableColumnMain, TableContainIdName, TableFirstRow, TableIdNameContainer, TableImg, TableRoomData, TableRow } from "../../styledComponents/StyledTabla";
 
@@ -16,6 +17,11 @@ const Room = () => {
     const big1 = "big1"
     const big2 = "big2"
     const first = "first"
+    const navigate = useNavigate()
+
+    const addRoom = () =>{
+        navigate("/addRoom")
+    }
 
     const handlePageClick = (index) =>{
         setPage(index)
@@ -78,7 +84,7 @@ const Room = () => {
                     <ButtonSort active={active === "Available"} onClick={() => setActive("Available")}>Available</ButtonSort>
                     <ButtonSort active={active === "Not available"} onClick={() => setActive("Not available")}>Not available</ButtonSort>
                 </TableRow>
-                <ButtonNewRoom>+ New Room</ButtonNewRoom>
+                <ButtonNewRoom onClick={addRoom}>+ New Room</ButtonNewRoom>
             </TableFirstRow>
             <TableRoomData>
                 <TableRow>

@@ -4,7 +4,7 @@ import {  ButtonNewRoom, ButtonSort, ButtonNextBack, ButtonPage, ButtonUnseen} f
 import { TableColumnFlexMain, TableColumnMain, TableContainIdName, TableFirstRow, TableIdNameContainer, TableImg, TableRoomData, TableRow } from "../../styledComponents/StyledTabla";
 import { TextColorfulNoBackground } from "../../styledComponents/TextStyled";
 import { MdOutlinePhone } from "react-icons/md";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 const Concierge= () => {

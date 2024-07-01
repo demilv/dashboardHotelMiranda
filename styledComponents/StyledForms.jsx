@@ -11,3 +11,13 @@ export const FormContainer = styled.div`
     align-items: center;
     max-width:20em;
 `
+
+export const RadioBigContainer = styled.div`
+    
+`
+
+export const PairRadio = styled.div`
+    display:inline-flex;
+    padding:0.5em;    
+    gap:0.7em;
+`
