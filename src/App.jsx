@@ -7,6 +7,7 @@ import Room from "../components/Room/Room.jsx";
 import Booking from "../components/Bookings/Booking.jsx";
 import Reviews from "../components/Reviews/Reviews.jsx";
 import Concierge from "../components/Concierge/Concierge.jsx";
+import AddUser from "../components/Concierge/AddUser.jsx";
 
 const usuarios = [
   {
@@ -86,6 +87,7 @@ function App() {
         <Route path="/booking" element={<Booking/>} />
         <Route path="/reviews" element={<Reviews/>} />
         <Route path="/concierge" element={<Concierge/>} />
+        <Route path="/addUser" element={<AddUser/>}/>
       </Route>
     </Routes>
   );

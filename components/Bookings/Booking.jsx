@@ -109,7 +109,6 @@ const Booking = () => {
                     <ButtonSort active={active === "inProgress"} onClick={() => setActive("inProgress")}>In Progress</ButtonSort>
                     {/*Aqui pondria un buscador de booking*/}
                 </TableRow>
-                <ButtonNewRoom>+ New Booking</ButtonNewRoom>
             </TableFirstRow>
             <TableRoomData>
                 <TableRow>
