@@ -6,6 +6,7 @@ import Home from "../components/Home/Home.jsx";
 import Room from "../components/Room/Room.jsx";
 import Booking from "../components/Bookings/Booking.jsx";
 import Reviews from "../components/Reviews/Reviews.jsx";
+import Concierge from "../components/Concierge/Concierge.jsx";
 
 const usuarios = [
   {
@@ -72,14 +73,19 @@ function App() {
     navigate('/reviews')
   }
 
+  const goConcierge = () =>{
+    navigate('/concierge')
+  }
+
   return (
     <Routes>
       <Route path="/login" element={user ? <Navigate to="/" /> : <Login user={user} loginUser={loginUser} loginError={loginError} />} />
-      <Route path="/" element={user ? <Dashboard logoutUser={logoutUser} goHome={goHome} goRoom={goRoom} goBooking={goBooking} goReviews={goReviews}/> : <Navigate to="/login" />}>
+      <Route path="/" element={user ? <Dashboard logoutUser={logoutUser} goHome={goHome} goRoom={goRoom} goBooking={goBooking} goReviews={goReviews} goConcierge={goConcierge}/> : <Navigate to="/login" />}>
         <Route path="/home" element={<Home />} />
         <Route path="/room" element={<Room />} />
         <Route path="/booking" element={<Booking/>} />
         <Route path="/reviews" element={<Reviews/>} />
+        <Route path="/concierge" element={<Concierge/>} />
       </Route>
     </Routes>
   );
