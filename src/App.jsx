@@ -28,7 +28,7 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    console.log('State actualizado:', state);
+    console.log('Esto es el contxt:', state);
   }, [state]);
 
   const loginUser = (formData) => {
@@ -37,10 +37,10 @@ function App() {
     );
     console.log(existsUser)
     if (existsUser) {
-      const {email, pass} = existsUser;
-      console.log({email, pass})
-      dispatch({ type: 'SET_USERDATA', payload: {email, pass} });
-      localStorage.setItem('user', JSON.stringify({email, pass}));
+      const {email, pass, name} = existsUser;
+      console.log({email, pass, name})
+      dispatch({ type: 'SET_USERDATA', payload: {email, pass, name} });
+      localStorage.setItem('user', JSON.stringify({email, pass, name}));
       navigate('/');
     } else {
       dispatch({ type: 'LOGOUT' });

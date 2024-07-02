@@ -6,12 +6,14 @@ const userReducer = (state, action) => {
         case "SET_USERDATA":
             return { ...state, 
                 user:{
+                        name:action.payload.name,
                         email: action.payload.email,
                         pass: action.payload.pass,
                         autenticado: true
                     }};
         case "LOGOUT":
             return {...state, user:{autenticado:null}};
+                    
         default:
             return state;
     }
