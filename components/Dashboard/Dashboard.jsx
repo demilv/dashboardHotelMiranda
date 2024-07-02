@@ -12,7 +12,7 @@ import './Dashboard.css';
 const Dashboard = ({ logoutUser, goHome, goRoom, goBooking, goReviews, goConcierge, goEditUser }) => {
   const [isAsideVisible, setIsAsideVisible] = useState(false);
 
-  const { state, dispatch } = useContext(UserContext);
+  const { state } = useContext(UserContext);
 
   useEffect(() => {
     console.log('Esto es el contxt en Dashboard:', state);

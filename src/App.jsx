@@ -39,7 +39,6 @@ function App() {
     console.log(existsUser)
     if (existsUser) {
       const {email, pass, name} = existsUser;
-      console.log({email, pass, name})
       dispatch({ type: 'SET_USERDATA', payload: {email, pass, name} });
       localStorage.setItem('user', JSON.stringify({email, pass, name}));
       navigate('/');

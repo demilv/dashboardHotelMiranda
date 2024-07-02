@@ -12,7 +12,12 @@ const userReducer = (state, action) => {
                         autenticado: true
                     }};
         case "LOGOUT":
-            return {...state, user:{autenticado:null}};
+            return {...state, user:{
+                name:null,
+                email: null,
+                pass: null,
+                autenticado: false
+            }};
                     
         default:
             return state;
@@ -23,6 +28,7 @@ export const UserContext = createContext(null)
 
 export const UserContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(userReducer, {user:{
+        name:null,
         email: null,
         pass: null,
         autenticado: false
