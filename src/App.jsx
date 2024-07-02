@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Route, Routes, useNavigate, Navigate } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from "react";
+import { Route, Routes, useNavigate, Navigate, BrowserRouter } from 'react-router-dom';
 import Login from '../components/Login/Login.jsx';
 import Dashboard from '../components/Dashboard/Dashboard.jsx';
 import Home from "../components/Home/Home.jsx";
@@ -7,54 +7,49 @@ import Room from "../components/Room/Room.jsx";
 import Booking from "../components/Bookings/Booking.jsx";
 import Reviews from "../components/Reviews/Reviews.jsx";
 import Concierge from "../components/Concierge/Concierge.jsx";
-import AddUser from "../components/Concierge/AddUser.jsx";
+import AddUser from "../components/Concierge/addUser.jsx";
 import AddRoom from "../components/Room/AddRoom.jsx";
+import users from "../data/conciergeData.json"
+import { UserContext } from '../context/userContext.jsx'; 
 
-const usuarios = [
-  {
-    email: 'a@gmail.com',
-    password: 'a',
-    name: 'Gonzalo',
-    role: 'admin',
-  },
-  {
-    email: 'JoseMaria@gmail.com',
-    password: 'bbbbb',
-    name: 'Jose',
-    role: 'client',
-  },
-];
 
 function App() {
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
-  const [loginError, setLoginError] = useState('');
+  const { state, dispatch } = useContext(UserContext);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
+    console.log(storedUser)
+    console.log(state)
     if (storedUser) {
-      setUser(JSON.parse(storedUser));
+      dispatch({ type: 'SET_USERDATA', payload: JSON.parse(storedUser) });
     }
-  }, []);
+    console.log(state)
+  }, [dispatch]);
+
+  useEffect(() => {
+    console.log('State actualizado:', state);
+  }, [state]);
 
   const loginUser = (formData) => {
-    const existsUser = usuarios.find(
-      (user) =>
-        user.email === formData.email && user.password === formData.password
+    const existsUser = users.find(
+      (user) => user.email === formData.email && user.password === formData.password
     );
+    console.log(existsUser)
     if (existsUser) {
-      setUser(existsUser);
-      setLoginError('');
-      localStorage.setItem('user', JSON.stringify(existsUser));
+      const {email, pass} = existsUser;
+      console.log({email, pass})
+      dispatch({ type: 'SET_USERDATA', payload: {email, pass} });
+      localStorage.setItem('user', JSON.stringify({email, pass}));
       navigate('/');
     } else {
-      setUser(false);
-      setLoginError('Usuario o contraseña incorrecta');
+      dispatch({ type: 'LOGOUT' });
+      alert('Usuario o contraseña incorrecta');
     }
   };
 
   const logoutUser = () => {
-    setUser(null);
+    dispatch({ type: 'LOGOUT' });
     localStorage.removeItem('user');
     navigate('/login');
   };
@@ -81,8 +76,8 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/login" element={user ? <Navigate to="/" /> : <Login user={user} loginUser={loginUser} loginError={loginError} />} />
-      <Route path="/" element={user ? <Dashboard logoutUser={logoutUser} goHome={goHome} goRoom={goRoom} goBooking={goBooking} goReviews={goReviews} goConcierge={goConcierge}/> : <Navigate to="/login" />}>
+      <Route path="/login" element={state.user.autenticado ? <Navigate to="/" /> : <Login loginUser={loginUser} />} />
+      <Route path="/" element={state.user.autenticado ? <Dashboard logoutUser={logoutUser} goHome={goHome} goRoom={goRoom} goBooking={goBooking} goReviews={goReviews} goConcierge={goConcierge}/> : <Navigate to="/login" />}>
         <Route path="/home" element={<Home />} />
         <Route path="/room" element={<Room />} />
         <Route path="/booking" element={<Booking/>} />
