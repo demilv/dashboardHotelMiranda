@@ -9,7 +9,8 @@ import Reviews from "../components/Reviews/Reviews.jsx";
 import Concierge from "../components/Concierge/Concierge.jsx";
 import AddUser from "../components/Concierge/addUser.jsx";
 import AddRoom from "../components/Room/AddRoom.jsx";
-import users from "../data/conciergeData.json"
+import users from "../data/conciergeData.json";
+import EditUser from "../components/Dashboard/editUser.jsx";
 import { UserContext } from '../context/userContext.jsx'; 
 
 
@@ -74,10 +75,14 @@ function App() {
     navigate('/concierge')
   }
 
+  const goEditUser = () =>{
+    navigate('/editUser')
+  }
+
   return (
     <Routes>
       <Route path="/login" element={state.user.autenticado ? <Navigate to="/" /> : <Login loginUser={loginUser} />} />
-      <Route path="/" element={state.user.autenticado ? <Dashboard logoutUser={logoutUser} goHome={goHome} goRoom={goRoom} goBooking={goBooking} goReviews={goReviews} goConcierge={goConcierge}/> : <Navigate to="/login" />}>
+      <Route path="/" element={state.user.autenticado ? <Dashboard logoutUser={logoutUser} goHome={goHome} goRoom={goRoom} goBooking={goBooking} goReviews={goReviews} goConcierge={goConcierge} goEditUser={goEditUser}/>  : <Navigate to="/login" />}>
         <Route path="/home" element={<Home />} />
         <Route path="/room" element={<Room />} />
         <Route path="/booking" element={<Booking/>} />
@@ -85,6 +90,7 @@ function App() {
         <Route path="/concierge" element={<Concierge/>} />
         <Route path="/addUser" element={<AddUser/>}/>
         <Route path="/addRoom" element={<AddRoom/>}/>
+        <Route path="/editUser" element={<EditUser/>}/>
       </Route>
     </Routes>
   );

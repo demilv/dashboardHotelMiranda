@@ -29,7 +29,7 @@ const Login = ({ loginUser, loginError }) => {
     return (<form className="form-container" onSubmit={submitForm}>
         <label htmlFor="email">
             Email
-            <input type="email" name="email" id="email" onChange={changeInput} value={formData.email} />
+            <input type="email" name="email" id="email" onChange={changeInput} />
         </label>
         <label htmlFor="pass">
             Contraseña
