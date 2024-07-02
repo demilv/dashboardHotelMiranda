@@ -1,20 +1,28 @@
-import React, { useState } from "react";
-import { Outlet } from "react-router-dom";
+import React, {useContext, useState, useEffect} from "react";
+import { UserContext } from "../../context/userContext";import { Outlet } from "react-router-dom";
 import { TbZoom } from "react-icons/tb";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { CiMail, CiBellOn } from "react-icons/ci";
 import { MdOutlineMessage } from "react-icons/md";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { GiCancel } from "react-icons/gi";
+import { GiCancel, GiExitDoor } from "react-icons/gi";
 import Button, { ButtonProvider } from "../styledComponents/ButtonStyled";
 import './Dashboard.css';
 
-const Dashboard = ({ logoutUser, goHome, goRoom, goBooking, goReviews, goConcierge }) => {
+const Dashboard = ({ logoutUser, goHome, goRoom, goBooking, goReviews, goConcierge, goEditUser }) => {
   const [isAsideVisible, setIsAsideVisible] = useState(false);
+
+  const { state } = useContext(UserContext);
+
+  useEffect(() => {
+    console.log('Esto es el contxt en Dashboard:', state);
+  }, [state]);
 
   const toggleAside = () => {
     setIsAsideVisible(!isAsideVisible);
   };
+
+
 
   return (
     <>
@@ -30,9 +38,9 @@ const Dashboard = ({ logoutUser, goHome, goRoom, goBooking, goReviews, goConcier
               <button className="noShow" onClick={goConcierge}><Button initialColor="white" index={4}>Concierge</Button></button>
               <img className="navbar__aside__img" src="../../public/IMG_20191223_131827 (2) Grande.jpg" alt="Profile"/>
               <div className="navbar__aside__myData">
-                <h3 className="myData__name">Gonzalo Cano</h3>
-                <h5 className="myData__mail">gonzalo.cano.rodriguez93@gmail.com</h5>
-                <button className="myData__contact">Contact Us</button>
+                <h3 className="myData__name">{state.user.name}</h3>
+                <h5 className="myData__mail">{state.user.email}</h5>
+                <button onClick={goEditUser} className="myData__contact">Modify data</button>
               </div>
               <h2 className="navbar__aside__h2">Travi Hotel Admin Dashboard</h2>
               <h6 className="navbar__aside__h6">@ 2024 All Rights Reserved</h6>
@@ -45,6 +53,7 @@ const Dashboard = ({ logoutUser, goHome, goRoom, goBooking, goReviews, goConcier
               <h1 className="navbar__h1">Dashboard</h1>
               <CiMail className="navbar__icon"/>
               <CiBellOn className="navbar__icon"/>
+              <GiExitDoor className="navbar__icon" onClick={logoutUser}/>
             </div>
           </div>
           <div className="outletContainer">

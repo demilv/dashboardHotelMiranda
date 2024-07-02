@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom"
 
 const datos_user = {
     email: "",
-    password: ""
+    pass: ""
 }
 
 const Login = ({ loginUser, loginError }) => {
@@ -29,12 +29,12 @@ const Login = ({ loginUser, loginError }) => {
     return (<form className="form-container" onSubmit={submitForm}>
         <label htmlFor="email">
             Email
-            <input type="email" name="email" id="email" onChange={changeInput} value={formData.email} />
+            <input type="email" name="email" id="email" onChange={changeInput} />
         </label>
         <label htmlFor="pass">
             Contraseña
-            <input type="password" name="password" id="pass" onChange={changeInput}
-                value={formData.password} />
+            <input type="password" name="pass" id="pass" onChange={changeInput}
+                value={formData.pass} />
         </label>
         <div>
             <button className="submit-bttn" type="submit">Log in</button>
