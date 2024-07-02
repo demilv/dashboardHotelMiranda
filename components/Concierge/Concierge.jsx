@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import conciergeData from '../../data/conciergeData.json';
-import {  ButtonSort, ButtonNextBack, ButtonPage, ButtonUnseen} from "../../styledComponents/StyledButton";
+import {  ButtonNewRoom, ButtonSort, ButtonNextBack, ButtonPage, ButtonUnseen} from "../../styledComponents/StyledButton";
 import { TableColumnFlexMain, TableColumnMain, TableContainIdName, TableFirstRow, TableIdNameContainer, TableImg, TableRoomData, TableRow } from "../../styledComponents/StyledTabla";
 import { TextColorfulNoBackground } from "../../styledComponents/TextStyled";
 import { MdOutlinePhone } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 
 const Concierge= () => {
 
-    const [active, setActive] = useState("All Contacts")
+    const [active, setActive] = useState("All Employee")
     const [sorting, setSorting] = useState("startDate")
     const [page, setPage] = useState(0)
     const [sortedUsers, setSortedUsers] = useState([])
@@ -20,6 +21,12 @@ const Concierge= () => {
     const big1 = "big1"
     const big2 = "big2"
     const first = "first"
+    const navigate = useNavigate();
+
+
+    const conciergeForms = (place) =>{
+        navigate('/addUser')
+    }
 
     const handlePageClick = (index) =>{
         setPage(index)
@@ -87,6 +94,7 @@ const Concierge= () => {
                     <ButtonSort active={active === "Active"} onClick={() => setActive("Active")}>Active</ButtonSort>
                     <ButtonSort active={active === "Inactive"} onClick={() => setActive("Inactive")}>Inactive</ButtonSort>
                 </TableRow>
+                <ButtonNewRoom onClick={conciergeForms}>+ New User</ButtonNewRoom>
             </TableFirstRow>
             <TableRoomData>
                 <TableRow>
@@ -112,7 +120,7 @@ const Concierge= () => {
                                 </TableIdNameContainer>
                             </TableContainIdName>
                         </TableColumnFlexMain>
-                        <TableColumnMain>{user.description}</TableColumnMain>
+                        <TableColumnMain>{user.job}</TableColumnMain>
                         <TableColumnMain> Schedule</TableColumnMain>
                         <TableColumnMain><MdOutlinePhone />{user.phone}</TableColumnMain>
                         <TableColumnMain>{colorText(user.status)}</TableColumnMain>
