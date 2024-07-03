@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { CajaDiv, CajaStyled, CajaMainContainer, CajaImg } from "./StyledCajasHome";
-import { TextH5Light, TextNumberBig } from "../styledComponents/TextStyled";
+import { TextH5Light, TextNumberBig } from "../../styledComponents/TextStyled";
 import { LuBedDouble, LuCalendarCheck2 } from "react-icons/lu";
 import { FaDoorOpen, FaDoorClosed } from "react-icons/fa6";
 
@@ -8,8 +8,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import roomReviews from '../../data/roomReview.json';
-import RecentReviews from "../ReviewsSlider/RecentReviews";
+import roomReviews from '../../../data/roomReview.json';
+import RecentReviews from "../../ReviewsSlider/RecentReviews";
 
 const Home = () => {
     const [selectedBox, setSelectedBox] = useState(null);

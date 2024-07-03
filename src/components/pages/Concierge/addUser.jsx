@@ -1,4 +1,4 @@
-import { FormContainer } from "../../styledComponents/StyledForms";
+import { FormContainer } from "../../../styledComponents/StyledForms";
 import React from "react";
 
 const AddUser = () =>{
