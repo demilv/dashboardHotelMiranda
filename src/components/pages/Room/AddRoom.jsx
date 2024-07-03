@@ -1,13 +1,26 @@
 import { FormContainer, PairRadio, RadioBigContainer } from "../../../styledComponents/StyledForms";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addRoom } from "../../../features/roomOperations/roomSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addRoom, roomDataSelect } from "../../../features/roomOperations/roomSlice";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const AddRoom = () => {
+    const navigate = useNavigate()
     const dispatch = useDispatch();
+    const rooms = useSelector(roomDataSelect);   
+
+    const getNextId = () => {
+        const lastId = rooms.reduce((last, room) => (room.id > last ? room.id : last), 0);
+        console.log(rooms)
+        return lastId + 1;
+    };
+
+    const [id, setId] = useState(getNextId)
+
+
     const [formData, setFormData] = useState({
+        id: id,
         fotoLink: "",
         number: "",
         bedType: "Single bed",
@@ -18,10 +31,17 @@ const AddRoom = () => {
         cancelPolicy: "",
         amenities: [],
     });
+    
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
-        if (type === "checkbox") {
+    
+        if (name === "offer" && formData.price < value) {
+            setFormData((prevData) => ({
+                ...prevData,
+                [name]: formData.price,
+            }));
+        } else if (type === "checkbox") {
             if (checked) {
                 setFormData((prevData) => ({
                     ...prevData,
@@ -40,6 +60,7 @@ const AddRoom = () => {
             }));
         }
     };
+    
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -52,7 +73,7 @@ const AddRoom = () => {
             timerProgressBar: true,
             showConfirmButton: true
         }).then(() => {
-            navigate("/rooms");
+            navigate("/room");
         });
     };
 
@@ -74,13 +95,13 @@ const AddRoom = () => {
                 <input type="text" name="description" onChange={handleChange} />
                 <h4>Room price</h4>
                 <input type="number" name="price" onChange={handleChange} />
-                <h4>Is there an offer?</h4>
-                <select name="offer" onChange={handleChange}>
+                <h4>Is there a discount?</h4>
+                <select name="discount" onChange={handleChange}>
                     <option>Yes</option>
                     <option>No</option>
                 </select>
-                <h4>Discount</h4>
-                <input type="text" name="discount" onChange={handleChange} />
+                <h4>Offer</h4>
+                <input type="number" name="offer" onChange={handleChange} disabled={formData.discount === "No"}/>
                 <h4>Cancel policy</h4>
                 <input type="text" name="cancelPolicy" onChange={handleChange} />
                 <h4>Amenities</h4>

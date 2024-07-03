@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { FaTrashAlt } from "react-icons/fa";
 import { ButtonNewRoom, ButtonSort, ButtonNextBack, ButtonPage, ButtonUnseen } from "../../../styledComponents/StyledButton";
 import { TableColumnFlexMain, TableColumnMain, TableContainIdName, TableFirstRow, TableIdNameContainer, TableImg, TableRoomData, TableRow } from "../../../styledComponents/StyledTabla";
-import { roomDataSelect, roomErrorSelect, roomStatusSelect } from "../../../features/roomOperations/roomSlice";
+import { roomDataSelect, roomErrorSelect, roomStatusSelect, deleteRoom } from "../../../features/roomOperations/roomSlice";
 import { roomThunk } from "../../../features/roomOperations/roomThunk";
 
 const Room = () => {
@@ -44,21 +45,23 @@ const Room = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        if (roomStatus === "idle") {
-            dispatch(roomThunk());
-        } else if (roomStatus === "pending") {
-            setLoading(true);
-        } else if (roomStatus === "fulfilled") {
-            setLoading(false);
-            let RoomDataMapeado = [];
-            roomDataSinMapear.forEach((room) => {
-                RoomDataMapeado.push({ fotoLink: room.fotoLink, id: room.id, number: room.number, floor: room.floor, bedType: room.bedType, amenities: room.amenities, price: room.price, status: room.status, offer: room.offer });
-            });
-            setRoomData(RoomDataMapeado);
-            setMaxPages(Math.ceil(RoomDataMapeado.length / 10));
-        } else if (roomStatus === "rejected") {
-            setLoading(false);
-            console.log(roomError);
+        if (roomsMostrar.length === 0){
+            if (roomStatus === "idle") {
+                dispatch(roomThunk());
+            } else if (roomStatus === "pending") {
+                setLoading(true);
+            } else if (roomStatus === "fulfilled") {
+                setLoading(false);
+                let RoomDataMapeado = [];
+                roomDataSinMapear.forEach((room) => {
+                    RoomDataMapeado.push({ fotoLink: room.fotoLink, id: room.id, number: room.number, floor: room.floor, bedType: room.bedType, amenities: room.amenities, price: room.price, status: room.status, offer: room.offer });
+                });
+                setRoomData(RoomDataMapeado);
+                setMaxPages(Math.ceil(RoomDataMapeado.length / 10));
+            } else if (roomStatus === "rejected") {
+                setLoading(false);
+                console.log(roomError);
+            }
         }
     }, [roomStatus, roomDataSinMapear, roomError, dispatch]);
 
@@ -105,6 +108,12 @@ const Room = () => {
         }
     }, [page, maxPages]);
 
+    const handleDeleteRoom = (roomId) => {
+        dispatch(deleteRoom(roomId));
+        const updatedRoomData = roomData.filter(room => room.id !== roomId);
+        setRoomData(updatedRoomData);
+    };
+
     return (
         <>
             {loading ? (
@@ -148,6 +157,7 @@ const Room = () => {
                                 <TableColumnMain>{room.price}/night</TableColumnMain>
                                 <TableColumnMain>{room.offer}/night</TableColumnMain>
                                 <TableColumnMain>{room.status ? 'Available' : 'Occupied'}</TableColumnMain>
+                                <TableColumnMain><FaTrashAlt onClick={() => handleDeleteRoom(room.id)}/></TableColumnMain>
                             </TableRow>
                         ))}
                     </TableRoomData>
