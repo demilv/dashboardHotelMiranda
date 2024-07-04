@@ -3,10 +3,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import roomReviews from '../../data/roomReview.json';
-import RecentReviews from "../ReviewsSlider/RecentReviews";
-import { ButtonNewRoom, ButtonSort, ButtonNextBack, ButtonPage, ButtonUnseen} from "../../styledComponents/StyledButton";
-import { TableColumnFlexMain, TableColumnMain, TableContainIdName, TableFirstRow, TableIdNameContainer, TableImg, TableRoomData, TableRow } from "../../styledComponents/StyledTabla";
+import roomReviews from '../../../data/roomReview.json';
+import RecentReviews from "../../ReviewsSlider/RecentReviews";
+import { ButtonNewRoom, ButtonSort, ButtonNextBack, ButtonPage, ButtonUnseen} from "../../../styledComponents/StyledButton";
+import { TableColumnFlexMain, TableColumnMain, TableContainIdName, TableFirstRow, TableIdNameContainer, TableImg, TableRoomData, TableRow } from "../../../styledComponents/StyledTabla";
 import { IoMdStar } from "react-icons/io";
 
 

@@ -1,17 +1,18 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Route, Routes, useNavigate, Navigate, BrowserRouter } from 'react-router-dom';
-import Login from '../components/Login/Login.jsx';
-import Dashboard from '../components/Dashboard/Dashboard.jsx';
-import Home from "../components/Home/Home.jsx";
-import Room from "../components/Room/Room.jsx";
-import Booking from "../components/Bookings/Booking.jsx";
-import Reviews from "../components/Reviews/Reviews.jsx";
-import Concierge from "../components/Concierge/Concierge.jsx";
-import AddUser from "../components/Concierge/addUser.jsx";
-import AddRoom from "../components/Room/AddRoom.jsx";
-import users from "../data/conciergeData.json";
-import EditUser from "../components/Dashboard/editUser.jsx";
-import { UserContext } from '../context/userContext.jsx'; 
+import Login from './components/pages/Login/Login.jsx';
+import Dashboard from './components/pages/Dashboard/Dashboard.jsx';
+import Home from "./components/pages/Home/Home.jsx";
+import Room from "./components/pages/Room/Room.jsx";
+import Booking from "./components/pages/Bookings/Booking.jsx";
+import Concierge from "./components/pages/Concierge/Concierge.jsx";
+import AddUser from "./components/pages/Concierge/addUser.jsx";
+import AddRoom from "./components/pages/Room/AddRoom.jsx";
+import EditRoom from "./components/pages/Room/EditRoom.jsx";
+import users from "./data/conciergeData.json";
+import EditUser from "./components/pages/Dashboard/editUser.jsx";
+import { UserContext } from './context/userContext.jsx'; 
+import Reviews from "./components/pages/Reviews/Reviews.jsx";
 
 
 function App() {
@@ -89,6 +90,7 @@ function App() {
         <Route path="/concierge" element={<Concierge/>} />
         <Route path="/addUser" element={<AddUser/>}/>
         <Route path="/addRoom" element={<AddRoom/>}/>
+        <Route path="/editRoom/:roomId" element={<EditRoom/>}/>
         <Route path="/editUser" element={<EditUser/>}/>
       </Route>
     </Routes>

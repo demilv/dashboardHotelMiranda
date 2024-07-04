@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import conciergeData from '../../data/conciergeData.json';
-import {  ButtonNewRoom, ButtonSort, ButtonNextBack, ButtonPage, ButtonUnseen} from "../../styledComponents/StyledButton";
-import { TableColumnFlexMain, TableColumnMain, TableContainIdName, TableFirstRow, TableIdNameContainer, TableImg, TableRoomData, TableRow } from "../../styledComponents/StyledTabla";
-import { TextColorfulNoBackground } from "../../styledComponents/TextStyled";
+import conciergeData from '../../../data/conciergeData.json';
+import {  ButtonNewRoom, ButtonSort, ButtonNextBack, ButtonPage, ButtonUnseen} from "../../../styledComponents/StyledButton";
+import { TableColumnFlexMain, TableColumnMain, TableContainIdName, TableFirstRow, TableIdNameContainer, TableImg, TableRoomData, TableRow } from "../../../styledComponents/StyledTabla";
+import { TextColorfulNoBackground } from "../../../styledComponents/TextStyled";
 import { MdOutlinePhone } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 

@@ -1,6 +1,6 @@
-import { FormContainer } from "../../styledComponents/StyledForms";
+import { FormContainer } from "../../../styledComponents/StyledForms";
 import React, {useContext, useState, useEffect} from "react";
-import { UserContext } from "../../context/userContext";
+import { UserContext } from "../../../context/userContext";
 import { useNavigate } from "react-router-dom";
 
 const EditUser = () =>{
@@ -49,7 +49,7 @@ const EditUser = () =>{
                 <h4>Your new Email</h4>
                 <input type="email" name="email" onChange={edit} value={values.email}/>
                 <h4>Your new Password</h4>
-                <input type="password" name="pass" onChange={edit} value={values.pass}/>
+                <input type="password" name="pass" onChange={edit} />
                 <input type="submit" value="New edited user"/>
             </form>
         </FormContainer>
