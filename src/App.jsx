@@ -12,6 +12,7 @@ import EditRoom from "./components/pages/Room/EditRoom.jsx";
 import users from "./data/conciergeData.json";
 import EditUserOnContext from "./components/pages/Dashboard/editUserOnContext.jsx";
 import EditUser from "./components/pages/Concierge/editUser.jsx";
+import EditDocumentBooking from "./components/pages/Bookings/editDocumentBooking.jsx";
 import { UserContext } from './context/userContext.jsx'; 
 import Reviews from "./components/pages/Reviews/Reviews.jsx";
 
@@ -87,6 +88,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/room" element={<Room />} />
         <Route path="/booking" element={<Booking/>} />
+        <Route path="/editBooking/:bookingId" element={<EditDocumentBooking/>}/>
         <Route path="/reviews" element={<Reviews/>} />
         <Route path="/concierge" element={<Concierge/>} />
         <Route path="/addUser" element={<AddUser/>}/>
