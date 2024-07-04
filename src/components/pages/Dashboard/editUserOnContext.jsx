@@ -3,7 +3,7 @@ import React, {useContext, useState, useEffect} from "react";
 import { UserContext } from "../../../context/userContext";
 import { useNavigate } from "react-router-dom";
 
-const EditUser = () =>{
+const EditUserOnContext = () =>{
 
     const navigate = useNavigate()
 
@@ -56,4 +56,4 @@ const EditUser = () =>{
     )
 }
 
-export default EditUser
+export default EditUserOnContext
