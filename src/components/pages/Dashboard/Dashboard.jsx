@@ -7,7 +7,7 @@ import { GiCancel, GiExitDoor } from "react-icons/gi";
 import Button, { ButtonProvider } from "../../styledComponents/ButtonStyled";
 import './Dashboard.css';
 
-const Dashboard = ({ logoutUser, goHome, goRoom, goBooking, goReviews, goConcierge, goEditUser }) => {
+const Dashboard = ({ logoutUser, goHome, goRoom, goBooking, goReviews, goConcierge, goEditUserOnContext }) => {
   const [isAsideVisible, setIsAsideVisible] = useState(false);
 
   const { state } = useContext(UserContext);
@@ -38,7 +38,7 @@ const Dashboard = ({ logoutUser, goHome, goRoom, goBooking, goReviews, goConcier
               <div className="navbar__aside__myData">
                 <h3 className="myData__name">{state.user.name}</h3>
                 <h5 className="myData__mail">{state.user.email}</h5>
-                <button onClick={goEditUser} className="myData__contact">Modify data</button>
+                <button onClick={goEditUserOnContext} className="myData__contact">Modify data</button>
               </div>
               <h2 className="navbar__aside__h2">Travi Hotel Admin Dashboard</h2>
               <h6 className="navbar__aside__h6">@ 2024 All Rights Reserved</h6>

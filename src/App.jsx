@@ -10,7 +10,8 @@ import AddUser from "./components/pages/Concierge/addUser.jsx";
 import AddRoom from "./components/pages/Room/AddRoom.jsx";
 import EditRoom from "./components/pages/Room/EditRoom.jsx";
 import users from "./data/conciergeData.json";
-import EditUser from "./components/pages/Dashboard/editUser.jsx";
+import EditUserOnContext from "./components/pages/Dashboard/editUserOnContext.jsx";
+import EditUser from "./components/pages/Concierge/editUser.jsx";
 import { UserContext } from './context/userContext.jsx'; 
 import Reviews from "./components/pages/Reviews/Reviews.jsx";
 
@@ -75,23 +76,24 @@ function App() {
     navigate('/concierge')
   }
 
-  const goEditUser = () =>{
-    navigate('/editUser')
+  const goEditUserOnContext = () =>{
+    navigate('/editUserOnContext')
   }
 
   return (
     <Routes>
       <Route path="/login" element={state.user.autenticado ? <Navigate to="/" /> : <Login loginUser={loginUser} />} />
-      <Route path="/" element={state.user.autenticado ? <Dashboard logoutUser={logoutUser} goHome={goHome} goRoom={goRoom} goBooking={goBooking} goReviews={goReviews} goConcierge={goConcierge} goEditUser={goEditUser}/>  : <Navigate to="/login" />}>
+      <Route path="/" element={state.user.autenticado ? <Dashboard logoutUser={logoutUser} goHome={goHome} goRoom={goRoom} goBooking={goBooking} goReviews={goReviews} goConcierge={goConcierge} goEditUserOnContext={goEditUserOnContext}/>  : <Navigate to="/login" />}>
         <Route path="/home" element={<Home />} />
         <Route path="/room" element={<Room />} />
         <Route path="/booking" element={<Booking/>} />
         <Route path="/reviews" element={<Reviews/>} />
         <Route path="/concierge" element={<Concierge/>} />
         <Route path="/addUser" element={<AddUser/>}/>
+        <Route path="/editUser/:userId" element={<EditUser />} />
         <Route path="/addRoom" element={<AddRoom/>}/>
         <Route path="/editRoom/:roomId" element={<EditRoom/>}/>
-        <Route path="/editUser" element={<EditUser/>}/>
+        <Route path="/editUserOnContext" element={<EditUserOnContext/>}/>
       </Route>
     </Routes>
   );
