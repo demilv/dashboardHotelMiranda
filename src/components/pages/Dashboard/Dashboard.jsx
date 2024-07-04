@@ -1,10 +1,7 @@
 import React, {useContext, useState, useEffect} from "react";
 import { UserContext } from "../../../context/userContext";
 import { Outlet } from "react-router-dom";
-import { TbZoom } from "react-icons/tb";
-import { IoMdHeartEmpty } from "react-icons/io";
 import { CiMail, CiBellOn } from "react-icons/ci";
-import { MdOutlineMessage } from "react-icons/md";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { GiCancel, GiExitDoor } from "react-icons/gi";
 import Button, { ButtonProvider } from "../../styledComponents/ButtonStyled";

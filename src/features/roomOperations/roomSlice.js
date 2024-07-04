@@ -14,6 +14,12 @@ export const roomSlice = createSlice({
         },
         deleteRoom: (state, action) => {
             state.rooms = state.rooms.filter(room => room.id !== action.payload);
+        },
+        editRoom: (state, action) => {
+            const index = state.rooms.findIndex(room => room.id === action.payload.id);
+            if (index !== -1) {
+                state.rooms[index] = action.payload;
+            }
         }
     },
     extraReducers: (builder) => {
@@ -33,7 +39,7 @@ export const roomSlice = createSlice({
 });
 
 export default roomSlice.reducer;
-export const { addRoom, deleteRoom } = roomSlice.actions;
+export const { addRoom, deleteRoom, editRoom } = roomSlice.actions;
 export const roomDataSelect = (state) => state.rooms.rooms
 export const roomStatusSelect = (state) => state.rooms.status
 export const roomErrorSelect = (state) => state.rooms.error

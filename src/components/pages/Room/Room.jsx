@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { FaTrashAlt } from "react-icons/fa";
+import { FaPencil } from "react-icons/fa6";
 import { ButtonNewRoom, ButtonSort, ButtonNextBack, ButtonPage, ButtonUnseen } from "../../../styledComponents/StyledButton";
 import { TableColumnFlexMain, TableColumnMain, TableContainIdName, TableFirstRow, TableIdNameContainer, TableImg, TableRoomData, TableRow } from "../../../styledComponents/StyledTabla";
 import { roomDataSelect, roomErrorSelect, roomStatusSelect, deleteRoom } from "../../../features/roomOperations/roomSlice";
@@ -28,6 +29,10 @@ const Room = () => {
     const first = "first";
     const navigate = useNavigate();
 
+    const editRoom = (roomId) => {
+        navigate(`/editRoom/${roomId}`);
+    };
+    
     const addRoom = () => {
         navigate("/addRoom");
     };
@@ -39,11 +44,7 @@ const Room = () => {
     const handleChangeSort = (type) => {
         setSorting(type);
     };
-
-    useEffect(() => {
-        dispatch(roomThunk());
-    }, [dispatch]);
-
+    
     useEffect(() => {
         if (roomsMostrar.length === 0){
             if (roomStatus === "idle") {
@@ -63,7 +64,7 @@ const Room = () => {
                 console.log(roomError);
             }
         }
-    }, [roomStatus, roomDataSinMapear, roomError, dispatch]);
+    }, [roomStatus, roomDataSinMapear, roomError]);
 
     useEffect(() => {
         let filteredRooms = roomData;
@@ -157,7 +158,7 @@ const Room = () => {
                                 <TableColumnMain>{room.price}/night</TableColumnMain>
                                 <TableColumnMain>{room.offer}/night</TableColumnMain>
                                 <TableColumnMain>{room.status ? 'Available' : 'Occupied'}</TableColumnMain>
-                                <TableColumnMain><FaTrashAlt onClick={() => handleDeleteRoom(room.id)}/></TableColumnMain>
+                                <TableColumnMain><FaTrashAlt onClick={() => handleDeleteRoom(room.id)}/><FaPencil  onClick={() => editRoom(room.id)}/></TableColumnMain>
                             </TableRow>
                         ))}
                     </TableRoomData>
