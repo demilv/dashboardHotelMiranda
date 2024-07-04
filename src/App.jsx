@@ -11,6 +11,7 @@ import AddRoom from "./components/pages/Room/AddRoom.jsx";
 import EditRoom from "./components/pages/Room/EditRoom.jsx";
 import users from "./data/conciergeData.json";
 import EditUserOnContext from "./components/pages/Dashboard/editUserOnContext.jsx";
+import EditUser from "./components/pages/Concierge/editUser.jsx";
 import { UserContext } from './context/userContext.jsx'; 
 import Reviews from "./components/pages/Reviews/Reviews.jsx";
 
@@ -89,6 +90,7 @@ function App() {
         <Route path="/reviews" element={<Reviews/>} />
         <Route path="/concierge" element={<Concierge/>} />
         <Route path="/addUser" element={<AddUser/>}/>
+        <Route path="/editUser/:userId" element={<EditUser />} />
         <Route path="/addRoom" element={<AddRoom/>}/>
         <Route path="/editRoom/:roomId" element={<EditRoom/>}/>
         <Route path="/editUserOnContext" element={<EditUserOnContext/>}/>
