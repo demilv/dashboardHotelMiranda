@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ButtonNewRoom, ButtonSort, ButtonNextBack, ButtonPage, ButtonUnseen, ButtonGreen} from "../../../styledComponents/StyledButton";
 import { TableColumnFlexMain, TableColumnMain, TableContainIdName, TableFirstRow, TableIdNameContainer, TableImg, TableRoomData, TableRow } from "../../../styledComponents/StyledTabla";
-import { TextColorful } from "../../styledComponents/TextStyled";
+import { TextColorful } from "../../../styledComponents/TextStyled";
 import Popup from "../../Popup/Popup";
 import { bookingsDataSelect, bookingsStatusSelect, bookingsErrorSelect, deleteBooking, editBooking } from "../../../features/bookingsOperations/bookingsSlice";
 import { BookingsThunk } from "../../../features/bookingsOperations/bookingsThunk";

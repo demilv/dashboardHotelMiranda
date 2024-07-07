@@ -71,6 +71,17 @@ export const CloseButtonn = styled.button`
   font-size: 1.5em;
 `;
 
+export const ButtonAside = styled.button`
+    height: 2em;
+    border: none;
+    background-color: transparent;
+    padding: 0 0.5em;
+    border-left: ${({active}) => (active ? '2px solid green': 'none')};
+    color: ${({ active }) => (active ? 'green' : 'grey')};
+    margin-top:3em;
+    z-index: 100;
+`;
+
 /*export const SelectTime = styled.select`
     background-color:white;
     border-radius:0.4em;
