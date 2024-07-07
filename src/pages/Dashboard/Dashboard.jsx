@@ -1,10 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
-import { UserContext } from "../../../context/userContext";
+import { UserContext } from "../../context/userContext";
 import { Outlet, useNavigate } from "react-router-dom";
 import { CiMail, CiBellOn } from "react-icons/ci";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { GiCancel, GiExitDoor } from "react-icons/gi";
-import { ButtonAside } from "../../../styledComponents/StyledButton";
+import { ButtonAside } from "../../styledComponents/StyledButton";
 import './Dashboard.css';
 
 const Dashboard = () => {

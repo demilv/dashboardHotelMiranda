@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { MdOutlinePhone } from "react-icons/md";
-import { ButtonNewRoom, ButtonSort, ButtonNextBack, ButtonPage, ButtonUnseen } from "../../../styledComponents/StyledButton";
-import { TableColumnFlexMain, TableColumnMain, TableContainIdName, TableFirstRow, TableIdNameContainer, TableImg, TableRoomData, TableRow } from "../../../styledComponents/StyledTabla";
-import { TextColorfulNoBackground } from "../../../styledComponents/TextStyled";
-import { conciergeDataSelect, conciergeStatusSelect, conciergeErrorSelect, deleteUser } from "../../../features/conciergeOperations/conciergeSlice";
-import { conciergeUsersThunk } from "../../../features/conciergeOperations/conciergeUsersThunk";
+import { ButtonNewRoom, ButtonSort, ButtonNextBack, ButtonPage, ButtonUnseen } from "../../styledComponents/StyledButton";
+import { TableColumnFlexMain, TableColumnMain, TableContainIdName, TableFirstRow, TableIdNameContainer, TableImg, TableRoomData, TableRow } from "../../styledComponents/StyledTabla";
+import { TextColorfulNoBackground } from "../../styledComponents/TextStyled";
+import { conciergeDataSelect, conciergeStatusSelect, conciergeErrorSelect, deleteUser } from "../../features/conciergeOperations/conciergeSlice";
+import { conciergeUsersThunk } from "../../features/conciergeOperations/conciergeUsersThunk";
 import { FaTrashAlt } from "react-icons/fa";
 import { FaPencil } from "react-icons/fa6";
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { CajaDiv, CajaStyled, CajaMainContainer, CajaImg } from "./StyledCajasHome";
-import { TextH5Light, TextNumberBig } from "../../../styledComponents/TextStyled";
+import { CajaDiv, CajaStyled, CajaMainContainer, CajaImg } from "../../styledComponents/StyledCajasHome";
+import { TextH5Light, TextNumberBig } from "../../styledComponents/TextStyled";
 import { LuBedDouble, LuCalendarCheck2 } from "react-icons/lu";
 import { FaDoorOpen, FaDoorClosed } from "react-icons/fa6";
 
@@ -8,12 +8,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import roomReviews from '../../../data/roomReview.json';
-import RecentReviews from "../../ReviewsSlider/RecentReviews";
+import roomReviews from '../../data/roomReview.json';
+import RecentReviews from "../../components/ReviewsSlider/RecentReviews";
 
 import { useDispatch, useSelector } from "react-redux";
-import { reviewDataSelect, reviewErrorSelect, reviewStatusSelect } from "../../../features/reviewOperations/reviewSlice";
-import { reviewThunk } from "../../../features/reviewOperations/reviewThunk";
+import { reviewDataSelect, reviewErrorSelect, reviewStatusSelect } from "../../features/reviewOperations/reviewSlice";
+import { reviewThunk } from "../../features/reviewOperations/reviewThunk";
 
 
 const Home = () => {

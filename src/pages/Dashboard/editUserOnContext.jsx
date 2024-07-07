@@ -1,6 +1,6 @@
-import { FormContainer } from "../../../styledComponents/StyledForms";
+import { FormContainer } from "../../styledComponents/StyledForms";
 import React, {useContext, useState, useEffect} from "react";
-import { UserContext } from "../../../context/userContext";
+import { UserContext } from "../../context/userContext";
 import { useNavigate } from "react-router-dom";
 
 const EditUserOnContext = () =>{

@@ -5,11 +5,11 @@ import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { IoMdStar } from "react-icons/io";
-import RecentReviews from "../../ReviewsSlider/RecentReviews";
-import { ButtonSort, ButtonNextBack, ButtonPage, ButtonUnseen } from "../../../styledComponents/StyledButton";
-import { TableColumnFlexMain, TableColumnMain, TableFirstRow, TableRoomData, TableRow } from "../../../styledComponents/StyledTabla";
-import { reviewDataSelect, reviewErrorSelect, reviewStatusSelect } from "../../../features/reviewOperations/reviewSlice";
-import { reviewThunk } from "../../../features/reviewOperations/reviewThunk";
+import RecentReviews from "../../components/ReviewsSlider/RecentReviews";
+import { ButtonSort, ButtonNextBack, ButtonPage, ButtonUnseen } from "../../styledComponents/StyledButton";
+import { TableColumnFlexMain, TableColumnMain, TableFirstRow, TableRoomData, TableRow } from "../../styledComponents/StyledTabla";
+import { reviewDataSelect, reviewErrorSelect, reviewStatusSelect } from "../../features/reviewOperations/reviewSlice";
+import { reviewThunk } from "../../features/reviewOperations/reviewThunk";
 
 const Reviews = () => {
     const [active, setActive] = useState("All Contacts");
