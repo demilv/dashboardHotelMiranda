@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Route, Routes, useNavigate, Navigate, BrowserRouter } from 'react-router-dom';
+import React, { useEffect, useContext } from "react";
+import { Route, Routes, Navigate } from 'react-router-dom';
 import Login from './components/pages/Login/Login.jsx';
 import Dashboard from './components/pages/Dashboard/Dashboard.jsx';
 import Home from "./components/pages/Home/Home.jsx";
@@ -17,30 +17,28 @@ import { UserContext } from './context/userContext.jsx';
 import Reviews from "./components/pages/Reviews/Reviews.jsx";
 import { PrivateRoutes } from './AuthProvider/PrivateRoutes';
 
-
 function App() {
-  const navigate = useNavigate();
   const { state, dispatch } = useContext(UserContext);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
-    console.log(storedUser)
-    console.log(state)
+    console.log(storedUser);
+    console.log(state);
     if (storedUser) {
       dispatch({ type: 'SET_USERDATA', payload: JSON.parse(storedUser) });
     }
-    console.log(state)
+    console.log(state);
   }, [dispatch]);
 
   const loginUser = (formData) => {
     const existsUser = users.find(
       (user) => user.email === formData.email && user.password === formData.password
     );
-    console.log(existsUser)
+    console.log(existsUser);
     if (existsUser) {
-      const {email, pass, name} = existsUser;
-      dispatch({ type: 'SET_USERDATA', payload: {email, pass, name} });
-      localStorage.setItem('user', JSON.stringify({email, pass, name}));
+      const { email, pass, name } = existsUser;
+      dispatch({ type: 'SET_USERDATA', payload: { email, pass, name } });
+      localStorage.setItem('user', JSON.stringify({ email, pass, name }));
       localStorage.setItem("isLogged", "true");
       navigate('/');
     } else {
@@ -49,55 +47,25 @@ function App() {
     }
   };
 
-  const logoutUser = () => {
-    dispatch({ type: 'LOGOUT' });
-    localStorage.removeItem('user');
-    localStorage.setItem("isLogged", "false");
-    navigate('/login');
-  };
-
-  const goHome = () => {
-    navigate('/home');
-  };
-
-  const goRoom = () => {
-    navigate('/room');
-  };
-
-  const goBooking = () => {
-    navigate('/booking')
-  }
-
-  const goReviews = () =>{
-    navigate('/reviews')
-  }
-
-  const goConcierge = () =>{
-    navigate('/concierge')
-  }
-
-  const goEditUserOnContext = () =>{
-    navigate('/editUserOnContext')
-  }
-
   return (
     <Routes>
       <Route path="/login" element={state.user.autenticado ? <Navigate to="/" /> : <Login loginUser={loginUser} />} />
       <Route path="/" element={
         <PrivateRoutes>
-          <Dashboard logoutUser={logoutUser} goHome={goHome} goRoom={goRoom} goBooking={goBooking} goReviews={goReviews} goConcierge={goConcierge} goEditUserOnContext={goEditUserOnContext}/> 
-        </PrivateRoutes>}>
+          <Dashboard />
+        </PrivateRoutes>
+      }>
         <Route path="/home" element={<Home />} />
         <Route path="/room" element={<Room />} />
-        <Route path="/booking" element={<Booking/>} />
-        <Route path="/editBooking/:bookingId" element={<EditDocumentBooking/>}/>
-        <Route path="/reviews" element={<Reviews/>} />
-        <Route path="/concierge" element={<Concierge/>} />
-        <Route path="/addUser" element={<AddUser/>}/>
+        <Route path="/booking" element={<Booking />} />
+        <Route path="/editBooking/:bookingId" element={<EditDocumentBooking />} />
+        <Route path="/reviews" element={<Reviews />} />
+        <Route path="/concierge" element={<Concierge />} />
+        <Route path="/addUser" element={<AddUser />} />
         <Route path="/editUser/:userId" element={<EditUser />} />
-        <Route path="/addRoom" element={<AddRoom/>}/>
-        <Route path="/editRoom/:roomId" element={<EditRoom/>}/>
-        <Route path="/editUserOnContext" element={<EditUserOnContext/>}/>
+        <Route path="/addRoom" element={<AddRoom />} />
+        <Route path="/editRoom/:roomId" element={<EditRoom />} />
+        <Route path="/editUserOnContext" element={<EditUserOnContext />} />
       </Route>
     </Routes>
   );
