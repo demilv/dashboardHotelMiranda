@@ -15,6 +15,7 @@ import EditUser from "./components/pages/Concierge/editUser.jsx";
 import EditDocumentBooking from "./components/pages/Bookings/editDocumentBooking.jsx";
 import { UserContext } from './context/userContext.jsx'; 
 import Reviews from "./components/pages/Reviews/Reviews.jsx";
+import { PrivateRoutes } from './AuthProvider/PrivateRoutes';
 
 
 function App() {
@@ -31,10 +32,6 @@ function App() {
     console.log(state)
   }, [dispatch]);
 
-  useEffect(() => {
-    console.log('Esto es el contxt:', state);
-  }, [state]);
-
   const loginUser = (formData) => {
     const existsUser = users.find(
       (user) => user.email === formData.email && user.password === formData.password
@@ -44,6 +41,7 @@ function App() {
       const {email, pass, name} = existsUser;
       dispatch({ type: 'SET_USERDATA', payload: {email, pass, name} });
       localStorage.setItem('user', JSON.stringify({email, pass, name}));
+      localStorage.setItem("isLogged", "true");
       navigate('/');
     } else {
       dispatch({ type: 'LOGOUT' });
@@ -54,6 +52,7 @@ function App() {
   const logoutUser = () => {
     dispatch({ type: 'LOGOUT' });
     localStorage.removeItem('user');
+    localStorage.setItem("isLogged", "false");
     navigate('/login');
   };
 
@@ -84,7 +83,10 @@ function App() {
   return (
     <Routes>
       <Route path="/login" element={state.user.autenticado ? <Navigate to="/" /> : <Login loginUser={loginUser} />} />
-      <Route path="/" element={state.user.autenticado ? <Dashboard logoutUser={logoutUser} goHome={goHome} goRoom={goRoom} goBooking={goBooking} goReviews={goReviews} goConcierge={goConcierge} goEditUserOnContext={goEditUserOnContext}/>  : <Navigate to="/login" />}>
+      <Route path="/" element={
+        <PrivateRoutes>
+          <Dashboard logoutUser={logoutUser} goHome={goHome} goRoom={goRoom} goBooking={goBooking} goReviews={goReviews} goConcierge={goConcierge} goEditUserOnContext={goEditUserOnContext}/> 
+        </PrivateRoutes>}>
         <Route path="/home" element={<Home />} />
         <Route path="/room" element={<Room />} />
         <Route path="/booking" element={<Booking/>} />
