@@ -1,9 +1,9 @@
-import { FormContainer } from "../../../styledComponents/StyledForms";
+import { FormContainer } from "../../styledComponents/StyledForms";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { editUser, conciergeDataSelect } from "../../../features/conciergeOperations/conciergeSlice";
+import { editUser, conciergeDataSelect } from "../../features/conciergeOperations/conciergeSlice";
 
 const EditUser = () => {
     const navigate = useNavigate();

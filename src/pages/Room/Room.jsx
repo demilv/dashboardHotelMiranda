@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { FaTrashAlt } from "react-icons/fa";
 import { FaPencil } from "react-icons/fa6";
-import { ButtonNewRoom, ButtonSort, ButtonNextBack, ButtonPage, ButtonUnseen } from "../../../styledComponents/StyledButton";
-import { TableColumnFlexMain, TableColumnMain, TableContainIdName, TableFirstRow, TableIdNameContainer, TableImg, TableRoomData, TableRow } from "../../../styledComponents/StyledTabla";
-import { roomDataSelect, roomErrorSelect, roomStatusSelect, deleteRoom } from "../../../features/roomOperations/roomSlice";
-import { roomThunk } from "../../../features/roomOperations/roomThunk";
+import { ButtonNewRoom, ButtonSort, ButtonNextBack, ButtonPage, ButtonUnseen } from "../../styledComponents/StyledButton";
+import { TableColumnFlexMain, TableColumnMain, TableContainIdName, TableFirstRow, TableIdNameContainer, TableImg, TableRoomData, TableRow } from "../../styledComponents/StyledTabla";
+import { roomDataSelect, roomErrorSelect, roomStatusSelect, deleteRoom } from "../../features/roomOperations/roomSlice";
+import { roomThunk } from "../../features/roomOperations/roomThunk";
 
 const Room = () => {
     const [active, setActive] = useState("All");

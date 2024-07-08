@@ -1,42 +1,34 @@
-import { FormContainer, PairRadio, RadioBigContainer } from "../../../styledComponents/StyledForms";
-import React, { useState } from "react";
+import { FormContainer, PairRadio, RadioBigContainer } from "../../styledComponents/StyledForms";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addRoom, roomDataSelect } from "../../../features/roomOperations/roomSlice";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { editRoom, roomDataSelect } from "../../features/roomOperations/roomSlice";
 
-const AddRoom = () => {
-    const navigate = useNavigate()
+const EditRoom = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
-    const rooms = useSelector(roomDataSelect);   
+    const { roomId } = useParams();
+    const rooms = useSelector(roomDataSelect);
 
-    const getNextId = () => {
-        const lastId = rooms.reduce((last, room) => (room.id > last ? room.id : last), 0);
-        console.log(rooms)
-        return lastId + 1;
-    };
-
-    const [id, setId] = useState(getNextId)
-
+    const roomToEdit = rooms.find(room => room.id === parseInt(roomId, 10));
 
     const [formData, setFormData] = useState({
-        id: id,
-        fotoLink: "",
-        number: "",
-        bedType: "Single bed",
-        description: "",
-        price: 0,
-        offer: "No",
-        discount: "",
-        cancelPolicy: "",
-        amenities: [],
-        status: "Available"
+        id: roomToEdit?.id,
+        fotoLink: roomToEdit?.fotoLink || "",
+        number: roomToEdit?.number || "",
+        bedType: roomToEdit?.bedType || "",
+        description: roomToEdit?.description || "",
+        price: roomToEdit?.price || 0,
+        offer: roomToEdit?.offer || "No",
+        discount: roomToEdit?.discount || "",
+        cancelPolicy: roomToEdit?.cancelPolicy || "",
+        amenities: roomToEdit?.amenities || [],
     });
-    
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
-    
+
         if (name === "offer" && formData.price < value) {
             setFormData((prevData) => ({
                 ...prevData,
@@ -61,14 +53,13 @@ const AddRoom = () => {
             }));
         }
     };
-    
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(addRoom(formData));
+        dispatch(editRoom(formData));
         Swal.fire({
             title: "Good job!",
-            text: "Room added successfully!",
+            text: "Room updated successfully!",
             icon: "success",
             timer: 3000,
             timerProgressBar: true,
@@ -84,66 +75,66 @@ const AddRoom = () => {
                 <h4>Room pics</h4>
                 <input type="file" name="fotoLink" onChange={handleChange} />
                 <h4>Room Number</h4>
-                <input type="text" name="number" onChange={handleChange} />
+                <input type="text" name="number" value={formData.number} onChange={handleChange} />
                 <h4>Room type</h4>
-                <select name="bedType" onChange={handleChange}>
+                <select name="bedType" value={formData.bedType} onChange={handleChange}>
                     <option>Single bed</option>
                     <option>Double bed</option>
                     <option>Double superior</option>
                     <option>Suite</option>
                 </select>
                 <h4>Room description</h4>
-                <input type="text" name="description" onChange={handleChange} />
+                <input type="text" name="description" value={formData.description} onChange={handleChange} />
                 <h4>Room price</h4>
-                <input type="number" name="price" onChange={handleChange} />
+                <input type="number" name="price" value={formData.price} onChange={handleChange} />
                 <h4>Is there a discount?</h4>
-                <select name="discount" onChange={handleChange}>
+                <select name="discount" value={formData.discount} onChange={handleChange}>
                     <option>Yes</option>
                     <option>No</option>
                 </select>
                 <h4>Offer</h4>
-                <input type="number" name="offer" onChange={handleChange} disabled={formData.discount === "No"}/>
+                <input type="number" name="offer" value={formData.offer} onChange={handleChange} disabled={formData.discount === "No"} />
                 <h4>Cancel policy</h4>
-                <input type="text" name="cancelPolicy" onChange={handleChange} />
+                <input type="text" name="cancelPolicy" value={formData.cancelPolicy} onChange={handleChange} />
                 <h4>Amenities</h4>
                 <RadioBigContainer>
                     <PairRadio>
                         <label>AC</label>
-                        <input type="checkbox" value="AC" onChange={handleChange} />
+                        <input type="checkbox" value="AC" checked={formData.amenities.includes("AC")} onChange={handleChange} />
                     </PairRadio>
                     <PairRadio>
                         <label>Shower</label>
-                        <input type="checkbox" value="Shower" onChange={handleChange} />
+                        <input type="checkbox" value="Shower" checked={formData.amenities.includes("Shower")} onChange={handleChange} />
                     </PairRadio>
                     <PairRadio>
                         <label>Double Bed</label>
-                        <input type="checkbox" value="Double Bed" onChange={handleChange} />
+                        <input type="checkbox" value="Double Bed" checked={formData.amenities.includes("Double Bed")} onChange={handleChange} />
                     </PairRadio>
                     <PairRadio>
                         <label>Towel</label>
-                        <input type="checkbox" value="Towel" onChange={handleChange} />
+                        <input type="checkbox" value="Towel" checked={formData.amenities.includes("Towel")} onChange={handleChange} />
                     </PairRadio>
                     <PairRadio>
                         <label>Bathup</label>
-                        <input type="checkbox" value="Bathup" onChange={handleChange} />
+                        <input type="checkbox" value="Bathup" checked={formData.amenities.includes("Bathup")} onChange={handleChange} />
                     </PairRadio>
                     <PairRadio>
                         <label>Coffee Set</label>
-                        <input type="checkbox" value="Coffee Set" onChange={handleChange} />
+                        <input type="checkbox" value="Coffee Set" checked={formData.amenities.includes("Coffee Set")} onChange={handleChange} />
                     </PairRadio>
                     <PairRadio>
                         <label>LED TV</label>
-                        <input type="checkbox" value="LED TV" onChange={handleChange} />
+                        <input type="checkbox" value="LED TV" checked={formData.amenities.includes("LED TV")} onChange={handleChange} />
                     </PairRadio>
                     <PairRadio>
                         <label>Wifi</label>
-                        <input type="checkbox" value="Wifi" onChange={handleChange} />
+                        <input type="checkbox" value="Wifi" checked={formData.amenities.includes("Wifi")} onChange={handleChange} />
                     </PairRadio>
                 </RadioBigContainer>
-                <input type="submit" value="New room" />
+                <input type="submit" value="Update room" />
             </form>
         </FormContainer>
     );
 };
 
-export default AddRoom;
+export default EditRoom;
