@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { FaTrashAlt } from "react-icons/fa";
-import { FaPencil } from "react-icons/fa6";
+import { FaPencil, FaRegEye } from "react-icons/fa6";
 import { ButtonNewRoom, ButtonSort, ButtonNextBack, ButtonPage, ButtonUnseen } from "../../styledComponents/StyledButton";
 import { TableColumnFlexMain, TableColumnMain, TableContainIdName, TableFirstRow, TableIdNameContainer, TableImg, TableRoomData, TableRow } from "../../styledComponents/StyledTabla";
 import { roomDataSelect, roomErrorSelect, roomStatusSelect, deleteRoom } from "../../features/roomOperations/roomSlice";
@@ -31,6 +31,10 @@ const Room = () => {
 
     const editRoom = (roomId) => {
         navigate(`/editRoom/${roomId}`);
+    };
+
+    const checkRoom = (roomId) => {
+        navigate(`/checkRoom/${roomId}`);
     };
     
     const addRoom = () => {
@@ -142,7 +146,7 @@ const Room = () => {
                         {roomsMostrar.map(room => (
                             <TableRow key={room.id}>
                                 <TableColumnFlexMain>
-                                    <TableImg src={room.fotoLink} alt={`Room ${room.number}`} />
+                                    <TableImg src={room.fotoLink[0]} alt={`Room ${room.number}`} />
                                     <TableContainIdName>
                                         <TableIdNameContainer>
                                             #{room.id}
@@ -158,7 +162,7 @@ const Room = () => {
                                 <TableColumnMain>{room.price}/night</TableColumnMain>
                                 <TableColumnMain>{room.offer}/night</TableColumnMain>
                                 <TableColumnMain>{room.status ? 'Available' : 'Occupied'}</TableColumnMain>
-                                <TableColumnMain><FaTrashAlt onClick={() => handleDeleteRoom(room.id)}/><FaPencil  onClick={() => editRoom(room.id)}/></TableColumnMain>
+                                <TableColumnMain><FaTrashAlt onClick={() => handleDeleteRoom(room.id)}/><FaPencil  onClick={() => editRoom(room.id)}/><FaRegEye onClick={() => checkRoom(room.id)}></FaRegEye></TableColumnMain>
                             </TableRow>
                         ))}
                     </TableRoomData>

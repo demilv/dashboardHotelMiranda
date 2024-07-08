@@ -9,6 +9,7 @@ import Concierge from "./pages/Concierge/Concierge.jsx";
 import AddUser from "./pages/Concierge/addUser.jsx";
 import AddRoom from "./pages/Room/AddRoom.jsx";
 import EditRoom from "./pages/Room/EditRoom.jsx";
+import CheckRoom from "./pages/Room/CheckRoom.jsx";
 import users from "./data/conciergeData.json";
 import EditUserOnContext from "./pages/Dashboard/editUserOnContext.jsx";
 import EditUser from "./pages/Concierge/editUser.jsx";
@@ -65,6 +66,7 @@ function App() {
         <Route path="/editUser/:userId" element={<EditUser />} />
         <Route path="/addRoom" element={<AddRoom />} />
         <Route path="/editRoom/:roomId" element={<EditRoom />} />
+        <Route path="/checkRoom/:roomId" element={<CheckRoom />} />
         <Route path="/editUserOnContext" element={<EditUserOnContext />} />
       </Route>
     </Routes>
