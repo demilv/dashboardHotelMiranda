@@ -6,6 +6,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { GiCancel, GiExitDoor } from "react-icons/gi";
 import { ButtonAside } from "../../styledComponents/StyledButton";
 import './Dashboard.css';
+import { MainNavbar, NavbarContainer, OutletContainer } from "../../styledComponents/StyledDashboard";
 
 const Dashboard = () => {
   const [isAsideVisible, setIsAsideVisible] = useState(false);
@@ -30,8 +31,8 @@ const Dashboard = () => {
 
   return (
     <>
-      <section className="navbarContainer">
-        <div className="navbar">
+      <MainNavbar>
+        <NavbarContainer>
           <div className={`navbar__aside ${isAsideVisible ? 'visible' : ''}`}>
             <img className="navbar__aside__logo" src="../../../public/logoDash.png" alt="Logo"/>
             <ButtonAside className="noShow" active={active === "Dashboard"} onClick={() => {setActive("Dashboard"); navigate('/home')}}>Dashboard</ButtonAside>
@@ -58,11 +59,11 @@ const Dashboard = () => {
             <CiBellOn className="navbar__icon"/>
             <GiExitDoor className="navbar__icon" onClick={logoutUser}/>
           </div>
-        </div>
-        <div className="outletContainer">
+        </NavbarContainer>
+        <OutletContainer>
           <Outlet />
-        </div>
-      </section>
+        </OutletContainer>
+      </MainNavbar>
     </>
   );
 }
