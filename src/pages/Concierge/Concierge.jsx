@@ -39,6 +39,10 @@ const Concierge = () => {
         navigate("/addUser");
     };
 
+    const checkUser = () => {
+        navigate("/checkUser")
+    }
+
     const handlePageClick = (index) => {
         setPage(index);
     };
@@ -167,7 +171,7 @@ const Concierge = () => {
                                 <TableColumnMain> Schedule</TableColumnMain>
                                 <TableColumnMain><MdOutlinePhone />{user.phone}</TableColumnMain>
                                 <TableColumnMain>{colorText(user.status)}</TableColumnMain>
-                                <TableColumnMain><FaTrashAlt onClick={() => handleDeleteUser(user.id)}/><FaPencil onClick={() => editUser(user.id)}/></TableColumnMain>
+                                <TableColumnMain><FaTrashAlt onClick={() => handleDeleteUser(user.id)}/><FaPencil onClick={() => editUser(user.id)}/><FaRegEye onClick={() => checkUser(user.id)}></FaRegEye></TableColumnMain>
                             </TableRow>
                         ))}
                     </TableRoomData>
