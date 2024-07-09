@@ -8,7 +8,7 @@ import { TextColorfulNoBackground } from "../../styledComponents/TextStyled";
 import { conciergeDataSelect, conciergeStatusSelect, conciergeErrorSelect, deleteUser } from "../../features/conciergeOperations/conciergeSlice";
 import { conciergeUsersThunk } from "../../features/conciergeOperations/conciergeUsersThunk";
 import { FaTrashAlt } from "react-icons/fa";
-import { FaPencil } from "react-icons/fa6";
+import { FaPencil, FaRegEye } from "react-icons/fa6";
 
 const Concierge = () => {
     const [active, setActive] = useState("All Employee");
@@ -39,8 +39,8 @@ const Concierge = () => {
         navigate("/addUser");
     };
 
-    const checkUser = () => {
-        navigate("/checkUser")
+    const checkUser = (userId) => {
+        navigate(`/checkUser/${userId}`)
     }
 
     const handlePageClick = (index) => {

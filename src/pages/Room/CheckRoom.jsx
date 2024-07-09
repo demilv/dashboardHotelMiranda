@@ -1,4 +1,4 @@
-import { CheckContainer, MainCheckContainer, CheckImg } from "../../styledComponents/StyledCheckPages";
+import { CheckContainer, MainCheckContainer, CheckImg, CheckContainer2, CheckContainerImg } from "../../styledComponents/StyledCheckPages";
 import React from "react";
 import { useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
@@ -22,8 +22,7 @@ const CheckRoom = () => {
         bedType: roomToCheck?.bedType || "",
         description: roomToCheck?.description || "",
         price: roomToCheck?.price || 0,
-        offer: roomToCheck?.offer || "No",
-        discount: roomToCheck?.discount || "",
+        offer: roomToCheck?.offer || 0,
         cancelPolicy: roomToCheck?.cancelPolicy || "",
         amenities: roomToCheck?.amenities || [],
     };
@@ -47,20 +46,22 @@ const CheckRoom = () => {
                     <h2>Amenities</h2>
                     <h4>{roomData.amenities}</h4>
                 </CheckContainer>
-                <CheckContainer>
+                <CheckContainer2>
                     <Swiper
                         modules={[Navigation]}
                         spaceBetween={30}
                         slidesPerView={1}
                         navigation={true}
                     >
-                        {roomData.fotoLink.map((url, index) => (                            
+                        {roomData.fotoLink.map((url, index) => (  
                             <SwiperSlide key={index} >
-                                <CheckImg src={url} />
+                                <CheckContainerImg>
+                                    <CheckImg src={url} />
+                                </CheckContainerImg>
                             </SwiperSlide>
                         ))}         
                     </Swiper>
-                </CheckContainer>
+                </CheckContainer2>
             </MainCheckContainer>
         </>
     );

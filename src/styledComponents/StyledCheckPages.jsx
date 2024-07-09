@@ -10,16 +10,28 @@ export const CheckContainer = styled.div`
     align-items: center;
     width:100%;
     max-width:40em;
-    overflow:hidden;
+`
+
+export const CheckContainer2 = styled.div`
+    height: 30em;
+    border:1px solid;
+    max-width:40em;
+    margin-top: 10em;  
 `
 
 export const MainCheckContainer = styled.div`
     display:flex;
     flex-direction:row;    
+    
+`
+
+export const CheckContainerImg = styled.div`
+    display:flex;
+    align-items:center;    
+    height:100%;
 `
 
 export const CheckImg = styled.img`
-    max-width:100%;
-    max-height:100%;
-    object-fit:cover;
+    width:100%;
+    height:30em;
 `

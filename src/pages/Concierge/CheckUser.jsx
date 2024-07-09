@@ -2,68 +2,54 @@ import { CheckContainer, MainCheckContainer, CheckImg } from "../../styledCompon
 import React from "react";
 import { useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
-import { roomDataSelect } from "../../features/roomOperations/roomSlice";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
+import { conciergeDataSelect } from "../../features/conciergeOperations/conciergeSlice";
 
-const CheckRoom = () => {
+const CheckUser = () => {
     const navigate = useNavigate();
-    const { roomId } = useParams();
-    const rooms = useSelector(roomDataSelect);
+    const { userId } = useParams();
+    const users = useSelector(conciergeDataSelect);
 
-    const roomToCheck = rooms.find(room => room.id === parseInt(roomId, 10));
+    const userToCheck = users.find(user => user.id === parseInt(userId, 10));
 
-    const roomData = {
-        id: roomToCheck?.id,
-        fotoLink: roomToCheck?.fotoLink || [],
-        number: roomToCheck?.number || "",
-        bedType: roomToCheck?.bedType || "",
-        description: roomToCheck?.description || "",
-        price: roomToCheck?.price || 0,
-        offer: roomToCheck?.offer || "No",
-        discount: roomToCheck?.discount || "",
-        cancelPolicy: roomToCheck?.cancelPolicy || "",
-        amenities: roomToCheck?.amenities || [],
+    const userData = {
+        id: userToCheck?.id,
+        photo: userToCheck?.photo || "",
+        name: userToCheck?.name || "",
+        job: userToCheck?.job || "",
+        email: userToCheck?.email || "",
+        phone: userToCheck?.phone || 0,
+        startDate: userToCheck?.startDate || "No",
+        responsibilities: userToCheck?.responsibilities || "",
+        status: userToCheck?.status || "",
     };
+
+    console.log(userToCheck)
 
     return (
         <>
             <MainCheckContainer>
                 <CheckContainer>    
-                    <h2>Room Number</h2>
-                    <h4>{roomData.number}</h4>
-                    <h2>Room type</h2>
-                    <h4>{roomData.bedType}</h4>
-                    <h2>Room description</h2>
-                    <h4>{roomData.description}</h4>
-                    <h2>Room price</h2>
-                    <h4>{roomData.price}</h4>
-                    <h2>Offer</h2>
-                    <h4>{roomData.offer}</h4>
-                    <h2>Cancel policy</h2>
-                    <h4>{roomData.cancelPolicy}</h4>
-                    <h2>Amenities</h2>
-                    <h4>{roomData.amenities}</h4>
+                    <h2>Username</h2>
+                    <h4>{userData.name}</h4>
+                    <h2>User job</h2>
+                    <h4>{userData.job}</h4>
+                    <h2>User email</h2>
+                    <h4>{userData.email}</h4>
+                    <h2>User phone</h2>
+                    <h4>{userData.phone}</h4>
+                    <h2>User starting date</h2>
+                    <h4>{userData.startDate}</h4>
+                    <h2>User ersponsibilities</h2>
+                    <h4>{userData.responsibilities}</h4>
+                    <h2>User current status</h2>
+                    <h4>{userData.status}</h4>
                 </CheckContainer>
-                <CheckContainer>
-                    <Swiper
-                        modules={[Navigation]}
-                        spaceBetween={30}
-                        slidesPerView={1}
-                        navigation={true}
-                    >
-                        {roomData.fotoLink.map((url, index) => (                            
-                            <SwiperSlide key={index} >
-                                <CheckImg src={url} />
-                            </SwiperSlide>
-                        ))}         
-                    </Swiper>
+                <CheckContainer>                    
+                    <CheckImg src={userData.photo} />                          
                 </CheckContainer>
             </MainCheckContainer>
         </>
     );
 };
 
-export default CheckRoom;
+export default CheckUser;
