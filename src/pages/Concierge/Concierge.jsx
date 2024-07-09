@@ -8,7 +8,7 @@ import { TextColorfulNoBackground } from "../../styledComponents/TextStyled";
 import { conciergeDataSelect, conciergeStatusSelect, conciergeErrorSelect, deleteUser } from "../../features/conciergeOperations/conciergeSlice";
 import { conciergeUsersThunk } from "../../features/conciergeOperations/conciergeUsersThunk";
 import { FaTrashAlt } from "react-icons/fa";
-import { FaPencil } from "react-icons/fa6";
+import { FaPencil, FaRegEye } from "react-icons/fa6";
 
 const Concierge = () => {
     const [active, setActive] = useState("All Employee");
@@ -38,6 +38,10 @@ const Concierge = () => {
     const addUser = () => {
         navigate("/addUser");
     };
+
+    const checkUser = (userId) => {
+        navigate(`/checkUser/${userId}`)
+    }
 
     const handlePageClick = (index) => {
         setPage(index);
@@ -167,7 +171,7 @@ const Concierge = () => {
                                 <TableColumnMain> Schedule</TableColumnMain>
                                 <TableColumnMain><MdOutlinePhone />{user.phone}</TableColumnMain>
                                 <TableColumnMain>{colorText(user.status)}</TableColumnMain>
-                                <TableColumnMain><FaTrashAlt onClick={() => handleDeleteUser(user.id)}/><FaPencil onClick={() => editUser(user.id)}/></TableColumnMain>
+                                <TableColumnMain><FaTrashAlt onClick={() => handleDeleteUser(user.id)}/><FaPencil onClick={() => editUser(user.id)}/><FaRegEye onClick={() => checkUser(user.id)}></FaRegEye></TableColumnMain>
                             </TableRow>
                         ))}
                     </TableRoomData>
