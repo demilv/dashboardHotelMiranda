@@ -8,12 +8,13 @@ const datos_user = {
     pass: ""
 }
 
-const Login = ({ loginUser, loginError }) => {
+const Login = ({ loginUser }) => {
     const location = useLocation()
     const { state } = location
     console.log(location)
 
     const [formData, setFormData] = useState(datos_user)
+    
     const changeInput = (ev) => {
         const { value, name } = ev.target;
         console.log(name, value)
@@ -39,8 +40,6 @@ const Login = ({ loginUser, loginError }) => {
         <div>
             <button className="submit-bttn" type="submit">Log in</button>
         </div>
-
-        {loginError ? <div className="error-message">{loginError} </div> : null}
     </form>)
 }
 export default Login
