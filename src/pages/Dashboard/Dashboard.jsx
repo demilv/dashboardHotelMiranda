@@ -5,11 +5,10 @@ import { CiMail, CiBellOn } from "react-icons/ci";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { GiCancel, GiExitDoor } from "react-icons/gi";
 import { ButtonAside } from "../../styledComponents/StyledButton";
-import './Dashboard.css';
 import { MainNavbar, NavbarContainer, OutletContainer, NavbarBurger, NavbarMain, NavbarMainTitle, StyledIcon, NavbarAside, NavbarAsideLogo, NavbarAsideImg, NavbarAsideH2, NavbarAsideMyData, NavbarAsideMyDataMail, NavbarAsideMyDataContact, NavbarAsideH6, NavbarAsideH3 } from "../../styledComponents/StyledDashboard";
 
 const Dashboard = () => {
-  const [isAsideVisible, setIsAsideVisible] = useState(false);
+  const [isAsideVisible, setIsAsideVisible] = useState(true);
   const [active, setActive] = useState("");
   const [location, setLocation] = useState("Home")
   const { state, dispatch } = useContext(UserContext);

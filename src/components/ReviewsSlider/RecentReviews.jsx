@@ -2,6 +2,7 @@ import React from "react";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 import { MdOutlineCancel } from "react-icons/md";
 import { HomeReviewMainContainer, HomeReviewMainContainerInside, HomeReviewMainContainerInside2, HomeReviewMainContainerInside3, HomeReviewCircle, HomeReviewGreySquare } from "./StyledCajasHomeReview";
+import styled from 'styled-components';
 
 const RecentReviews = ({ review, customerName, date }) => {
     const timeSince = (date) => {
@@ -32,6 +33,14 @@ const RecentReviews = ({ review, customerName, date }) => {
         return Math.floor(seconds) + " seconds";
     };
 
+    const GreenCheckIcon = styled(IoIosCheckmarkCircleOutline)`
+        color: green;
+    `;
+
+    const RedCancelIcon = styled(MdOutlineCancel)`
+        color:red;
+    `
+
     return (
         <HomeReviewMainContainer>                    
             <p className="reviewContainerP">{review}</p>
@@ -42,8 +51,8 @@ const RecentReviews = ({ review, customerName, date }) => {
                     <h6 className="reviewContainerInside2Time">{timeSince(date)} ago</h6>
                 </HomeReviewMainContainerInside2>
                 <HomeReviewMainContainerInside3>
-                    <HomeReviewCircle><IoIosCheckmarkCircleOutline/></HomeReviewCircle>
-                    <MdOutlineCancel />
+                    <HomeReviewCircle><GreenCheckIcon/></HomeReviewCircle>
+                    <RedCancelIcon />
                 </HomeReviewMainContainerInside3>
             </HomeReviewMainContainerInside>
         </HomeReviewMainContainer>

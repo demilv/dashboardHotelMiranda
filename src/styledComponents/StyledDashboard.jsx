@@ -117,5 +117,5 @@ export const OutletContainer = styled.div`
     padding: 2em 2em 0 2em;
     z-index:1;    
     min-height:52.55em;
-    background-color: rgb(192, 192, 192);    
+    background-color: rgb(235, 235, 235);
 `
