@@ -10,8 +10,8 @@ describe('The Home Page', () => {
       cy.get('input[name=pass]').type(`${pass}`)
       cy.get('button[type=submit]').click()
       
-      cy.url().should('eq', 'http://localhost:5173/')
+      cy.url().should('eq', 'http://localhost:5173/home')
 
-      cy.get('.navbar__burger').should('be.visible')      
+      cy.get('[data-testid="navbar-burger"]').should('be.visible');
     })
   })
