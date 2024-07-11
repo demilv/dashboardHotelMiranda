@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react";
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 import Login from './pages/Login/Login.jsx';
 import Dashboard from './pages/Dashboard/Dashboard.jsx';
 import Home from "./pages/Home/Home.jsx";
@@ -21,6 +21,7 @@ import { PrivateRoutes } from './AuthProvider/PrivateRoutes';
 
 function App() {
   const { state, dispatch } = useContext(UserContext);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
