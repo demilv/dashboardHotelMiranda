@@ -14,5 +14,7 @@ describe('The Home Page', () => {
         expect(text).to.contains('Usuario o contraseña incorrecta');
       });
 
+      cy.url().should('include', '/login')  
+
     })
   })
