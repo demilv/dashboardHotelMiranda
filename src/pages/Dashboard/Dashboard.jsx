@@ -5,12 +5,12 @@ import { CiMail, CiBellOn } from "react-icons/ci";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { GiCancel, GiExitDoor } from "react-icons/gi";
 import { ButtonAside } from "../../styledComponents/StyledButton";
-import './Dashboard.css';
-import { MainNavbar, NavbarContainer, OutletContainer } from "../../styledComponents/StyledDashboard";
+import { MainNavbar, NavbarContainer, OutletContainer, NavbarBurger, NavbarMain, NavbarMainTitle, StyledIcon, NavbarAside, NavbarAsideLogo, NavbarAsideImg, NavbarAsideH2, NavbarAsideMyData, NavbarAsideMyDataMail, NavbarAsideMyDataContact, NavbarAsideH6, NavbarAsideH3 } from "../../styledComponents/StyledDashboard";
 
 const Dashboard = () => {
-  const [isAsideVisible, setIsAsideVisible] = useState(false);
+  const [isAsideVisible, setIsAsideVisible] = useState(true);
   const [active, setActive] = useState("");
+  const [location, setLocation] = useState("Home")
   const { state, dispatch } = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -33,32 +33,34 @@ const Dashboard = () => {
     <>
       <MainNavbar>
         <NavbarContainer>
-          <div className={`navbar__aside ${isAsideVisible ? 'visible' : ''}`}>
-            <img className="navbar__aside__logo" src="./logoDash.png" alt="Logo"/>
-            <ButtonAside className="noShow" active={active === "Dashboard"} onClick={() => {setActive("Dashboard"); navigate('/home')}}>Dashboard</ButtonAside>
-            <ButtonAside className="noShow" active={active === "Room"} onClick={() => {setActive("Room"); navigate('/room')}}>Room</ButtonAside>
-            <ButtonAside className="noShow" active={active === "Bookings"} onClick={() => {setActive("Bookings"); navigate('/booking')}}>Bookings</ButtonAside>
-            <ButtonAside className="noShow" active={active === "Contact"} onClick={() => {setActive("Contact"); navigate('/reviews')}}>Contact</ButtonAside>
-            <ButtonAside className="noShow" active={active === "Concierge"} onClick={() => {setActive("Concierge"); navigate('/concierge')}}>Concierge</ButtonAside>
-            <img className="navbar__aside__img" src="./IMG_20191223_131827 (2) Grande.jpg" alt="Profile"/>
-            <div className="navbar__aside__myData">
-              <h3 className="myData__name">{state.user.name}</h3>
-              <h5 className="myData__mail">{state.user.email}</h5>
-              <button onClick={() => navigate('/editUserOnContext')} className="myData__contact">Modify data</button>
-            </div>
-            <h2 className="navbar__aside__h2">Travi Hotel Admin Dashboard</h2>
-            <h6 className="navbar__aside__h6">@ 2024 All Rights Reserved</h6>
-            <h6 className="navbar__aside__h6">Made with &hearts; by Gonzalo</h6>
-          </div>
-          <div className="navbar__main">
-            <button className="navbar__burger" onClick={toggleAside}>
+          <NavbarAside isVisible={isAsideVisible}>
+            <NavbarAsideLogo src="./logoDash.png" alt="Logo" />
+            <ButtonAside active={active === "Dashboard"} onClick={() => { setActive("Dashboard"); navigate('/home'); setLocation("Home") }}>Home</ButtonAside>
+            <ButtonAside active={active === "Room"} onClick={() => { setActive("Room"); navigate('/room'); setLocation("Rooms") }}>Rooms</ButtonAside>
+            <ButtonAside active={active === "Bookings"} onClick={() => { setActive("Bookings"); navigate('/booking'); setLocation("Bookings") }}>Bookings</ButtonAside>
+            <ButtonAside active={active === "Contact"} onClick={() => { setActive("Contact"); navigate('/reviews'); setLocation("Reviews") }}>Reviews</ButtonAside>
+            <ButtonAside active={active === "Concierge"} onClick={() => { setActive("Concierge"); navigate('/concierge'); setLocation("Concierge") }}>Concierge</ButtonAside>
+            <NavbarAsideImg src="./IMG_20191223_131827 (2) Grande.jpg" alt="Profile" />
+            <NavbarAsideMyData>
+              <NavbarAsideH3>{state.user.name}</NavbarAsideH3>
+              <NavbarAsideMyDataMail>{state.user.email}</NavbarAsideMyDataMail>
+              <NavbarAsideMyDataContact onClick={() => navigate('/editUserOnContext')}>Modify data</NavbarAsideMyDataContact>
+            </NavbarAsideMyData>
+            <NavbarAsideH2>Travi Hotel Admin Dashboard</NavbarAsideH2>
+            <NavbarAsideH6>@ 2024 All Rights Reserved</NavbarAsideH6>
+            <NavbarAsideH6>Made with &hearts; by Gonzalo</NavbarAsideH6>
+          </NavbarAside>           
+          <NavbarMain>
+            <NavbarBurger data-testid="navbar-burger" onClick={toggleAside}>
               {isAsideVisible ? <GiCancel /> : <RxHamburgerMenu />}
-            </button>
-            <h1 className="navbar__h1">Dashboard</h1>
-            <CiMail className="navbar__icon"/>
-            <CiBellOn className="navbar__icon"/>
-            <GiExitDoor className="navbar__icon" onClick={logoutUser}/>
-          </div>
+            </NavbarBurger>
+            <NavbarMainTitle>{location}</NavbarMainTitle>
+            <StyledIcon>
+              <CiMail />
+              <CiBellOn />
+              <GiExitDoor  onClick={logoutUser}/>
+            </StyledIcon>
+          </NavbarMain>
         </NavbarContainer>
         <OutletContainer>
           <Outlet />

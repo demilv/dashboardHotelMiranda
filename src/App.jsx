@@ -43,10 +43,10 @@ function App() {
       dispatch({ type: 'SET_USERDATA', payload: { email, pass, name } });
       localStorage.setItem('user', JSON.stringify({ email, pass, name }));
       localStorage.setItem("isLogged", "true");
-      navigate('/');
+      navigate('/home');
     } else {
       dispatch({ type: 'LOGOUT' });
-      alert('Usuario o contraseña incorrecta');
+      alert('Prueba con el email kdeveral0@nifty.com y la password 1');
     }
   };
 

@@ -76,10 +76,8 @@ export const ButtonAside = styled.button`
     border: none;
     background-color: transparent;
     padding: 0 0.5em;
-    border-left: ${({active}) => (active ? '2px solid green': 'none')};
-    color: ${({ active }) => (active ? 'green' : 'grey')};
+    color: ${({ active }) => (active ? 'red' : '#5b755b')};
     margin-top:3em;
-    z-index: 100;
 `;
 
 /*export const SelectTime = styled.select`
