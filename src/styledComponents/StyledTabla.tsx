@@ -10,7 +10,7 @@ export const TableRoomData = styled.div`
     overflow-y:auto;
 `;
 
-export const TableRow = styled.div`
+export const TableRow = styled.div<{first?: "first" | "" }>`
     border:none;    
     border-bottom: ${({ first }) => (first ? '' : '1px solid rgb(219, 219, 219)')};;
     margin-right:2em;
@@ -20,7 +20,7 @@ export const TableRow = styled.div`
     padding: 1.25em 1em
 `
 
-export const TableColumnMain = styled.div`    
+export const TableColumnMain = styled.div<{big?: "big1" | "big2"}>`    
     color:black;
     font-weight:700;
     margin-right:4.8em;

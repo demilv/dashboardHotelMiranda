@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ButtonSort = styled.button`
+export const ButtonSort = styled.button<{active: boolean}>`
   margin-top: 3em;
   padding: 0 2em 0 2em;
   width:10em;

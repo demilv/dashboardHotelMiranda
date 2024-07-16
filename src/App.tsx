@@ -1,22 +1,22 @@
 import React, { useEffect, useContext } from "react";
 import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
-import Login from './pages/Login/Login.jsx';
-import Dashboard from './pages/Dashboard/Dashboard.jsx';
-import Home from "./pages/Home/Home.jsx";
-import Room from "./pages/Room/Room.jsx";
-import Booking from "./pages/Bookings/Booking.jsx";
-import Concierge from "./pages/Concierge/Concierge.jsx";
-import AddUser from "./pages/Concierge/addUser.jsx";
-import AddRoom from "./pages/Room/AddRoom.jsx";
-import EditRoom from "./pages/Room/EditRoom.jsx";
-import CheckRoom from "./pages/Room/CheckRoom.jsx";
+import Login from './pages/Login/Login';
+import Dashboard from './pages/Dashboard/Dashboard';
+import Home from "./pages/Home/Home";
+import Room from "./pages/Room/Room";
+import Booking from "./pages/Bookings/Booking";
+import Concierge from "./pages/Concierge/Concierge";
+import AddUser from "./pages/Concierge/addUser";
+import AddRoom from "./pages/Room/AddRoom";
+import EditRoom from "./pages/Room/EditRoom";
+import CheckRoom from "./pages/Room/CheckRoom";
 import users from "./data/conciergeData.json";
-import EditUserOnContext from "./pages/Dashboard/editUserOnContext.jsx";
-import EditUser from "./pages/Concierge/editUser.jsx";
-import CheckUser from "./pages/Concierge/CheckUser.jsx";
-import EditDocumentBooking from "./pages/Bookings/editDocumentBooking.jsx";
-import { UserContext } from './context/userContext.jsx'; 
-import Reviews from "./pages/Reviews/Reviews.jsx";
+import EditUserOnContext from "./pages/Dashboard/editUserOnContext";
+import EditUser from "./pages/Concierge/editUser";
+import CheckUser from "./pages/Concierge/CheckUser";
+import EditDocumentBooking from "./pages/Bookings/editDocumentBooking";
+import { UserContext } from './context/userContext'; 
+import Reviews from "./pages/Reviews/Reviews";
 import { PrivateRoutes } from './AuthProvider/PrivateRoutes';
 
 function App() {

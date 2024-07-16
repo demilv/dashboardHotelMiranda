@@ -9,29 +9,31 @@ import { bookingsDataSelect, bookingsStatusSelect, bookingsErrorSelect, deleteBo
 import { BookingsThunk } from "../../features/bookingsOperations/bookingsThunk";
 import { FaTrashAlt } from "react-icons/fa";
 import { FaPencil } from "react-icons/fa6";
+import { AppDispatch } from "../../app/store";
+import { Booking as BookingClass} from "../../features/Types/typeInterfaces";
 
 const Booking = () => {
-    const [active, setActive] = useState("All")
-    const [sorting, setSorting] = useState("id")
-    const [page, setPage] = useState(0)
-    const [sortedBookings, setSortedBookings] = useState([])
-    const [bookingsMostrar, setBookingsMostrar] = useState([])
-    const [isDisabledBack, setIsDisabledBack] = useState()
-    const [isDisabledNext, setIsDisabledNext] = useState()
-    const [maxPages, setMaxPages] = useState()
-    const dispatch = useDispatch();
-    const [popupVisible, setPopupVisible] = useState(false);
-    const [selectedRequest, setSelectedRequest] = useState("");
+    const [active, setActive] = useState<string>("All")
+    const [sorting, setSorting] = useState<string>("id")
+    const [page, setPage] = useState<number>(0)
+    const [sortedBookings, setSortedBookings] = useState<BookingClass[]>([])
+    const [bookingsMostrar, setBookingsMostrar] = useState<BookingClass[]>([])
+    const [isDisabledBack, setIsDisabledBack] = useState<boolean>()
+    const [isDisabledNext, setIsDisabledNext] = useState<boolean>()
+    const [maxPages, setMaxPages] = useState<number>()
+    const dispatch = useDispatch<AppDispatch>();
+    const [popupVisible, setPopupVisible] = useState<boolean>(false);
+    const [selectedRequest, setSelectedRequest] = useState<string>("");
     const bookingsDataSinMapear = useSelector(bookingsDataSelect);
     const bookingsStatus = useSelector(bookingsStatusSelect);
     const bookingsError = useSelector(bookingsErrorSelect);
-    const [loading, setLoading] = useState(true);
-    const [bookingsData, setBookingsData] = useState([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [bookingsData, setBookingsData] = useState<BookingClass[]>([]);
 
 
-    const big1 = "big1"
-    const big2 = "big2"
-    const first = "first"
+    const big1: "big1" | "" = "big1"
+    const big2: "big2" | "" = "big2"
+    const first: "first" | "" = "first"
     const navigate = useNavigate();
 
     const editBooking = (bookingId) => {
@@ -68,9 +70,10 @@ const Booking = () => {
                 setLoading(true);
             } else if (bookingsStatus === "fulfilled") {
                 setLoading(false);
-                let bookingsDataMapeado = [];
+                let bookingsDataMapeado : BookingClass[] = [];
                 bookingsDataSinMapear.forEach((booking) => {
-                    bookingsDataMapeado.push({ fotoLink: booking.fotoLink, id: booking.id, guest: booking.guest, orderDate: booking.orderDate, checkInDate: booking.checkInDate, checkOut: booking.checkOut, specialRequest: booking.specialRequest,status: booking.status });
+                    const añadirBooking: BookingClass = { fotoLink: booking.fotoLink, id: booking.id, guest: booking.guest, orderDate: booking.orderDate, checkInDate: booking.checkInDate, checkOutDate: booking.checkOutDate, specialRequest: booking.specialRequest,status: booking.status }
+                    bookingsDataMapeado.push(añadirBooking);
                 });
                 setBookingsData(bookingsDataMapeado);
                 setMaxPages(Math.ceil(bookingsDataMapeado.length / 10));
@@ -170,7 +173,7 @@ const Booking = () => {
                         {bookingsMostrar.map(booking => (
                             <TableRow key={booking.id}>
                                 <TableColumnFlexMain>
-                                    <TableImg src={booking.fotoLink} alt={`Room ${booking.number}`}/>
+                                    <TableImg src={booking.fotoLink} alt={`Room ${booking.id}`}/>
                                     <TableContainIdName>
                                         <TableIdNameContainer>
                                             {booking.guest}
