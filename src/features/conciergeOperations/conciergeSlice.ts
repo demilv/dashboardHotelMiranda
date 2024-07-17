@@ -1,13 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { conciergeUsersThunk } from './conciergeUsersThunk';
+import type { RootState } from '../../app/store';
+import { ConciergeUsers } from '../Types/typeInterfaces';
+
+
+
+interface interfaceState {
+    conciergeUsers: ConciergeUsers[],
+    status: 'idle' | 'pending' | 'fulfilled' | 'rejected',
+    error: string | null
+}
+
+const initialState: interfaceState = {
+    conciergeUsers: [],
+    status: 'idle', 
+    error: null,
+}
 
 export const conciergeSlice = createSlice({
     name: 'conciergeUsers',
-    initialState: {
-        conciergeUsers: [],
-        status: 'idle',
-        error: null,
-    },
+    initialState,
     reducers: {
         addUser: (state, action) => {
             state.conciergeUsers = [...state.conciergeUsers, action.payload];
@@ -29,17 +41,17 @@ export const conciergeSlice = createSlice({
             })
             .addCase(conciergeUsersThunk.fulfilled, (state, action) => {
                 state.status = 'fulfilled';
-                state.conciergeUsers = action.payload;
+                state.conciergeUsers = action.payload as ConciergeUsers[];
             })
             .addCase(conciergeUsersThunk.rejected, (state, action) => {
                 state.status = 'rejected';
-                state.error = action.error.message;
+                state.error = action.error.message as string;
             });
     }
 });
 
 export default conciergeSlice.reducer;
 export const { addUser, deleteUser, editUser } = conciergeSlice.actions;
-export const conciergeDataSelect = (state) => state.conciergeUsers.conciergeUsers;
-export const conciergeStatusSelect = (state) => state.conciergeUsers.status;
-export const conciergeErrorSelect = (state) => state.conciergeUsers.error;
+export const conciergeDataSelect = (state: RootState) => state.conciergeUsers.conciergeUsers;
+export const conciergeStatusSelect = (state: RootState) => state.conciergeUsers.status;
+export const conciergeErrorSelect = (state: RootState) => state.conciergeUsers.error;

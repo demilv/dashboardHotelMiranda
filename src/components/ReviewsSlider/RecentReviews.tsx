@@ -4,12 +4,18 @@ import { MdOutlineCancel } from "react-icons/md";
 import { HomeReviewMainContainer, HomeReviewMainContainerInside, HomeReviewMainContainerInside2, HomeReviewMainContainerInside3, HomeReviewCircle, HomeReviewGreySquare } from "./StyledCajasHomeReview";
 import styled from 'styled-components';
 
-const RecentReviews = ({ review, customerName, date }) => {
-    const timeSince = (date) => {
-        const now = new Date();
-        const reviewDate = new Date(date);
-        const seconds = Math.floor((now - reviewDate) / 1000);
-        let interval = Math.floor(seconds / 31536000);
+interface RecentReviewsProps {
+    review: string;
+    customerName: string;
+    date: string;
+  }
+
+const RecentReviews: React.FC<RecentReviewsProps> = ({ review, customerName, date }) => {
+    const timeSince = (date : string) => {
+        const now: Date = new Date();
+        const reviewDate: Date = new Date(date);
+        const seconds: number = Math.floor((now.getTime() - reviewDate.getTime()) / 1000);
+        let interval: number = Math.floor(seconds / 31536000);
 
         if (interval > 1) {
             return interval + " years";

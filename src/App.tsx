@@ -19,40 +19,49 @@ import { UserContext } from './context/userContext';
 import Reviews from "./pages/Reviews/Reviews";
 import { PrivateRoutes } from './AuthProvider/PrivateRoutes';
 
+
 function App() {
-  const { state, dispatch } = useContext(UserContext);
+
+  interface Form {
+    email:string,
+    password:string
+}
+  const userContext = useContext(UserContext);
   const navigate = useNavigate()
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     console.log(storedUser);
-    console.log(state);
-    if (storedUser) {
-      dispatch({ type: 'SET_USERDATA', payload: JSON.parse(storedUser) });
+    console.log(userContext?.state);
+    if (storedUser && userContext) {
+      userContext.dispatch({ type: 'SET_USERDATA', payload: JSON.parse(storedUser) });
     }
-    console.log(state);
-  }, [dispatch]);
+    console.log(userContext?.state);
+  }, [userContext]);
 
-  const loginUser = (formData) => {
+  const loginUser = (formData: Form) => {
     const existsUser = users.find(
-      (user) => user.email === formData.email && user.password === formData.password
+      (user) => user.email === formData.email && user.pass === formData.password
     );
     console.log(existsUser);
     if (existsUser) {
       const { email, pass, name } = existsUser;
-      dispatch({ type: 'SET_USERDATA', payload: { email, pass, name } });
-      localStorage.setItem('user', JSON.stringify({ email, pass, name }));
-      localStorage.setItem("isLogged", "true");
-      navigate('/home');
-    } else {
-      dispatch({ type: 'LOGOUT' });
-      alert('Prueba con el email kdeveral0@nifty.com y la password 1');
+      if (userContext) {
+        userContext.dispatch({ type: 'SET_USERDATA', payload: { email, pass, name } });
+        localStorage.setItem('user', JSON.stringify({ email, pass, name }));
+        localStorage.setItem("isLogged", "true");
+        navigate('/home');
+      }
+    }else {
+      if (userContext) {
+        userContext.dispatch({ type: 'LOGOUT' });
+      }
     }
   };
 
   return (
     <Routes>
-      <Route path="/login" element={state.user.autenticado ? <Navigate to="/" /> : <Login loginUser={loginUser} />} />
+      <Route path="/login" element={userContext?.state.user.autenticado ? <Navigate to="/" /> : <Login loginUser={loginUser} />} />
       <Route path="/" element={
         <PrivateRoutes>
           <Dashboard />

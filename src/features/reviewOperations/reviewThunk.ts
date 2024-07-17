@@ -2,9 +2,15 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import reviewData from '../../data/roomReview.json';
 
 export const reviewThunk = createAsyncThunk('reviews/reviewThunk', async () => {
-    return new Promise((resolve) => {
+    const promesa = new Promise((resolve, reject) => {
         setTimeout(() => {
-            resolve(reviewData);
-        }, 3000);
+            if (reviewData.length > 0) {
+                resolve(reviewData);
+            }else{
+                reject("no encontrado")
+            }
+        }, 3000); 
     });
+    return promesa.then((resolve) => {return resolve}
+    ).catch((error) => {throw new Error(error)})
 });
