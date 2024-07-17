@@ -20,7 +20,7 @@ export const ButtonNewRoom = styled.button`
     margin-right:5%;
 `
 
-export const ButtonNextBack = styled.button`
+export const ButtonNextBack = styled.button<{first?:string}>`
     margin-left: ${props => props.first ? '60%' : ''};
     border-radius:0.4em;
     color: rgb(6, 74, 4);
@@ -30,7 +30,7 @@ export const ButtonNextBack = styled.button`
     margin-right:0.5em
 `
 
-export const ButtonPage = styled.button`
+export const ButtonPage = styled.button<{active:boolean}>`
     border-radius:0.4em;
     min-width: 4.5em;
     margin-bottom:1em;

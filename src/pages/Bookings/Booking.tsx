@@ -13,14 +13,15 @@ import { AppDispatch } from "../../app/store";
 import { Booking as BookingClass} from "../../features/Types/typeInterfaces";
 
 const Booking = () => {
+    type BookingKeys = keyof BookingClass;
     const [active, setActive] = useState<string>("All")
-    const [sorting, setSorting] = useState<string>("id")
+    const [sorting, setSorting] = useState<BookingKeys>("id")
     const [page, setPage] = useState<number>(0)
     const [sortedBookings, setSortedBookings] = useState<BookingClass[]>([])
     const [bookingsMostrar, setBookingsMostrar] = useState<BookingClass[]>([])
     const [isDisabledBack, setIsDisabledBack] = useState<boolean>()
     const [isDisabledNext, setIsDisabledNext] = useState<boolean>()
-    const [maxPages, setMaxPages] = useState<number>()
+    const [maxPages, setMaxPages] = useState<number>(0)
     const dispatch = useDispatch<AppDispatch>();
     const [popupVisible, setPopupVisible] = useState<boolean>(false);
     const [selectedRequest, setSelectedRequest] = useState<string>("");
@@ -36,11 +37,11 @@ const Booking = () => {
     const first: "first" | "" = "first"
     const navigate = useNavigate();
 
-    const editBooking = (bookingId) => {
+    const editBooking = (bookingId: number) => {
         navigate(`/editBooking/${bookingId}`);
     };
 
-    const getStatusColor = (status) => {
+    const getStatusColor = (status: string) => {
         switch (status) {
           case 'Check In':
             return 'green';
@@ -54,11 +55,11 @@ const Booking = () => {
       };
       
 
-    const handlePageClick = (index) =>{
+    const handlePageClick = (index: number) =>{
         setPage(index)
     }
 
-    const handleChangeSort = (type) =>{
+    const handleChangeSort = (type: BookingKeys) =>{
         setSorting(type)
     }
 
@@ -94,7 +95,7 @@ const Booking = () => {
         } else if (active === "inProgress") {
             filteredBookings = filteredBookings.filter(booking => booking.status === "In Progress");
         }
-
+        
         filteredBookings.sort((a, b) => {
             if (a[sorting] < b[sorting]) return -1;
             if (a[sorting] > b[sorting]) return 1;
@@ -129,7 +130,7 @@ const Booking = () => {
         }
       }, [page,  sortedBookings])
 
-    const handleSpecialRequest = (specialRequest) => {
+    const handleSpecialRequest = (specialRequest: string) => {
     setSelectedRequest(specialRequest);
     setPopupVisible(true);
     };
@@ -139,7 +140,7 @@ const Booking = () => {
     setSelectedRequest("");
     };
 
-    const handleDeleteBooking = (bookingId) => {
+    const handleDeleteBooking = (bookingId: number) => {
         dispatch(deleteBooking(bookingId));
         const updatedBookingsData = bookingsData.filter(booking => booking.id !== bookingId);
         setBookingsData(updatedBookingsData);
@@ -163,9 +164,9 @@ const Booking = () => {
                     <TableRoomData>
                         <TableRow>
                             <TableColumnMain big={big1}><ButtonUnseen onClick={()=> handleChangeSort("guest")}>Guest</ButtonUnseen></TableColumnMain>
-                            <TableColumnMain big={big1}><ButtonUnseen onClick={()=> handleChangeSort("order_date")}>Order Date</ButtonUnseen></TableColumnMain>
-                            <TableColumnMain><ButtonUnseen onClick={()=> handleChangeSort("checkIn_date")}>Check in</ButtonUnseen></TableColumnMain>
-                            <TableColumnMain><ButtonUnseen onClick={()=> handleChangeSort("checkOut_date")}>Check out</ButtonUnseen></TableColumnMain>
+                            <TableColumnMain big={big1}><ButtonUnseen onClick={()=> handleChangeSort("orderDate")}>Order Date</ButtonUnseen></TableColumnMain>
+                            <TableColumnMain><ButtonUnseen onClick={()=> handleChangeSort("checkInDate")}>Check in</ButtonUnseen></TableColumnMain>
+                            <TableColumnMain><ButtonUnseen onClick={()=> handleChangeSort("checkOutDate")}>Check out</ButtonUnseen></TableColumnMain>
                             <TableColumnMain>Special Request</TableColumnMain>
                             <TableColumnMain>Room Type</TableColumnMain>
                             <TableColumnMain>Status</TableColumnMain>

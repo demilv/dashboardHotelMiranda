@@ -5,10 +5,13 @@ import { BrowserRouter } from 'react-router-dom';
 import "./main.css"
 import { UserContextProvider } from './context/userContext.jsx';
 import {Provider} from 'react-redux'
-import {store} from '/src/app/store.js'
+import {store} from './app/store'
 import GlobalStyles from './styledComponents/GlobalText.js';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+const rootElement = document.getElementById('root')
+
+if(rootElement){
+ReactDOM.createRoot(rootElement).render(
   <Provider store={store}>
     <UserContextProvider>
       <BrowserRouter>
@@ -18,4 +21,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </UserContextProvider>  
   </Provider>
 );
-
+}
