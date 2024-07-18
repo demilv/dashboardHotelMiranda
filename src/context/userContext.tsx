@@ -17,6 +17,7 @@ import React from "react";
   }
   
   type Action = | { type: 'SET_USERDATA'; payload: { name: string; email: string; pass: string } } | { type: 'LOGOUT' };
+  
   interface UserContextType {
     state: State;
     dispatch: React.Dispatch<Action>;

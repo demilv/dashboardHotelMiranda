@@ -15,23 +15,24 @@ import RecentReviews from "../../components/ReviewsSlider/RecentReviews";
 import { useDispatch, useSelector } from "react-redux";
 import { reviewDataSelect, reviewErrorSelect, reviewStatusSelect } from "../../features/reviewOperations/reviewSlice";
 import { reviewThunk } from "../../features/reviewOperations/reviewThunk";
-
+import { Review as ReviewClass } from "../../features/Types/typeInterfaces";
+import { AppDispatch } from "../../app/store";
 
 const Home = () => {
-    const [selectedBox, setSelectedBox] = useState(null);
-    const dispatch = useDispatch();
+    const [selectedBox, setSelectedBox] = useState<number>();
+    const dispatch = useDispatch<AppDispatch>();
     const reviewDataSinMapear = useSelector(reviewDataSelect);
     const reviewStatus = useSelector(reviewStatusSelect);
     const reviewError = useSelector(reviewErrorSelect);
-    const [loading, setLoading] = useState(true);
-    const [reviewData, setReviewData] = useState([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [reviewData, setReviewData] = useState<ReviewClass[]>([]);
 
-    const handleBoxClick = (boxId) => {
+    const handleBoxClick = (boxId : number) => {
         setSelectedBox(boxId);
     };
 
     console.log(roomReviews)
-    const latestReviews = reviewData.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5);
+    const latestReviews = reviewData.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 5);
 
     useEffect(() => {
         if (reviewData.length === 0) {
@@ -40,17 +41,21 @@ const Home = () => {
             } else if (reviewStatus === "pending") {
                 setLoading(true);
             } else if (reviewStatus === "fulfilled") {
-                setLoading(false);
-                let reviewsMapeadas = []
+                setLoading(false);                
+                let reviewsMapeadas : ReviewClass[] = []
                 reviewDataSinMapear.forEach((review) => {
-                    reviewsMapeadas.push({
+                    const añadirReview: ReviewClass = {
                     id: review.id,
                     date: review.date,
+                    hora: review.hora,
                     customerName: review.customerName,
                     email: review.email,
                     stars: review.stars,
                     review: review.review,
-                    status: review.status});
+                    status: review.status,
+                    phone: review.phone
+                }
+                reviewsMapeadas.push(añadirReview)
                 });
                 setReviewData(reviewsMapeadas);
             } else if (reviewStatus === "rejected") {

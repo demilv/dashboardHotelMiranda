@@ -71,7 +71,7 @@ export const CloseButtonn = styled.button`
   font-size: 1.5em;
 `;
 
-export const ButtonAside = styled.button`
+export const ButtonAside = styled.button<{active: boolean}>`
     height: 2em;
     border: none;
     background-color: transparent;

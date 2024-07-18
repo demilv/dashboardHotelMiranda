@@ -40,7 +40,7 @@ export const StyledIcon = styled.div`
     }
 `;
 
-export const NavbarAside = styled.div`
+export const NavbarAside = styled.div<{isVisible: boolean}>`
   display: flex;
   position: absolute;
   left: -13.9em;

@@ -10,34 +10,37 @@ import { ButtonSort, ButtonNextBack, ButtonPage, ButtonUnseen } from "../../styl
 import { TableColumnFlexMain, TableColumnMain, TableFirstRow, TableRoomData, TableRow } from "../../styledComponents/StyledTabla";
 import { reviewDataSelect, reviewErrorSelect, reviewStatusSelect } from "../../features/reviewOperations/reviewSlice";
 import { reviewThunk } from "../../features/reviewOperations/reviewThunk";
+import { AppDispatch } from "../../app/store";
+import { Review as ReviewClass } from "../../features/Types/typeInterfaces";
 
 const Reviews = () => {
-    const [active, setActive] = useState("All Contacts");
-    const [sorting, setSorting] = useState("id");
-    const [page, setPage] = useState(0);
-    const [sortedReviews, setSortedReviews] = useState([]);
-    const [reviewsMostrar, setReviewsMostrar] = useState([]);
-    const [isDisabledBack, setIsDisabledBack] = useState();
-    const [isDisabledNext, setIsDisabledNext] = useState();
-    const [maxPages, setMaxPages] = useState();
-    const dispatch = useDispatch();
+    type ReviewKeys = keyof ReviewClass;
+    const [active, setActive] = useState<string>("All Contacts");
+    const [sorting, setSorting] = useState<ReviewKeys>("id");
+    const [page, setPage] = useState<number>(0);
+    const [sortedReviews, setSortedReviews] = useState<ReviewClass[]>([]);
+    const [reviewsMostrar, setReviewsMostrar] = useState<ReviewClass[]>([]);
+    const [isDisabledBack, setIsDisabledBack] = useState<boolean>();
+    const [isDisabledNext, setIsDisabledNext] = useState<boolean>();
+    const [maxPages, setMaxPages] = useState<number>(0);
+    const dispatch = useDispatch<AppDispatch>();
     const reviewDataSinMapear = useSelector(reviewDataSelect);
     const reviewStatus = useSelector(reviewStatusSelect);
     const reviewError = useSelector(reviewErrorSelect);
-    const [loading, setLoading] = useState(true);
-    const [reviewData, setReviewData] = useState([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [reviewData, setReviewData] = useState<ReviewClass[]>([]);
 
 
-    const latestReviews = reviewData.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5);
+    const latestReviews = reviewData.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 5);
     const big1 = "big1";
     const big2 = "big2";
     const first = "first";
 
-    const handlePageClick = (index) => {
+    const handlePageClick = (index : number) => {
         setPage(index);
     };
 
-    const handleChangeSort = (type) => {
+    const handleChangeSort = (type: ReviewKeys) => {
         setSorting(type);
     };
 
@@ -49,16 +52,22 @@ const Reviews = () => {
                 setLoading(true);
             } else if (reviewStatus === "fulfilled") {
                 setLoading(false);
-                let reviewsMapeadas = []
-                reviewDataSinMapear.forEach((review) => {
-                    reviewsMapeadas.push({
-                    id: review.id,
-                    date: review.date,
-                    customerName: review.customerName,
-                    email: review.email,
-                    stars: review.stars,
-                    review: review.review,
-                    status: review.status});
+                let reviewsMapeadas : ReviewClass[] = []
+                reviewDataSinMapear.forEach((review) => 
+                {
+                    const añadirReview: ReviewClass = 
+                    {
+                        id: review.id,
+                        date: review.date,
+                        hora: review.hora,
+                        customerName: review.customerName,
+                        email: review.email,
+                        stars: review.stars,
+                        review: review.review,
+                        status: review.status,
+                        phone: review.phone
+                    }
+                    reviewsMapeadas.push(añadirReview);
                 });
                 setReviewData(reviewsMapeadas);
                 setMaxPages(Math.ceil(reviewsMapeadas.length / 10));
@@ -110,7 +119,7 @@ const Reviews = () => {
         }
     }, [page, maxPages]);
 
-    const generateStars = (stars) => {
+    const generateStars = (stars : number) => {
         const starsArray = [];
         for (let i = 0; i < stars; i++) {
             starsArray.push(<IoMdStar key={i} />);
@@ -118,7 +127,7 @@ const Reviews = () => {
         return starsArray;
     };
 
-    const actionButton = (status) => {
+    const actionButton = (status : boolean) => {
         if (status === true) {
             return <ButtonUnseen color={"red"}>Archive</ButtonUnseen>;
         } else {

@@ -24,7 +24,7 @@ function App() {
 
   interface Form {
     email:string,
-    password:string
+    pass:string
 }
   const userContext = useContext(UserContext);
   const navigate = useNavigate()
@@ -37,11 +37,11 @@ function App() {
       userContext.dispatch({ type: 'SET_USERDATA', payload: JSON.parse(storedUser) });
     }
     console.log(userContext?.state);
-  }, [userContext]);
+  }, []);
 
   const loginUser = (formData: Form) => {
     const existsUser = users.find(
-      (user) => user.email === formData.email && user.pass === formData.password
+      (user) => user.email === formData.email && user.pass === formData.pass
     );
     console.log(existsUser);
     if (existsUser) {

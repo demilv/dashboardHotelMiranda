@@ -12,7 +12,7 @@ import { FaPencil, FaRegEye } from "react-icons/fa6";
 import { AppDispatch } from "../../app/store";
 import { ConciergeUsers as ConciergeUserClass} from "../../features/Types/typeInterfaces";
 
-const Concierge = () => {
+const Concierge = () : React.JSX.Element => {
     type ConciergeUserKeys = keyof ConciergeUserClass;
     const [active, setActive] = useState<string>("All Employee");
     const [sorting, setSorting] = useState<ConciergeUserKeys>("startDate");

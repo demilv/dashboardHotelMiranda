@@ -10,7 +10,7 @@ export const CajaMainContainer = styled.div`
     width:100%;
 `;
 
-export const CajaImg = styled.div`
+export const CajaImg = styled.div<{isSelected : boolean}>`
     display: flex;
     justify-content: center;
     align-items: center;

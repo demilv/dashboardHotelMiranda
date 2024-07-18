@@ -7,33 +7,36 @@ import { ButtonNewRoom, ButtonSort, ButtonNextBack, ButtonPage, ButtonUnseen } f
 import { TableColumnFlexMain, TableColumnMain, TableContainIdName, TableFirstRow, TableIdNameContainer, TableImg, TableRoomData, TableRow } from "../../styledComponents/StyledTabla";
 import { roomDataSelect, roomErrorSelect, roomStatusSelect, deleteRoom } from "../../features/roomOperations/roomSlice";
 import { roomThunk } from "../../features/roomOperations/roomThunk";
+import { AppDispatch } from "../../app/store";
+import { Room as RoomClass } from "../../features/Types/typeInterfaces";
 
 const Room = () => {
-    const [active, setActive] = useState("All");
-    const [sorting, setSorting] = useState("id");
-    const [page, setPage] = useState(0);
-    const [sortedRooms, setSortedRooms] = useState([]);
-    const [roomsMostrar, setRoomsMostrar] = useState([]);
-    const [isDisabledBack, setIsDisabledBack] = useState();
-    const [isDisabledNext, setIsDisabledNext] = useState();
-    const [maxPages, setMaxPages] = useState();
-    const dispatch = useDispatch();
+    type RoomKeys = keyof RoomClass
+    const [active, setActive] = useState<string>("All");
+    const [sorting, setSorting] = useState<RoomKeys>("id");
+    const [page, setPage] = useState<number>(0);
+    const [sortedRooms, setSortedRooms] = useState<RoomClass[]>([]);
+    const [roomsMostrar, setRoomsMostrar] = useState<RoomClass[]>([]);
+    const [isDisabledBack, setIsDisabledBack] = useState<boolean>();
+    const [isDisabledNext, setIsDisabledNext] = useState<boolean>();
+    const [maxPages, setMaxPages] = useState<number>(0);
+    const dispatch = useDispatch<AppDispatch>();
     const roomDataSinMapear = useSelector(roomDataSelect);
     const roomStatus = useSelector(roomStatusSelect);
     const roomError = useSelector(roomErrorSelect);
-    const [loading, setLoading] = useState(true);
-    const [roomData, setRoomData] = useState([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [roomData, setRoomData] = useState<RoomClass[]>([]);
 
-    const big1 = "big1";
-    const big2 = "big2";
-    const first = "first";
+    const big1: "big1" | "" = "big1"
+    const big2: "big2" | "" = "big2"
+    const first: "first" | "" = "first"
     const navigate = useNavigate();
 
-    const editRoom = (roomId) => {
+    const editRoom = (roomId:number) => {
         navigate(`/editRoom/${roomId}`);
     };
 
-    const checkRoom = (roomId) => {
+    const checkRoom = (roomId: number) => {
         navigate(`/checkRoom/${roomId}`);
     };
     
@@ -41,11 +44,11 @@ const Room = () => {
         navigate("/addRoom");
     };
 
-    const handlePageClick = (index) => {
+    const handlePageClick = (index: number) => {
         setPage(index);
     };
 
-    const handleChangeSort = (type) => {
+    const handleChangeSort = (type: RoomKeys) => {
         setSorting(type);
     };
     
@@ -57,9 +60,14 @@ const Room = () => {
                 setLoading(true);
             } else if (roomStatus === "fulfilled") {
                 setLoading(false);
-                let RoomDataMapeado = [];
-                roomDataSinMapear.forEach((room) => {
-                    RoomDataMapeado.push({ fotoLink: room.fotoLink, id: room.id, number: room.number, floor: room.floor, bedType: room.bedType, amenities: room.amenities, price: room.price, status: room.status, offer: room.offer });
+                let RoomDataMapeado: RoomClass[] = [];
+                roomDataSinMapear.forEach((room) => 
+                {
+                    const añadirReview: RoomClass = 
+                    {
+                        fotoLink: room.fotoLink, id: room.id, number: room.number, floor: room.floor, bedType: room.bedType, amenities: room.amenities, price: room.price, status: room.status, offer: room.offer 
+                    }
+                    RoomDataMapeado.push(añadirReview)
                 });
                 setRoomData(RoomDataMapeado);
                 setMaxPages(Math.ceil(RoomDataMapeado.length / 10));
@@ -113,7 +121,7 @@ const Room = () => {
         }
     }, [page, maxPages]);
 
-    const handleDeleteRoom = (roomId) => {
+    const handleDeleteRoom = (roomId: number) => {
         dispatch(deleteRoom(roomId));
         const updatedRoomData = roomData.filter(room => room.id !== roomId);
         setRoomData(updatedRoomData);

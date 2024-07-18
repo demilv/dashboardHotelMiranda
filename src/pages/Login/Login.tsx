@@ -3,24 +3,32 @@ import './Login.css'
 import { useState } from "react";
 import { useLocation } from "react-router-dom"
 
+interface UserData {
+    email: string;
+    pass: string;
+}
+
+interface LoginProps {
+    loginUser: (formData: UserData, prevRoute: string | null) => void;
+}
+
 const datos_user = {
     email: "",
     pass: ""
 }
 
-const Login = ({ loginUser }) => {
-    const location = useLocation()
+const Login: React.FC<LoginProps> = ({ loginUser }) => {    const location = useLocation()
     const { state } = location
     console.log(location)
 
     const [formData, setFormData] = useState(datos_user)
     
-    const changeInput = (ev) => {
+    const changeInput = (ev: React.ChangeEvent<HTMLInputElement>) => {
         const { value, name } = ev.target;
         console.log(name, value)
         setFormData({ ...formData, [name]: value })
     }
-    const submitForm = (ev) => {
+    const submitForm = (ev: React.FormEvent<HTMLFormElement>) => {
         ev.preventDefault();
         console.log("se han enviado los datos");
         loginUser(formData, state ? state.prevRoute : null)

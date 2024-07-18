@@ -44,3 +44,21 @@ export interface Room {
     status: boolean,
     offer: number
 }
+
+interface User {
+    name: string | null;
+    email: string | null;
+    pass: string | null;
+    autenticado: boolean;
+  }
+
+  type Action = | { type: 'SET_USERDATA'; payload: { name: string; email: string; pass: string } } | { type: 'LOGOUT' };
+
+interface State {
+    user: User;
+  }
+
+export interface UserContextType {
+    state: State;
+    dispatch: React.Dispatch<Action>;
+  }
