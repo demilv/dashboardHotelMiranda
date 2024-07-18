@@ -7,24 +7,26 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { Room as RoomClass } from "../../features/Types/typeInterfaces";
 
 const CheckRoom = () => {
     const navigate = useNavigate();
-    const { roomId } = useParams();
-    const rooms = useSelector(roomDataSelect);
+    const { roomId } = useParams<{roomId: string}>();
+    const rooms: RoomClass[] = useSelector(roomDataSelect);
 
-    const roomToCheck = rooms.find(room => room.id === parseInt(roomId, 10));
+    const roomToCheck : RoomClass | undefined = rooms.find(room => room.id === parseInt(roomId!, 10));
 
     const roomData = {
         id: roomToCheck?.id,
         fotoLink: roomToCheck?.fotoLink || [],
         number: roomToCheck?.number || "",
         bedType: roomToCheck?.bedType || "",
-        description: roomToCheck?.description || "",
+        floor: roomToCheck?.floor || 0,
         price: roomToCheck?.price || 0,
         offer: roomToCheck?.offer || 0,
-        cancelPolicy: roomToCheck?.cancelPolicy || "",
-        amenities: roomToCheck?.amenities || [],
+        status: roomToCheck?.status || true,
+        amenities: roomToCheck?.amenities || "",
+        cancelPolicy: roomToCheck?.cancelPolicy || ""
     };
 
     return (
@@ -35,16 +37,18 @@ const CheckRoom = () => {
                     <h4>{roomData.number}</h4>
                     <h2>Room type</h2>
                     <h4>{roomData.bedType}</h4>
-                    <h2>Room description</h2>
-                    <h4>{roomData.description}</h4>
+                    <h2>Room floor</h2>
+                    <h4>{roomData.floor}</h4>
                     <h2>Room price</h2>
                     <h4>{roomData.price}</h4>
                     <h2>Offer</h2>
                     <h4>{roomData.offer}</h4>
-                    <h2>Cancel policy</h2>
-                    <h4>{roomData.cancelPolicy}</h4>
+                    <h2>Status</h2>
+                    <h4>{roomData.status}</h4>
                     <h2>Amenities</h2>
                     <h4>{roomData.amenities}</h4>
+                    <h2>Cancel Policy</h2>
+                    <h4>{roomData.cancelPolicy}</h4>
                 </CheckContainer>
                 <CheckContainer2>
                     <Swiper
@@ -53,7 +57,7 @@ const CheckRoom = () => {
                         slidesPerView={1}
                         navigation={true}
                     >
-                        {roomData.fotoLink.map((url, index) => (  
+                        {Array.isArray(roomData.fotoLink) && roomData.fotoLink.map((url: string, index: number) => ( 
                             <SwiperSlide key={index} >
                                 <CheckContainerImg>
                                     <CheckImg src={url} />

@@ -65,7 +65,7 @@ const Room = () => {
                 {
                     const añadirReview: RoomClass = 
                     {
-                        fotoLink: room.fotoLink, id: room.id, number: room.number, floor: room.floor, bedType: room.bedType, amenities: room.amenities, price: room.price, status: room.status, offer: room.offer 
+                        fotoLink: room.fotoLink, id: room.id, number: room.number, floor: room.floor, bedType: room.bedType, amenities: room.amenities, price: room.price, status: room.status, offer: room.offer, cancelPolicy: room.cancelPolicy 
                     }
                     RoomDataMapeado.push(añadirReview)
                 });

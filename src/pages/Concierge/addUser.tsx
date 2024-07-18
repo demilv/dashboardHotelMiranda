@@ -4,10 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { addUser, conciergeDataSelect } from "../../features/conciergeOperations/conciergeSlice";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AppDispatch } from "../../app/store";
 
 const AddUser = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const users = useSelector(conciergeDataSelect);
 
     const getNextId = () => {

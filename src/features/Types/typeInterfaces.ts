@@ -43,6 +43,7 @@ export interface Room {
     price: number,
     status: boolean,
     offer: number
+    cancelPolicy: string
 }
 
 interface User {

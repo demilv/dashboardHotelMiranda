@@ -4,46 +4,53 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { editRoom, roomDataSelect } from "../../features/roomOperations/roomSlice";
+import { AppDispatch } from "../../app/store";
+import { Room as RoomClass } from "../../features/Types/typeInterfaces";
 
 const EditRoom = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const { roomId } = useParams();
-    const rooms = useSelector(roomDataSelect);
+    const rooms: RoomClass[] = useSelector(roomDataSelect);
 
-    const roomToEdit = rooms.find(room => room.id === parseInt(roomId, 10));
+    const roomToEdit = rooms.find(room => room.id === parseInt(roomId!, 10));
 
     const [formData, setFormData] = useState({
         id: roomToEdit?.id,
         fotoLink: roomToEdit?.fotoLink || "",
         number: roomToEdit?.number || "",
         bedType: roomToEdit?.bedType || "",
-        description: roomToEdit?.description || "",
         price: roomToEdit?.price || 0,
-        offer: roomToEdit?.offer || "No",
-        discount: roomToEdit?.discount || "",
+        offer: roomToEdit?.offer || 0,
+        discount: "",
         cancelPolicy: roomToEdit?.cancelPolicy || "",
-        amenities: roomToEdit?.amenities || [],
+        amenities: roomToEdit?.amenities || "",
     });
 
-    const handleChange = (e) => {
-        const { name, value, type, checked } = e.target;
-
-        if (name === "offer" && formData.price < value) {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const { name, value, type } = e.target;
+    
+        if (name === "offer") {
+            const offerValue = Number(value);
+            const updatedOffer = offerValue > formData.price ? formData.price : offerValue;
+    
             setFormData((prevData) => ({
                 ...prevData,
-                [name]: formData.price,
+                [name]: updatedOffer,
             }));
         } else if (type === "checkbox") {
-            if (checked) {
+            const isChecked = (e.target as HTMLInputElement).checked;
+            const amenityValue = value;
+
+            if (isChecked) {
                 setFormData((prevData) => ({
                     ...prevData,
-                    amenities: [...prevData.amenities, value],
+                    amenities: prevData.amenities ? prevData.amenities + ", " + amenityValue : amenityValue, 
                 }));
             } else {
                 setFormData((prevData) => ({
                     ...prevData,
-                    amenities: prevData.amenities.filter((amenity) => amenity !== value),
+                    amenities: prevData.amenities.split(" ").filter((amenity) => amenity !== amenityValue).join(" "), 
                 }));
             }
         } else {
@@ -54,9 +61,15 @@ const EditRoom = () => {
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(editRoom(formData));
+        const roomNumber = parseInt(formData.number, 10);
+        const floor = Math.floor(roomNumber / 10);
+        const formDataFinal = {
+            ...formData,
+            floor: floor,
+        };
+        dispatch(editRoom(formDataFinal));        
         Swal.fire({
             title: "Good job!",
             text: "Room updated successfully!",
@@ -83,8 +96,6 @@ const EditRoom = () => {
                     <option>Double superior</option>
                     <option>Suite</option>
                 </select>
-                <h4>Room description</h4>
-                <input type="text" name="description" value={formData.description} onChange={handleChange} />
                 <h4>Room price</h4>
                 <input type="number" name="price" value={formData.price} onChange={handleChange} />
                 <h4>Is there a discount?</h4>

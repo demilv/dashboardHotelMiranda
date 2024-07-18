@@ -4,11 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { addRoom, roomDataSelect } from "../../features/roomOperations/roomSlice";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AppDispatch } from "../../app/store";
+import { Room as RoomClass } from "../../features/Types/typeInterfaces";
 
-const AddRoom = () => {
+const AddRoom: React.FC = () => {
     const navigate = useNavigate()
-    const dispatch = useDispatch();
-    const rooms = useSelector(roomDataSelect);   
+    const dispatch = useDispatch<AppDispatch>();
+    const rooms: RoomClass[] = useSelector(roomDataSelect);   
 
     const getNextId = () => {
         const lastId = rooms.reduce((last, room) => (room.id > last ? room.id : last), 0);
@@ -16,7 +18,7 @@ const AddRoom = () => {
         return lastId + 1;
     };
 
-    const [id, setId] = useState(getNextId)
+    const [id, setId] = useState<number>(getNextId)
 
 
     const [formData, setFormData] = useState({
@@ -24,34 +26,39 @@ const AddRoom = () => {
         fotoLink: "",
         number: "",
         bedType: "Single bed",
-        description: "",
         price: 0,
-        offer: "No",
+        offer: 0,
         discount: "",
         cancelPolicy: "",
-        amenities: [],
+        amenities: "",
         status: "Available"
     });
     
 
-    const handleChange = (e) => {
-        const { name, value, type, checked } = e.target;
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const { name, value, type } = e.target;
     
-        if (name === "offer" && formData.price < value) {
+        if (name === "offer") {
+            const offerValue = Number(value);
+            const updatedOffer = offerValue > formData.price ? formData.price : offerValue;
+    
             setFormData((prevData) => ({
                 ...prevData,
-                [name]: formData.price,
+                [name]: updatedOffer,
             }));
         } else if (type === "checkbox") {
-            if (checked) {
+            const isChecked = (e.target as HTMLInputElement).checked;
+            const amenityValue = value;
+
+            if (isChecked) {
                 setFormData((prevData) => ({
                     ...prevData,
-                    amenities: [...prevData.amenities, value],
+                    amenities: prevData.amenities ? prevData.amenities + ", " + amenityValue : amenityValue, 
                 }));
             } else {
                 setFormData((prevData) => ({
                     ...prevData,
-                    amenities: prevData.amenities.filter((amenity) => amenity !== value),
+                    amenities: prevData.amenities.split(" ").filter((amenity) => amenity !== amenityValue).join(" "), 
                 }));
             }
         } else {
@@ -62,8 +69,9 @@ const AddRoom = () => {
         }
     };
     
+    
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatch(addRoom(formData));
         Swal.fire({
@@ -91,9 +99,7 @@ const AddRoom = () => {
                     <option>Double bed</option>
                     <option>Double superior</option>
                     <option>Suite</option>
-                </select>
-                <h4>Room description</h4>
-                <input type="text" name="description" onChange={handleChange} />
+                </select>                
                 <h4>Room price</h4>
                 <input type="number" name="price" onChange={handleChange} />
                 <h4>Is there a discount?</h4>
