@@ -9,29 +9,33 @@ import { conciergeDataSelect, conciergeStatusSelect, conciergeErrorSelect, delet
 import { conciergeUsersThunk } from "../../features/conciergeOperations/conciergeUsersThunk";
 import { FaTrashAlt } from "react-icons/fa";
 import { FaPencil, FaRegEye } from "react-icons/fa6";
+import { AppDispatch } from "../../app/store";
+import { ConciergeUsers as ConciergeUserClass} from "../../features/Types/typeInterfaces";
 
 const Concierge = () => {
-    const [active, setActive] = useState("All Employee");
-    const [sorting, setSorting] = useState("startDate");
-    const [page, setPage] = useState(0);
-    const [sortedUsers, setSortedUsers] = useState([]);
-    const [usersMostrar, setUsersMostrar] = useState([]);
-    const [isDisabledBack, setIsDisabledBack] = useState();
-    const [isDisabledNext, setIsDisabledNext] = useState();
-    const [maxPages, setMaxPages] = useState();
-    const dispatch = useDispatch();
+    type ConciergeUserKeys = keyof ConciergeUserClass;
+    const [active, setActive] = useState<string>("All Employee");
+    const [sorting, setSorting] = useState<ConciergeUserKeys>("startDate");
+    const [page, setPage] = useState<number>(0);
+    const [sortedUsers, setSortedUsers] = useState<ConciergeUserClass[]>([]);
+    const [usersMostrar, setUsersMostrar] = useState<ConciergeUserClass[]>([]);
+    const [isDisabledBack, setIsDisabledBack] = useState<boolean>();
+    const [isDisabledNext, setIsDisabledNext] = useState<boolean>();
+    const [maxPages, setMaxPages] = useState<number>(0);
+    const dispatch = useDispatch<AppDispatch>();
     const conciergeDataSinMapear = useSelector(conciergeDataSelect);
     const conciergeStatus = useSelector(conciergeStatusSelect);
     const conciergeError = useSelector(conciergeErrorSelect);
-    const [loading, setLoading] = useState(true);
-    const [conciergeData, setConciergeData] = useState([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [conciergeData, setConciergeData] = useState<ConciergeUserClass[]>([]);
 
-    const big1 = "big1";
-    const big2 = "big2";
-    const first = "first";
+    const big1: "big1" | "" = "big1"
+    const big2: "big2" | "" = "big2"
+    const first: "first" | "" = "first"
+    const margin: boolean = true
     const navigate = useNavigate();
 
-    const editUser = (userId) => {
+    const editUser = (userId: number) => {
         navigate(`/editUser/${userId}`);
     };
     
@@ -39,15 +43,15 @@ const Concierge = () => {
         navigate("/addUser");
     };
 
-    const checkUser = (userId) => {
+    const checkUser = (userId: number) => {
         navigate(`/checkUser/${userId}`)
     }
 
-    const handlePageClick = (index) => {
+    const handlePageClick = (index: number) => {
         setPage(index);
     };
 
-    const handleChangeSort = (type) => {
+    const handleChangeSort = (type: ConciergeUserKeys) => {
         setSorting(type);
     };
     
@@ -59,9 +63,13 @@ const Concierge = () => {
                 setLoading(true);
             } else if (conciergeStatus === "fulfilled") {
                 setLoading(false);
-                let conciergeDataMapeado = [];
-                conciergeDataSinMapear.forEach((user) => {
-                    conciergeDataMapeado.push({ photo: user.photo, id: user.id, name: user.name, job: user.job, startDate: user.startDate, phone: user.phone, status: user.status });
+                let conciergeDataMapeado : ConciergeUserClass[] = [];
+                conciergeDataSinMapear.forEach((user) => 
+                {
+                    const añadirConciergeUser: ConciergeUserClass = {
+                         photo: user.photo, id: user.id, name: user.name, job: user.job, startDate: user.startDate, phone: user.phone, status: user.status, email: user.email, pass: user.pass
+                         }
+                         conciergeDataMapeado.push(añadirConciergeUser);
                 });
                 setConciergeData(conciergeDataMapeado);
                 setMaxPages(Math.ceil(conciergeDataMapeado.length / 10));
@@ -115,13 +123,13 @@ const Concierge = () => {
         }
     }, [page, maxPages]);
 
-    const handleDeleteUser = (userId) => {
+    const handleDeleteUser = (userId: number) => {
         dispatch(deleteUser(userId));
         const updatedConciergeData = conciergeData.filter(user => user.id !== userId);
         setConciergeData(updatedConciergeData);
     };
 
-    const colorText = (status) => {
+    const colorText = (status: boolean) => {
         if (status === true){        
             return <TextColorfulNoBackground color={"green"}>Active</TextColorfulNoBackground>
         } else {
@@ -154,7 +162,7 @@ const Concierge = () => {
                         {usersMostrar.map(user => (
                             <TableRow key={user.id}>
                                 <TableColumnFlexMain>
-                                    <TableImg active={active} src={user.photo} alt={`User ${user.id}`} />
+                                    <TableImg margin={margin} src={user.photo} alt={`User ${user.id}`} />
                                     <TableContainIdName>
                                         <TableIdNameContainer>
                                             {user.name}

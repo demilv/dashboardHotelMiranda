@@ -5,13 +5,13 @@ import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { editBooking, bookingsDataSelect } from "../../features/bookingsOperations/bookingsSlice";
 
-const EditDocumentBooking = () => {
+const EditDocumentBooking: React.FC = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { bookingId } = useParams();
+    const { bookingId } = useParams<{bookingId: string}>();
     const bookings = useSelector(bookingsDataSelect);
 
-    const bookingToEdit = bookings.find(booking => booking.id === parseInt(bookingId, 10));
+    const bookingToEdit = bookings.find(booking => booking.id === parseInt(bookingId!, 10));
 
     const [formData, setFormData] = useState({
         id: bookingToEdit?.id,
@@ -39,7 +39,7 @@ const EditDocumentBooking = () => {
         }
     }, [bookingToEdit]);
 
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
             ...prevData,
@@ -47,9 +47,28 @@ const EditDocumentBooking = () => {
         }));
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        dispatch(editBooking(formData));
+    const handleSubmit = ((e: React.SyntheticEvent) => {
+        e.preventDefault()
+        const target = e.target as typeof e.target & {
+            guest: {value : string},
+            orderDate: {value: string},
+            checkInDate: {value: string},
+            checkOutDate: {value: string},
+            specialRequest: {value: string},
+            status: {value: string}
+        }
+
+        const updatedFormData = {
+            id: formData.id,
+            guest : target.guest.value,
+            orderDate : target.orderDate.value,
+            checkInDate : target.checkInDate.value,
+            checkOutDate : target.checkOutDate.value,
+            specialRequest : target.specialRequest.value,
+            status : target.status.value
+        }
+
+        dispatch(editBooking(updatedFormData));
         Swal.fire({
             title: "Good job!",
             text: "Booking updated successfully!",
@@ -60,7 +79,7 @@ const EditDocumentBooking = () => {
         }).then(() => {
             navigate("/booking");
         });
-    };
+    });
 
     return (
         <FormContainer>

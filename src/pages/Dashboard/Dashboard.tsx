@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useDispatch } from "react";
 import { UserContext } from "../../context/userContext";
 import { Outlet, useNavigate } from "react-router-dom";
 import { CiMail, CiBellOn } from "react-icons/ci";
@@ -6,12 +6,16 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { GiCancel, GiExitDoor } from "react-icons/gi";
 import { ButtonAside } from "../../styledComponents/StyledButton";
 import { MainNavbar, NavbarContainer, OutletContainer, NavbarBurger, NavbarMain, NavbarMainTitle, StyledIcon, NavbarAside, NavbarAsideLogo, NavbarAsideImg, NavbarAsideH2, NavbarAsideMyData, NavbarAsideMyDataMail, NavbarAsideMyDataContact, NavbarAsideH6, NavbarAsideH3 } from "../../styledComponents/StyledDashboard";
+import { AppDispatch } from "../../app/store";
+
 
 const Dashboard = () => {
   const [isAsideVisible, setIsAsideVisible] = useState(true);
   const [active, setActive] = useState("");
   const [location, setLocation] = useState("Home")
-  const { state, dispatch } = useContext(UserContext);
+  const dispatch = useDispatch<AppDispatch>();
+
+  const { state } = useContext(UserContext);
   const navigate = useNavigate();
 
   useEffect(() => {

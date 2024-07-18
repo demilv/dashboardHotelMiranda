@@ -20,3 +20,27 @@ export interface ConciergeUsers {
     status: boolean,
     pass: string
 }
+
+export interface Review {
+    id: number,
+    date: string,
+    hora: string,
+    customerName: string,
+    email: string,
+    stars: number,
+    review: string,
+    status: boolean,
+    phone: string
+}
+
+export interface Room {
+    id: number,
+    fotoLink: string,
+    number: string,
+    floor: number,
+    bedType: string,
+    amenities: string,
+    price: number,
+    status: boolean,
+    offer: number
+}
