@@ -6,10 +6,10 @@ import { conciergeDataSelect } from "../../features/conciergeOperations/concierg
 
 const CheckUser = () => {
     const navigate = useNavigate();
-    const { userId } = useParams();
+    const { userId } = useParams<{userId: string}>();
     const users = useSelector(conciergeDataSelect);
 
-    const userToCheck = users.find(user => user.id === parseInt(userId, 10));
+    const userToCheck = users.find(user => user.id === parseInt(userId!, 10));
 
     const userData = {
         id: userToCheck?.id,
@@ -19,7 +19,6 @@ const CheckUser = () => {
         email: userToCheck?.email || "",
         phone: userToCheck?.phone || 0,
         startDate: userToCheck?.startDate || "No",
-        responsibilities: userToCheck?.responsibilities || "",
         status: userToCheck?.status || "",
     };
 
@@ -39,8 +38,6 @@ const CheckUser = () => {
                     <h4>{userData.phone}</h4>
                     <h2>User starting date</h2>
                     <h4>{userData.startDate}</h4>
-                    <h2>User ersponsibilities</h2>
-                    <h4>{userData.responsibilities}</h4>
                     <h2>User current status</h2>
                     <h4>{userData.status}</h4>
                 </CheckContainer>

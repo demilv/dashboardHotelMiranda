@@ -5,13 +5,25 @@ import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { editUser, conciergeDataSelect } from "../../features/conciergeOperations/conciergeSlice";
 
-const EditUser = () => {
+interface ConciergeUser {
+    id: number;
+    photo: string;
+    name: string;
+    job: string;
+    email: string;
+    phone: string;
+    startDate: string;
+    status: boolean;
+    pass: string;
+}
+
+const EditUser: React.FC = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { userId } = useParams();
-    const users = useSelector(conciergeDataSelect);
+    const { userId } = useParams<{ userId: string }>();
+    const users: ConciergeUser[] = useSelector(conciergeDataSelect);
 
-    const userToEdit = users.find(user => user.id === parseInt(userId, 10));
+    const userToEdit = users.find(user => user.id === parseInt(userId!, 10));
 
     const [formData, setFormData] = useState({
         id: userToEdit?.id,
@@ -21,9 +33,8 @@ const EditUser = () => {
         email: userToEdit?.email || "",
         phone: userToEdit?.phone || "",
         startDate: userToEdit?.startDate || "",
-        responsibilities: userToEdit?.responsibilities || "",
-        status: userToEdit?.status || "Yes",
-        password: userToEdit?.password || ""
+        status: userToEdit?.status ? "Yes" : "No",
+        password: userToEdit?.pass || "",
     });
 
     useEffect(() => {
@@ -36,14 +47,13 @@ const EditUser = () => {
                 email: userToEdit.email,
                 phone: userToEdit.phone,
                 startDate: userToEdit.startDate,
-                responsibilities: userToEdit.responsibilities,
-                status: userToEdit.status,
-                password: userToEdit.password
+                status: userToEdit.status ? "Yes" : "No",
+                password: userToEdit.pass,
             });
         }
     }, [userToEdit]);
 
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
             ...prevData,
@@ -51,9 +61,13 @@ const EditUser = () => {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(editUser(formData));
+        const updatedFormData = {
+            ...formData,
+            status: formData.status === "Yes",
+        };
+        dispatch(editUser(updatedFormData));
         Swal.fire({
             title: "Good job!",
             text: "User updated successfully!",
@@ -85,8 +99,6 @@ const EditUser = () => {
                 <input type="text" name="phone" value={formData.phone} onChange={handleChange} />
                 <h4>Start date</h4>
                 <input type="date" name="startDate" value={formData.startDate} onChange={handleChange} />
-                <h4>Your responsibilities</h4>
-                <input type="text" name="responsibilities" value={formData.responsibilities} onChange={handleChange} />
                 <h4>Are you currently active?</h4>
                 <select name="status" value={formData.status} onChange={handleChange}>
                     <option>Yes</option>

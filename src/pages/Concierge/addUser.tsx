@@ -30,7 +30,7 @@ const AddUser = () => {
         password: ""
     });
 
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
             ...prevData,
@@ -38,7 +38,7 @@ const AddUser = () => {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = ((e: React.SyntheticEvent) => {
         e.preventDefault();
         dispatch(addUser(formData));
         Swal.fire({
@@ -51,7 +51,7 @@ const AddUser = () => {
         }).then(() => {
             navigate("/concierge");
         });
-    };
+    });
 
     return (
         <FormContainer>
