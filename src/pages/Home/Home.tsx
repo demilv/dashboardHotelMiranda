@@ -18,7 +18,7 @@ import { reviewThunk } from "../../features/reviewOperations/reviewThunk";
 import { Review as ReviewClass } from "../../features/Types/typeInterfaces";
 import { AppDispatch } from "../../app/store";
 
-const Home = () => {
+const Home = () : React.JSX.Element => {
     const [selectedBox, setSelectedBox] = useState<number>();
     const dispatch = useDispatch<AppDispatch>();
     const reviewDataSinMapear = useSelector(reviewDataSelect);

@@ -10,7 +10,7 @@ import { roomThunk } from "../../features/roomOperations/roomThunk";
 import { AppDispatch } from "../../app/store";
 import { Room as RoomClass } from "../../features/Types/typeInterfaces";
 
-const Room = () => {
+const Room = () : React.JSX.Element => {
     type RoomKeys = keyof RoomClass
     const [active, setActive] = useState<string>("All");
     const [sorting, setSorting] = useState<RoomKeys>("id");

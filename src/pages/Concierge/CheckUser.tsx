@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { conciergeDataSelect } from "../../features/conciergeOperations/conciergeSlice";
 
-const CheckUser = () => {
+const CheckUser = () : React.JSX.Element => {
     const navigate = useNavigate();
     const { userId } = useParams<{userId: string}>();
     const users = useSelector(conciergeDataSelect);

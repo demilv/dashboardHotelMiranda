@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 import { AppDispatch } from "../../app/store";
 import { Room as RoomClass } from "../../features/Types/typeInterfaces";
 
-const AddRoom: React.FC = () => {
+const AddRoom = () : React.JSX.Element => {
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>();
     const rooms: RoomClass[] = useSelector(roomDataSelect);   
@@ -73,7 +73,13 @@ const AddRoom: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(addRoom(formData));
+        const roomNumber = parseInt(formData.number, 10);
+        const floor = Math.floor(roomNumber / 10);
+        const formDataFinal = {
+            ...formData,
+            floor: floor,
+        };
+        dispatch(addRoom(formDataFinal));
         Swal.fire({
             title: "Good job!",
             text: "Room added successfully!",

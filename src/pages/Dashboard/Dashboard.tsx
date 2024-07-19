@@ -9,10 +9,10 @@ import { MainNavbar, NavbarContainer, OutletContainer, NavbarBurger, NavbarMain,
 import { UserContextType } from "../../features/Types/typeInterfaces";
 import { Context } from "react";
 
-const Dashboard = () => {
-  const [isAsideVisible, setIsAsideVisible] = useState(true);
-  const [active, setActive] = useState("");
-  const [location, setLocation] = useState("Home")
+const Dashboard = () : React.JSX.Element => {
+  const [isAsideVisible, setIsAsideVisible] = useState<boolean>(true);
+  const [active, setActive] = useState<string>("");
+  const [location, setLocation] = useState<string>("Home")
   const { state, dispatch } = useContext(UserContext as Context<UserContextType>);
   const navigate = useNavigate();
 

@@ -7,7 +7,7 @@ import { editRoom, roomDataSelect } from "../../features/roomOperations/roomSlic
 import { AppDispatch } from "../../app/store";
 import { Room as RoomClass } from "../../features/Types/typeInterfaces";
 
-const EditRoom = () => {
+const EditRoom = () : React.JSX.Element => {
     const navigate = useNavigate();
     const dispatch = useDispatch<AppDispatch>();
     const { roomId } = useParams();

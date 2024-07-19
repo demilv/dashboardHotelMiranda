@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AppDispatch } from "../../app/store";
 
-const AddUser = () => {
+const AddUser = () : React.JSX.Element => {
     const navigate = useNavigate();
     const dispatch = useDispatch<AppDispatch>();
     const users = useSelector(conciergeDataSelect);
@@ -16,7 +16,7 @@ const AddUser = () => {
         return lastId + 1;
     };
 
-    const [id, setId] = useState(getNextId);
+    const id: number = getNextId();
 
     const [formData, setFormData] = useState({
         id: id,

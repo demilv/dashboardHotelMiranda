@@ -13,7 +13,7 @@ import { reviewThunk } from "../../features/reviewOperations/reviewThunk";
 import { AppDispatch } from "../../app/store";
 import { Review as ReviewClass } from "../../features/Types/typeInterfaces";
 
-const Reviews = () => {
+const Reviews = () : React.JSX.Element => {
     type ReviewKeys = keyof ReviewClass;
     const [active, setActive] = useState<string>("All Contacts");
     const [sorting, setSorting] = useState<ReviewKeys>("id");

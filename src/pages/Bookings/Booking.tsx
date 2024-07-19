@@ -12,7 +12,7 @@ import { FaPencil } from "react-icons/fa6";
 import { AppDispatch } from "../../app/store";
 import { Booking as BookingClass} from "../../features/Types/typeInterfaces";
 
-const Booking = () => {
+const Booking = () : React.JSX.Element => {
     type BookingKeys = keyof BookingClass;
     const [active, setActive] = useState<string>("All")
     const [sorting, setSorting] = useState<BookingKeys>("id")

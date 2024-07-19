@@ -4,9 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { editBooking, bookingsDataSelect } from "../../features/bookingsOperations/bookingsSlice";
+import { AppDispatch } from "../../app/store";
 
-const EditDocumentBooking: React.FC = () => {
-    const dispatch = useDispatch();
+
+const EditDocumentBooking = () : React.JSX.Element => {
+    const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
     const { bookingId } = useParams<{bookingId: string}>();
     const bookings = useSelector(bookingsDataSelect);

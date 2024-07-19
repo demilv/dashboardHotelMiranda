@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { editUser, conciergeDataSelect } from "../../features/conciergeOperations/conciergeSlice";
+import { AppDispatch } from "../../app/store";
 
 interface ConciergeUser {
     id: number;
@@ -17,9 +18,9 @@ interface ConciergeUser {
     pass: string;
 }
 
-const EditUser: React.FC = () => {
+const EditUser = () : React.JSX.Element => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const { userId } = useParams<{ userId: string }>();
     const users: ConciergeUser[] = useSelector(conciergeDataSelect);
 

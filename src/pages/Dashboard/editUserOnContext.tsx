@@ -3,7 +3,7 @@ import React, {useContext, useState, useEffect} from "react";
 import { UserContext } from "../../context/userContext";
 import { useNavigate } from "react-router-dom";
 
-const EditUserOnContext = () =>{
+const EditUserOnContext = () : React.JSX.Element => {
 
     const navigate = useNavigate()
 
@@ -14,31 +14,33 @@ const EditUserOnContext = () =>{
     }
 
     const [values, setValues] = useState(user);
-    const { state, dispatch } = useContext(UserContext);
-    
+    const userContext = useContext(UserContext);
+
     useEffect(() => {
-        if (state.user) {
-          setValues({
-            email: state.user.email,
-            pass: state.user.pass,
-            name: state.user.name 
-          });
+        if (userContext?.state.user) {
+            setValues({
+                email: userContext.state.user.email || "",
+                pass: userContext.state.user.pass || "",
+                name: userContext.state.user.name || ""
+            });
         }
-      }, [state]);
+    }, [userContext]);
 
 
-    const edit = (e) =>{
+    const edit = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const {value, name} = e.target
         setValues({...values, [name]: value})
     }    
 
-    const submitEditedUser= (ev) =>{
+    const submitEditedUser= (ev: React.FormEvent<HTMLFormElement>) => {
         ev.preventDefault();
         const {email, pass, name} = values
-        dispatch({ type: 'SET_USERDATA', payload: {email, pass, name} });
-        localStorage.setItem('user', JSON.stringify({email, pass, name}));
-        console.log(state)
-        navigate("/")
+        if (userContext) {
+            userContext.dispatch({ type: 'SET_USERDATA', payload: { email, pass, name } });
+            localStorage.setItem('user', JSON.stringify({ email, pass, name }));
+            console.log(userContext.state);
+        }
+        navigate("/home")
     }
 
     return(

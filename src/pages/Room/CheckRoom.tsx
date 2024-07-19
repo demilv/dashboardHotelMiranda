@@ -9,7 +9,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { Room as RoomClass } from "../../features/Types/typeInterfaces";
 
-const CheckRoom = () => {
+const CheckRoom = () : React.JSX.Element => {
     const navigate = useNavigate();
     const { roomId } = useParams<{roomId: string}>();
     const rooms: RoomClass[] = useSelector(roomDataSelect);
